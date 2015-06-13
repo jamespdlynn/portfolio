@@ -1,0 +1,186 @@
+#navigation {
+  left: 0;
+  right: 0;
+  position: absolute;
+  bottom: 0;
+
+
+  .thought {
+
+    position:absolute;
+    left: 50%;
+    cursor: pointer;
+
+
+    &:hover, &:active{
+
+      .bubble{
+        background-color: #e4fbff !important;
+
+        &.main{
+          .background-image('bubble-selected.png');
+          background-color: transparent !important;
+        }
+      }
+
+
+
+    }
+
+    .bubble {
+
+      position: relative;
+      margin: 8px auto;
+
+
+      &.main {
+        .image-fill('bubble.png', 128px);
+        .box-sizing(border-box);
+        padding: 43px;
+        transform: scale(0.9);
+
+        .icon{
+          .image-fill('',42px);
+        }
+
+        .text{
+          width: 100%;
+        }
+
+
+      }
+
+      &:nth-child(2) {
+        .circle(12px, #fff, solid 2px #000);
+      }
+
+      &:nth-child(3) {
+        .circle(8px, #fff, solid 2px #000);
+      }
+
+    }
+
+  }
+
+  #about {
+    transform: rotate(-75deg);
+    margin-left: -220px;
+    bottom: 250px;
+
+    .bubble.main {
+      left: 6px;
+
+      .icon, .text{
+        transform: rotate(75deg);
+      }
+
+      .icon{
+        .background-image('about.png');
+      }
+    }
+
+    .bubble:nth-child(2) {
+      right: 6px;
+    }
+
+  }
+
+  #portfolio{
+    transform: rotate(-25deg);
+    margin-left: -150px;
+    bottom: 390px;
+
+    .bubble.main {
+      left: 3px;
+
+
+      .icon, .text{
+        transform: rotate(25deg);
+      }
+
+      .icon{
+        .background-image('portfolio.png');
+      }
+    }
+
+    .bubble:nth-child(2) {
+      right: 3px;
+    }
+
+
+  }
+
+  #resume {
+    transform: rotate(25deg);
+    margin-left: 25px;
+    bottom: 390px;
+
+    .bubble:nth-child(1) {
+      right: 3px;
+
+
+      .icon, .text{
+        transform: rotate(-25deg);
+      }
+
+      .icon{
+        .background-image('resume.png');
+      }
+    }
+
+    .bubble:nth-child(2) {
+      left: 3px;
+    }
+
+  }
+
+  #contact {
+    transform: rotate(75deg);
+    bottom: 250px;
+    margin-left: 95px;
+
+    .bubble:nth-child(1) {
+      right: 6px;
+
+
+
+      .icon, .text{
+        transform: rotate(-75deg);
+      }
+
+      .icon{
+        .background-image('contact.png');
+      }
+    }
+
+    .bubble:nth-child(2) {
+      left: 6px;
+    }
+  }
+
+  #avatar {
+    margin: auto;
+    width: 220px;
+    height: 420px;
+    .background('blink.png', transparent, left center);
+    animation: blink 0.5s steps(3) alternate infinite;
+
+    @keyframes blink {
+      100% {
+        background-position: -660px;
+      }
+    }
+
+    @keyframes dance {
+      100% {
+        background-position: -1760px;
+      }
+    }
+
+    @keyframes wave {
+      100% {
+        background-position: -1100px;
+      }
+    }
+  }
+}

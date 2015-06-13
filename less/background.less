@@ -1,0 +1,89 @@
+#background{
+  position:fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  #gradient > .vertical(#a7bae1, #e7f8ff);
+  overflow: hidden;
+
+  .sun {
+    width: 240px;
+    height: 240px;
+    background: #ff0;
+    background: radial-gradient(ellipse at center, #f90 0%,#fc0 60%,#ff0 100%);
+    border-radius: 100%;
+    position: absolute;
+    top: -120px;
+    left: -120px;
+    animation: pulse 2s alternate infinite;
+    z-index: 2;
+  }
+
+  .cloud {
+    width: 200px;
+    height: 60px;
+    background: #fff;
+    border-radius: 200px;
+    position: relative;
+    opacity: 0.5;
+    animation:  move 15s linear infinite;
+    margin-left: 120%;
+
+    &:before, &:after{
+      content: '';
+      position: absolute;
+      background: #fff;
+      width: 100px;
+      height: 80px;
+      position: absolute;
+      top: -15px;
+      left: 10px;
+      border-radius: 120px;
+      transform: rotate(30deg);
+    }
+
+    &:after{
+      width: 120px;
+      height: 120px;
+      top: -40px;
+      left: auto;
+      right: 15px;
+    }
+
+
+    &:nth-child(3){
+      transfomr: scale(0.6);
+      animation-delay: 3s;
+    }
+
+    &:nth-child(4){
+      transform: scale(0.8);
+      animation-delay: 6s;
+    }
+
+    &:nth-child(5){
+      top: -200px;
+      animation-delay: 9s;
+      transform: scale(0.75);
+    }
+
+    &:nth-child(6){
+      top: -150px;
+      transform: scale(0.9);
+      animation-delay: 12s;
+    }
+
+  }
+
+  @keyframes pulse {
+    from { box-shadow: 0 0 100px #ff0, 0 0 100px #ff0; }
+    to { box-shadow: 0 0 50px #ff0, 0 0 75px #ff0;  }
+  }
+
+  @keyframes move{
+    0% {margin-left: 120%}
+    100% {margin-left: -400px;}
+  }
+
+}
