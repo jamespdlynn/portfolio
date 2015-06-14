@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="app">
 <head lang="en">
     <meta charset="UTF-8">
     <title>James Lynn</title>
@@ -7,48 +7,22 @@
 </head>
 <body>
 
+
 <div id="background">
     <div class="sun"></div>
-    <div class="cloud"></div>
-    <div class="cloud"></div>
-    <div class="cloud"></div>
-    <div class="cloud"></div>
-    <div class="cloud"></div>
+    <div class="cloud" ng-repeat="i in [1,2,3,4,5]"></div>
 </div>
 
+<div id="main" ng-controller="MainController">
+   <div id="nav" class="animate-show" nav></div>
+   <div id="avatar" ng-click="onClick()" avatar></div>
 
-<div id="navigation">
-
-        <div id="about" class="thought">
-            <div class="main bubble">
-                <div class="icon"></div>
-            </div>
-            <div class="bubble"></div>
-            <div class="bubble"></div>
-        </div>
-        <div id="portfolio" class="thought">
-            <div class="main bubble">
-                <div class="icon"></div>
-            </div>
-            <div class="bubble"></div>
-            <div class="bubble"></div>
-        </div>
-        <div id="resume" class="thought">
-            <div class="main bubble">
-                <div class="icon"></div>
-            </div>
-            <div class="bubble"></div>
-            <div class="bubble"></div>
-        </div>
-        <div id="contact" class="thought">
-            <div class="main bubble">
-                <div class="icon"></div>
-            </div>
-            <div class="bubble"></div>
-            <div class="bubble"></div>
-        </div>
-    <div id="avatar"></div>
 </div>
+
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular-animate.js"></script>
+
+<script src="js/app.js"></script>
 
 </body>
 </html>

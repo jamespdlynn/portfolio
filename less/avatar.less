@@ -1,0 +1,45 @@
+#avatar {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  margin-left: -110px;
+
+  width: 220px;
+  height: 420px;
+  transition : 2.5s linear left;
+
+  .background('blink.png', transparent, left center);
+
+  &.blink{
+    animation: three-frame 0.3s steps(3);
+  }
+
+  &.wave{
+    .background-image('wave.png');
+    animation: five-frame 0.5s steps(5) alternate 2;
+  }
+
+  &.dance{
+    .background-image('dance.png');
+    animation: eight-frame 0.75s steps(8) 2;
+  }
+
+  &.walk{
+    .background-image('walk.png');
+    animation: eight-frame 0.75s steps(8) infinite;
+
+    &.left{
+      transform: scaleX(-1);
+    }
+  }
+
+  &.left{
+    left: 10%;
+  }
+
+
+  .keyframe(three-frame, {background-position:-660px});
+  .keyframe(five-frame, {background-position:-1100px});
+  .keyframe(eight-frame, {background-position:-1760px});
+
+}

@@ -22,6 +22,7 @@ switch (app.get('env'))
 				}
 			},
 			dest : path.join(__dirname, 'public'),
+			compress : false,
 			debug : true,
 			force : true
 		}));

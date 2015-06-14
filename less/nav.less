@@ -1,0 +1,159 @@
+#nav {
+
+  .nav-item {
+
+    position:absolute;
+    left: 50%;
+    cursor: pointer;
+
+    &:hover, &:active{
+
+      .bubble{
+        background-color: #e4fbff !important;
+
+        &.main{
+          .background-image('bubble-selected.png');
+          background-color: transparent !important;
+        }
+      }
+    }
+
+    .bubble {
+      position: relative;
+      margin: 8px auto;
+      opacity: 1;
+      transition: transform ease-out 0.3s;
+
+      &.main {
+        .image-fill('bubble.png', 128px);
+        .box-sizing(border-box);
+        padding: 43px;
+        transition-delay: 0.6s;
+
+        .icon {
+          .image-fill('', 42px);
+
+          &.about {
+            .background-image('about.png');
+          }
+
+          &.portfolio {
+            .background-image('portfolio.png');
+          }
+
+          &.resume {
+            .background-image('resume.png');
+          }
+
+          &.contact {
+            .background-image('contact.png');
+          }
+        }
+
+        .text {
+          width: 100%;
+        }
+
+      }
+
+      &:nth-child(2) {
+        transition-delay: 0.3s;
+        .circle(12px, #fff, solid 2px #000);
+      }
+
+      &:nth-child(3) {
+        transition-delay: 0s;
+        .circle(8px, #fff, solid 2px #000);
+      }
+
+
+      &.hidden {
+        transform: scale(0);
+        transition-delay: 0s !important;
+      }
+    }
+
+    &:nth-child(1) {
+      transform: rotate(-75deg);
+      margin-left: -220px;
+      bottom: 250px;
+
+      .bubble.main {
+        left: 6px;
+
+        .icon{
+          transform: rotate(75deg);
+        }
+      }
+
+      .bubble:nth-child(2) {
+        right: 6px;
+      }
+
+    }
+
+    &:nth-child(2) {
+      transform: rotate(-25deg);
+      margin-left: -150px;
+      bottom: 390px;
+
+      .bubble.main {
+        left: 3px;
+
+        .icon{
+          transform: rotate(25deg);
+        }
+      }
+
+      .bubble:nth-child(2) {
+        right: 3px;
+      }
+
+
+    }
+
+    &:nth-child(3) {
+      transform: rotate(25deg);
+      margin-left: 25px;
+      bottom: 390px;
+
+      .bubble:nth-child(1) {
+        right: 3px;
+
+        .icon{
+          transform: rotate(-25deg);
+        }
+
+      }
+
+      .bubble:nth-child(2) {
+        left: 3px;
+      }
+
+    }
+
+    &:nth-child(4) {
+      transform: rotate(75deg);
+      bottom: 250px;
+      margin-left: 95px;
+
+      .bubble:nth-child(1) {
+        right: 6px;
+
+        .icon{
+          transform: rotate(-75deg);
+        }
+      }
+
+      .bubble:nth-child(2) {
+        left: 6px;
+      }
+    }
+
+
+
+  }
+
+
+
+}

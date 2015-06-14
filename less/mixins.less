@@ -177,4 +177,10 @@
   .transform(translate(@x, @y));
 }
 
+.keyframe(@name,@arguments){
+  @-webkit-keyframes @name { 100%{ @arguments();}}
+  @-moz-keyframes @name { 100%{ @arguments();}}
+  @keyframes @name { 100%{@arguments();}}
+}
+
 
