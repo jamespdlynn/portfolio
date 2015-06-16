@@ -1,7 +1,5 @@
-<a href="{{item.path}}" class="nav-item" ng-repeat="item in nav.items">
-
+<a href="{{item.path}}" target="{{item.target}}" class="nav-item" ng-repeat="item in nav.items">
     <div class="bubble" ng-class="{main:$first,hidden:!nav.visible}" ng-repeat="i in [1,2,3]">
         <div class="icon {{item.key}}" ng-if="$first"></div>
     </div>
-
 </a>

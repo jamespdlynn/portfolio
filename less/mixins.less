@@ -104,7 +104,6 @@
   border-bottom-right-radius: @bottomright;
   border-bottom-left-radius: @bottomleft;
   border-top-left-radius: @topleft;
-  .background-clip(padding-box);
 }
 
 .opacity(@opacity: 0.5) {
@@ -177,10 +176,16 @@
   .transform(translate(@x, @y));
 }
 
-.keyframe(@name,@arguments){
-  @-webkit-keyframes @name { 100%{ @arguments();}}
-  @-moz-keyframes @name { 100%{ @arguments();}}
-  @keyframes @name { 100%{@arguments();}}
+.keyframe(@name,@to) {
+  @-webkit-keyframes @name { to{@to();} }
+  @-moz-keyframes @name { to{@to();} }
+  @keyframes @name { to{@to();} }
+}
+
+.keyframe(@name,@from,@to){
+  @-webkit-keyframes @name { from{ @from();} to{@to();} }
+  @-moz-keyframes @name { from{ @from();} to{@to();} }
+  @keyframes @name { from{ @from();} to{@to();} }
 }
 
 
