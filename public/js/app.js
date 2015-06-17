@@ -1,7 +1,5 @@
 angular.module("app", ['ngRoute'])
 	.config(function($routeProvider) {
-
-
 		$routeProvider.
 			when('/',{
 				state: ''
@@ -46,13 +44,11 @@ angular.module("app", ['ngRoute'])
 			link: function (scope, element) {
 
 				var avatar = element.find('avatar');
-				var nav = element.find('nav');
-
 				angular.extend(avatar, {
 
 					reset : function(){
-						clearTimeout(this.timeout);
-						this.removeClass('walk').removeClass('notransition');
+						clearTimeout(avatar.timeout);
+						avatar.removeClass('walk').removeClass('notransition');
 						return this;
 					},
 
@@ -67,7 +63,7 @@ angular.module("app", ['ngRoute'])
 					togglePosition : function(callback){
 
 						avatar.reset().addClass('walk').toggleClass('left');
-						this.timeout = setTimeout(function(){
+						avatar.timeout = setTimeout(function(){
 							avatar.removeClass('walk').animateRandom();
 							if (callback) callback();
 						}, 2000);
@@ -77,7 +73,7 @@ angular.module("app", ['ngRoute'])
 					},
 
 					animateRandom : function(){
-						this.timeout = setInterval(function(){
+						avatar.timeout = setInterval(function(){
 							var num = Math.random();
 							var type = (num >= 0.2 ? 'blink' : (num >= 0.1 ? 'wave' : 'dance'));
 							avatar.animate(type);
@@ -88,10 +84,11 @@ angular.module("app", ['ngRoute'])
 
 				});
 
+				var nav = element.find('nav');
 				angular.extend(nav, {
 
 					reset : function(){
-						clearTimeout(this.timeout);
+						clearTimeout(nav.timeout);
 						return this;
 					},
 
@@ -107,19 +104,12 @@ angular.module("app", ['ngRoute'])
 
 						nav.reset().toggleClass('hidden', value);
 						if (callback){
-							setTimeout(callback, 350);
+							nav.timeout = setTimeout(callback, 350);
 						}
 
 						return this;
 					}
 				});
-
-
-				var interval;
-				var restartInterval = function(){
-					clearInterval(interval);
-					interval = setInterval(avatar.animateRandom, 7000);
-				};
 
 				avatar.on('click', function() {
 					if (avatar.isMoving()) return;
