@@ -1,149 +1,166 @@
-var app = angular.module("app", ['ngRoute']);
+angular.module("app", ['ngRoute'])
+	.config(function($routeProvider) {
 
 
-app.config(['$routeProvider',function($routeProvider) {
-	$routeProvider.
-		when('/about', {
-			state : 'about'
-		}).
-		when('/portfolio', {
-			state : 'portfolio'
-		}).
-		when('/contact', {
-			state : 'contact'
-		}).
-		otherwise({
-			state : ''
-		});
-}]);
+		$routeProvider.
+			when('/',{
+				state: ''
+			}).
+			when('/about', {
+				state : 'about'
+			}).
+			when('/portfolio', {
+				state : 'portfolio'
+			}).
+			when('/contact', {
+				state : 'contact'
+			}).
+			otherwise({
+				redirectTo :'/'
+			});
+	}).
 
-app.controller('MainController', function ($scope, $route, $location) {
+	run(function($rootScope, $route){
+		$rootScope.state = '';
 
-	$scope.nav = {
-
-		visible: false,
-
-		items: [
+		$rootScope.navItems = [
 			{key: 'about', path: '#/about', target:'_self'},
 			{key: 'portfolio', path: '#/portfolio', target:'_self'},
 			{key: 'contact', path: '#/contact', target:'_self'},
 			{key: 'resume', path: '/resume.pdf', target:'_blank'}
-		],
+		];
 
-		toggle: function () {
-			return (this.visible = !this.visible);
-		}
-	};
+		$rootScope.$on('$routeChangeSuccess', function (event, current) {
+			$rootScope.state = current.state;
+		});
+	}).
 
-	$scope.avatar = {
-		isLeft :  false,
+	directive('main', function () {
+		return {
+			restrict: 'E',
 
-		onClick : function(){
+			templateUrl : 'templates/main.html',
 
-			if (!this.isLeft){
-				$scope.nav.toggle();
-			} else{
-				$location.url('/');
+			scope : true,
+
+			link: function (scope, element) {
+
+				var avatar = element.find('avatar');
+				var nav = element.find('nav');
+
+				angular.extend(avatar, {
+
+					reset : function(){
+						clearTimeout(this.timeout);
+						this.removeClass('walk').removeClass('notransition');
+						return this;
+					},
+
+					isLeft : function(){
+						return avatar.hasClass('left');
+					},
+
+					isMoving : function(){
+						return avatar.hasClass('walk');
+					},
+
+					togglePosition : function(callback){
+
+						avatar.reset().addClass('walk').toggleClass('left');
+						this.timeout = setTimeout(function(){
+							avatar.removeClass('walk').animateRandom();
+							if (callback) callback();
+						}, 2000);
+
+
+						return this;
+					},
+
+					animateRandom : function(){
+						this.timeout = setInterval(function(){
+							var num = Math.random();
+							var type = (num >= 0.2 ? 'blink' : (num >= 0.1 ? 'wave' : 'dance'));
+							avatar.animate(type);
+						}, 5000);
+
+						return this;
+					}
+
+				});
+
+				angular.extend(nav, {
+
+					reset : function(){
+						clearTimeout(this.timeout);
+						return this;
+					},
+
+					toggle : function(value, callback) {
+						if (value != null) {
+							value = !value;
+
+							if (nav.hasClass('hidden') === value){
+								if (callback) callback();
+								return;
+							}
+						}
+
+						nav.reset().toggleClass('hidden', value);
+						if (callback){
+							setTimeout(callback, 350);
+						}
+
+						return this;
+					}
+				});
+
+
+				var interval;
+				var restartInterval = function(){
+					clearInterval(interval);
+					interval = setInterval(avatar.animateRandom, 7000);
+				};
+
+				avatar.on('click', function() {
+					if (avatar.isMoving()) return;
+
+					if (avatar.isLeft()) {
+						location.assign('#/');
+					} else {
+						nav.toggle();
+					}
+				});
+
+				var initial = true;
+				scope.$watch('state', function(state) {
+
+					if (!!state != avatar.isLeft()){
+
+						if (initial || avatar.isMoving()) {
+							avatar.reset().addClass('notransition').toggleClass('left', !!state);
+							avatar.animateRandom();
+						}
+						else {
+							nav.toggle(false, function(){
+								avatar.togglePosition(function () {
+									if (!avatar.isLeft()) {
+										nav.toggle(true);
+									}
+								});
+							});
+						}
+					}
+
+					initial = false;
+				});
+
+				avatar.animateRandom();
+
 			}
-		}
-	}
 
-	$scope.$on('$routeChangeSuccess', function() {
-		if ($route.current){
 
-			$scope.nav.visible = false;
-			$scope.avatar.isLeft = !!$route.current.state;
-			console.log($route.current.state+' '+$scope.avatar.isLeft);
 		}
 	});
-
-}).directive('jlNav', function () {
-	return {
-		restrict: 'E',
-
-		scope : true,
-
-		templateUrl : 'templates/nav.html'
-	}
-}).directive('jlAvatar', function () {
-
-	return {
-		restrict: 'E',
-
-		link: function (scope, element) {
-
-			var ANIMATIONS = ['wave', 'blink', 'dance', 'walk', 'turn'];
-			var ANIMATION_EVENTS = ['webkitAnimationEnd', 'oanimationend', 'msAnimationEnd', 'animationend'];
-			var TRANSITION_EVENTS = ['webkitTransitionEnd', 'otransitionend', 'oTransitionEnd', 'msTransitionEnd', 'transitionend'];
-
-			var reset = function () {
-				ANIMATIONS.forEach(function (animation) {
-					element.removeClass(animation);
-				});
-				element.removeClass('flip').removeClass('reverse');
-			};
-
-			var animate = function(type, callback){
-				type = type.toLowerCase();
-				callback = callback || reset;
-
-				if (~ANIMATIONS.indexOf(type)) {
-					reset();
-					element.addClass(type);
-					element.one(ANIMATION_EVENTS.join(' '), callback);
-				}
-				else {
-					console.error(type + ' is not a valid animation');
-				}
-			}
-
-			var togglePosition = function () {
-				reset();
-
-				if(!element.hasClass('left')){
-					element.addClass('flip');
-				}
-
-				element.addClass('turn');
-
-				element.one(ANIMATION_EVENTS.join(' '), function(){
-					element.removeClass('turn');
-					element.addClass('walk').toggleClass('left');
-
-					element.one(TRANSITION_EVENTS.join(' '), function(){
-						element.removeClass('walk');
-						element.addClass('turn reverse');
-
-						element.one(ANIMATION_EVENTS.join(' '),reset);
-					});
-				});
-			};
-
-			setInterval(function(){
-				var num = Math.random();
-				var type = (num >= 0.25 ? 'blink' : (scope >= 0.125 ? 'wave' : 'dance'));
-				if (!element.hasClass('walk') && !element.hasClass('turn')){
-					animate(type);
-
-				}
-			}, 7000);
-
-			window.avatar = {
-				blink : animate.bind(this,'blink'),
-				wave : animate.bind(this,'dance'),
-				dance : animate.bind(this,'dance')
-			};
-
-			scope.$watch('avatar.isLeft', function(value){
-				console.log(scope.avatar.isLeft);
-				if (scope.avatar.isLeft != element.hasClass('left')){
-					togglePosition();
-				}
-			});
-
-		}
-	}
-});
 
 
 

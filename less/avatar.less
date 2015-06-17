@@ -1,4 +1,4 @@
-jl-avatar {
+#avatar {
 
   position: absolute;
   bottom: 0;
@@ -7,7 +7,8 @@ jl-avatar {
 
   width: 176px;
   height: 336px;
-  transition : 2s linear left;
+  transition : 1.6s linear left;
+  transition-delay: 0.2s;
   cursor: pointer;
 
   .background('sprites.png', transparent, left top);
@@ -18,14 +19,21 @@ jl-avatar {
 
   &.turn{
     animation: turn 0.2s steps(2) 1;
-
+    cursor: default;
     &.reverse{
       animation-name: turnReverse;
     }
   }
 
   &.walk{
-    animation: walk 0.8s steps(8) infinite;
+    animation: turn 0.2s steps(2), walk 0.8s steps(8), turnReverse 0.2s steps(2);
+    animation-iteration-count: 1, 2, 1;
+    animation-delay: 0s, 0.2s, 1.8s;
+    cursor: default;
+
+    &.left{
+      transform: scaleX(-1);
+    }
   }
 
   &.dance{
@@ -44,11 +52,14 @@ jl-avatar {
     transform: scaleX(-1);
   }
 
+  &.notransition{
+    transition: none;
+  }
 
   .keyframe(blink, {background-position: 0px 0px}, {background-position:-528px 0px});
   .keyframe(turn, {background-position:-176px -336px}, {background-position:-528px -336px});
   .keyframe(turnReverse, {background-position:-352px -336px}, {background-position:0 -336px});
-  .keyframe(walk, {background-position:0px -672px}, {background-position:-1408px -672px});
+  .keyframe(walk, {background-position: 0px -672px},{background-position:-1408px -672px});
   .keyframe(dance, {background-position:0px -1008px}, {background-position:-1408px -1008px});
 
 }

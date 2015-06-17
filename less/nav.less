@@ -1,4 +1,4 @@
-jl-nav {
+#nav {
 
   .nav-item {
 
@@ -67,11 +67,6 @@ jl-nav {
         .circle(6px, #fff, solid 2px #000);
       }
 
-
-      &.hidden {
-        transform: scale(0);
-        transition-delay: 0s !important;
-      }
     }
 
     &:nth-child(1) {
@@ -154,6 +149,22 @@ jl-nav {
 
 
 
+  }
+
+  &.hidden{
+
+
+    .nav-item{
+      pointer: default;
+      pointer-events: none;
+
+
+      .bubble{
+        transform: scale(0);
+        transition-delay: 0s !important;
+        .user-select(none);
+      }
+    }
   }
 
 
