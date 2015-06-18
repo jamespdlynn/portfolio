@@ -56,7 +56,6 @@ angular.module("app", ['ngRoute', 'ngAnimate'])
 						avatar.animations.forEach(function(animation){
 							avatar.removeClass(animation);
 						});
-						avatar.removeClass('auto');
 						return this;
 					},
 
@@ -89,16 +88,8 @@ angular.module("app", ['ngRoute', 'ngAnimate'])
 						return avatar.hasClass('walk');
 					},
 
-					togglePosition : function(auto, callback){
-
-						if (auto){
-							avatar.reset().addClass('auto');
-						}else{
-							avatar.animate('walk', callback);
-						}
-
-						avatar.toggleClass('left');
-
+					togglePosition : function(callback){
+						avatar.toggleClass('left').animate('walk', callback);
 						return this;
 					},
 
@@ -160,11 +151,12 @@ angular.module("app", ['ngRoute', 'ngAnimate'])
 
 					if (!!state != avatar.isLeft()){
 						if (!initialized || avatar.isWalking()) {
-							avatar.togglePosition(true).animateRandom();
+							avatar.reset().toggleClass('left');
+							avatar.animateRandom();
 						}
 						else {
 							nav.toggle(false, function(){
-								avatar.togglePosition(false, function () {
+								avatar.togglePosition(function () {
 									nav.toggle(!avatar.isLeft());
 								});
 							});

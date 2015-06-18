@@ -9,9 +9,11 @@
   height: 378px;
   cursor: pointer;
 
-  .transition(1.6s linear left);
-  .transition-delay(0.2s);
   .background('sprites.png', transparent, left top);
+
+  &.left{
+    left: 10%;
+  }
 
   &.blink{
     .animation(blink 0.3s steps(3) 2 alternate);
@@ -19,10 +21,12 @@
 
   &.walk{
     cursor: default;
-
     .animation(~"turn 0.2s steps(2), walk 0.8s steps(8), turnReverse 0.2s steps(2)");
     .animation-iteration-count(~"1, 2, 1");
     .animation-delay(~"0s, 0.2s, 1.8s");
+
+    .transition(1.6s linear left);
+    .transition-delay(0.2s);
 
     &.left{
       .transform(scaleX(-1));
@@ -37,13 +41,6 @@
     .animation(wave 1s steps(8) alternate 2);
   }
 
-  &.left{
-    left: 10%;
-  }
-
-  &.auto{
-    .transition(none);
-  }
 
   .keyframe(blink, {background-position: 0px 0px}, {background-position:-594px 0px});
   .keyframe(turn, {background-position:-198px -378px}, {background-position:-594px -378px});
