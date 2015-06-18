@@ -1,65 +1,56 @@
 #avatar {
 
   position: absolute;
-  bottom: 0;
+  bottom: 10px;
   left: 50%;
-  margin-left: -88px;
+  margin-left: -99px;
 
-  width: 176px;
-  height: 336px;
-  transition : 1.6s linear left;
-  transition-delay: 0.2s;
+  width: 198px;
+  height: 378px;
   cursor: pointer;
 
+  .transition(1.6s linear left);
+  .transition-delay(0.2s);
   .background('sprites.png', transparent, left top);
 
   &.blink{
-    animation: blink 0.3s steps(3) 2 alternate;
-  }
-
-  &.turn{
-    animation: turn 0.2s steps(2) 1;
-    cursor: default;
-    &.reverse{
-      animation-name: turnReverse;
-    }
+    .animation(blink 0.3s steps(3) 2 alternate);
   }
 
   &.walk{
-    animation: turn 0.2s steps(2), walk 0.8s steps(8), turnReverse 0.2s steps(2);
-    animation-iteration-count: 1, 2, 1;
-    animation-delay: 0s, 0.2s, 1.8s;
     cursor: default;
 
+    .animation(~"turn 0.2s steps(2), walk 0.8s steps(8), turnReverse 0.2s steps(2)");
+    .animation-iteration-count(~"1, 2, 1");
+    .animation-delay(~"0s, 0.2s, 1.8s");
+
     &.left{
-      transform: scaleX(-1);
+      .transform(scaleX(-1));
     }
   }
 
   &.dance{
-    animation: dance 0.8s steps(8) 2;
+    .animation(dance 1s steps(8) 2);
   }
 
   &.wave{
-    //animation: five-frame 0.5s steps(5) alternate 2;
+    .animation(wave 1s steps(8) alternate 2);
   }
 
   &.left{
     left: 10%;
   }
 
-  &.flip{
-    transform: scaleX(-1);
+  &.auto{
+    .transition(none);
   }
 
-  &.notransition{
-    transition: none;
-  }
+  .keyframe(blink, {background-position: 0px 0px}, {background-position:-594px 0px});
+  .keyframe(turn, {background-position:-198px -378px}, {background-position:-594px -378px});
+  .keyframe(turnReverse, {background-position:-396px -378px}, {background-position:0 -378px});
 
-  .keyframe(blink, {background-position: 0px 0px}, {background-position:-528px 0px});
-  .keyframe(turn, {background-position:-176px -336px}, {background-position:-528px -336px});
-  .keyframe(turnReverse, {background-position:-352px -336px}, {background-position:0 -336px});
-  .keyframe(walk, {background-position: 0px -672px},{background-position:-1408px -672px});
-  .keyframe(dance, {background-position:0px -1008px}, {background-position:-1408px -1008px});
+  .keyframe(walk, {background-position: 0px -756px},{background-position:-1584px -756px});
+  .keyframe(dance, {background-position:0px -1134px}, {background-position:-1584px -1134px});
+  .keyframe(wave, {background-position: 0px -1512px}, {background-position:-1584px -1512px});
 
 }

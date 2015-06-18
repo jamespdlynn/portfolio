@@ -116,12 +116,7 @@
   filter: ~"alpha(opacity=@{opperc})";
 }
 
-.transition-duration(@duration: 0.2s) {
-  -moz-transition-duration: @duration;
-  -webkit-transition-duration: @duration;
-  -o-transition-duration: @duration;
-  transition-duration: @duration;
-}
+
 
 .transform(...) {
   -webkit-transform: @arguments;
@@ -131,7 +126,7 @@
   transform: @arguments;
 }
 
-.rotation(@deg:5deg){
+.rotate(@deg:5deg){
   .transform(rotate(@deg));
 }
 
@@ -139,12 +134,55 @@
   .transform(scale(@ratio));
 }
 
-.transition(@duration:0.2s, @ease:ease-out) {
-  -webkit-transition: all @duration @ease;
-  -moz-transition: all @duration @ease;
-  -o-transition: all @duration @ease;
-  transition: all @duration @ease;
+.transition(...) {
+  -webkit-transition: @arguments;
+  -moz-transition: @arguments;
+  -o-transition: @arguments;
+  transition: @arguments;
 }
+
+.transition-duration(@duration: 0.2s) {
+  -moz-transition-duration: @duration;
+  -webkit-transition-duration: @duration;
+  -o-transition-duration: @duration;
+  transition-duration: @duration;
+}
+
+.transition-delay(@delay: 0.2s){
+  -moz-transition-delay: @delay;
+  -webkit-transition-delay: @delay;
+  -o-transition-delay: @delay;
+  transition-delay: @delay;
+}
+
+.animation(...){
+  -webkit-animation: @arguments;
+  -moz-animation: @arguments;
+  -o-animation: @arguments;
+  animation: @arguments;
+}
+
+.animation-iteration-count(...){
+  -webkit-animation-iteration-count: @arguments;
+  -moz-animation-iteration-count: @arguments;
+  -o-animation-iteration-count: @arguments;
+  animation-iteration-count: @arguments;
+}
+
+.animation-duration(...) {
+  -moz-animation-duration: @arguments;
+  -webkit-animation-duration: @arguments;
+  -o-animation-duration: @arguments;
+  animation-duration: @arguments;
+}
+
+.animation-delay(...){
+  -moz-animation-delay: @arguments;
+  -webkit-animation-delay: @arguments;
+  -o-animation-delay: @arguments;
+  animation-delay: @arguments;
+}
+
 
 .inner-shadow(@horizontal:0, @vertical:1px, @blur:2px, @alpha: 0.4) {
   -webkit-box-shadow: inset @horizontal @vertical @blur rgba(0, 0, 0, @alpha);
@@ -179,12 +217,14 @@
 .keyframe(@name,@to) {
   @-webkit-keyframes @name { to{@to();} }
   @-moz-keyframes @name { to{@to();} }
+  @-o-keyframes @name { to{@to();} }
   @keyframes @name { to{@to();} }
 }
 
 .keyframe(@name,@from,@to){
   @-webkit-keyframes @name { from{ @from();} to{@to();} }
   @-moz-keyframes @name { from{ @from();} to{@to();} }
+  @-o-keyframes @name { from{ @from();} to{@to();} }
   @keyframes @name { from{ @from();} to{@to();} }
 }
 

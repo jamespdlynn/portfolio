@@ -1,0 +1,41 @@
+#view{
+  position: absolute;
+  max-width: 960px;
+  left:20%;
+  right:20%;
+  bottom: 10px;
+  color: #111;
+
+  font: 20px "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  transition: 0.5s ease-in opacity;
+
+  &.ng-enter{
+    transition-delay: 1.8s;
+    opacity: 0;
+    &.ng-enter-active{
+      opacity: 1;
+    }
+  }
+
+  &.ng-leave{
+    transition-duration: 0.5s;
+    opacity: 1;
+    &.ng-leave-active{
+      opacity: 0;
+    }
+  }
+
+  h1 {
+    font-family: 'Lobster', Georgia, Times, serif;
+    font-size: 60px;
+    line-height: 55px;
+    margin-bottom: 20px;
+  }
+
+  p {
+    font-family: 'Cabin', Helvetica, Arial, sans-serif;
+    font-size: 17px;
+    line-height: 30px;
+  }
+
+}
