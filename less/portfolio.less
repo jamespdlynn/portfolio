@@ -1,0 +1,44 @@
+#portfolio{
+
+  .header{
+    position: relative;
+
+    .slick-slider{
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      left: 220px;
+      height: 100%;
+      margin: 0;
+      .grab;
+      .box-sizing(border-box);
+      .user-select(none);
+
+
+      .slick-slide{
+
+        height: 58px;
+        .background('portfolio/hyper-galactic.png');
+        .rounded(5px);
+        background-size: 100%;
+
+        .scale(0.8);
+        opacity: 0.5;
+        .transition(all 0.5s linear);
+
+
+        &.slick-center{
+          .scale(1);
+          opacity: 1;
+        }
+
+      }
+    }
+  }
+
+  .view{
+    transition-delay: 0s;
+  }
+  
+  
+}

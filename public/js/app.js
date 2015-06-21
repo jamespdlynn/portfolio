@@ -1,40 +1,155 @@
-angular.module("app", ['ngRoute', 'ngAnimate'])
+Array.prototype.where = function(obj){
+	var filter = this.filter(function(value){
+		for (var key in obj){
+			if (obj.hasOwnProperty(key)){
+				if (value[key] !== obj[key]){
+					return false;
+				}
+			}
+		}
+		return true;
+	});
+	return filter.length ? filter[0] : null;
+};
 
-	.config(function($routeProvider) {
-		$routeProvider.
-			when('/',{
-				state: ''
-			}).
-			when('/about', {
-				state : 'about',
-				templateUrl : 'templates/about.html'
-			}).
-			when('/portfolio', {
-				state : 'portfolio',
-				templateUrl : 'templates/portfolio.html'
-			}).
-			when('/contact', {
-				state : 'contact',
-				templateUrl : 'templates/contact.html'
-			}).
-			otherwise({
-				redirectTo :'/'
+angular.module("app", ['ui.router', 'ngAnimate', 'slick'])
+
+
+
+	.constant("$States", [
+		{
+			key : 'home',
+			url : '/',
+			label : 'Home',
+			navEnabled : false
+		},
+
+		{
+			key : 'about',
+			label : 'About Me',
+			template : 'templates/about.html',
+			navEnabled : true
+		},
+
+		{
+			key : 'portfolio',
+			label : 'Portfolio',
+			controller : 'PortfolioController',
+			template : 'templates/portfolio.html',
+			navEnabled : true,
+			abstract : true,
+			states : [
+				{
+					url : '',
+					key : 'hyper',
+					label : 'Hyper Galactic',
+					template : 'templates/portfolio/test.html',
+					navEnabled : true
+				},
+
+				{
+					key : 'chess',
+					label : 'Chess Chaps',
+					template : 'templates/portfolio/test.html',
+					navEnabled : true
+				},
+
+				{
+					key : 'league',
+					label : 'League Champs',
+					template : 'templates/portfolio/test.html',
+					navEnabled : true
+				},
+
+				{
+					key : 'oracle',
+					label : 'Oracle ROI Calculator',
+					template : 'templates/portfolio/test.html',
+					navEnabled : true
+				},
+
+				{
+					key : 'emerson',
+					label : 'Emerson IO Calculator',
+					template : 'templates/portfolio/test.html',
+					navEnabled : true
+				},
+
+				{
+					key : 'lowes',
+					label : 'Lowes Digital Coupons',
+					template : 'templates/portfolio/test.html',
+					navEnabled : true
+				}
+			]
+		},
+
+		{
+			key : 'contact',
+			label : 'Contact',
+			template : 'templates/contact.html',
+			navEnabled : true
+		},
+
+		{
+			key : 'resume',
+			label : 'Resume',
+			template : 'templates/resume.html',
+			navEnabled : true
+		}
+
+	])
+
+	.config(function($stateProvider, $urlRouterProvider, $States) {
+
+
+		var createStates = function(states, path){
+			path = path || '';
+			states.forEach(function(state){
+
+				state.name = state.name || path+state.key;
+				state.url = state.url || '/'+state.key;
+				state.abstract = !!state.abstract;
+
+				$stateProvider.state(state.name, {
+					url : state.url,
+					controller : state.controller,
+					templateUrl : state.template,
+					abstract : !!state.abstract
+				});
+
+				if (state.states){
+					createStates(state.states, state.name+'.')
+
+					if (state.abstract){
+						$urlRouterProvider.when(state.url, state.url+state.states[0].url);
+					}
+				}
 			});
+		};
+
+		createStates($States);
+
+
+		$urlRouterProvider.otherwise('/');
+
 	}).
 
-	controller('MainController', ['$scope', function($scope){
+	controller('MainController', function($scope, $state, $States){
 
-		$scope.navItems = [
-			{key: 'about', path: '#/about', target:'_self'},
-			{key: 'portfolio', path: '#/portfolio', target:'_self'},
-			{key: 'contact', path: '#/contact', target:'_self'},
-			{key: 'resume', path: '/resume.pdf', target:'_blank'}
-		];
+		$scope.isLeft = false;
 
-		$scope.$on('$routeChangeSuccess', function (event, current) {
-			$scope.state = current.state;
+		$scope.navItems = $States.filter(function(value){
+			return value.navEnabled;
 		});
-	}]).
+
+		$scope.home = $state.go.bind($state, 'home');
+
+		$scope.$on('$stateChangeSuccess', function(event, state){
+			$scope.isLeft = !!(state.template || state.templateUrl);
+		});
+
+	}).
 
 	directive('main', function () {
 		return {
@@ -49,30 +164,34 @@ angular.module("app", ['ngRoute', 'ngAnimate'])
 				var avatar = element.find('avatar');
 				angular.extend(avatar, {
 
-					animations : ['blink','wave','dance','walk'],
+					animations : {
+						blink : 600,
+						wave : 2000,
+						dance : 1600,
+						walk : 2000
+					},
 
 					reset : function(){
 						clearTimeout(avatar.timeout);
-						avatar.animations.forEach(function(animation){
-							avatar.removeClass(animation);
-						});
+						for (var key in avatar.animations){
+							if (avatar.animations.hasOwnProperty(key)){
+								avatar.removeClass(key);
+							}
+						}
 						return this;
 					},
 
-					animate : function(type, duration, callback){
-						if (typeof duration === 'function'){
-							callback = duration;
-							duration = null;
-						}
+					animate : function(type, callback){
 
-						duration = duration || 2000;
+						if (avatar.animations.hasOwnProperty(type)){
 
-						if (~avatar.animations.indexOf(type)){
 							avatar.reset().addClass(type);
+
 							avatar.timeout = setTimeout(function(){
-								avatar.reset().animateRandom();
+								avatar.removeClass(type).animateRandom();
 								if (callback) callback();
-							}, duration);
+							}, avatar.animations[type]);
+
 						}else{
 							console.error('Invalid animation: '+type);
 						}
@@ -88,8 +207,12 @@ angular.module("app", ['ngRoute', 'ngAnimate'])
 						return avatar.hasClass('walk');
 					},
 
-					togglePosition : function(callback){
-						avatar.toggleClass('left').animate('walk', callback);
+					togglePosition : function(animate, callback){
+						if (animate){
+							avatar.toggleClass('left').animate('walk', callback);
+						}else{
+							avatar.reset().toggleClass('left').animateRandom();
+						}
 						return this;
 					},
 
@@ -117,7 +240,7 @@ angular.module("app", ['ngRoute', 'ngAnimate'])
 						if (value != null) {
 							value = !value;
 
-							if (nav.hasClass('hidden') === value){
+							if (nav.hasClass('hidden') == value){
 								if (callback) callback();
 								return;
 							}
@@ -125,7 +248,7 @@ angular.module("app", ['ngRoute', 'ngAnimate'])
 
 						nav.reset().toggleClass('hidden', value);
 						if (callback){
-							nav.timeout = setTimeout(callback, 350);
+							nav.timeout = setTimeout(callback, 400);
 						}
 
 						return this;
@@ -135,34 +258,26 @@ angular.module("app", ['ngRoute', 'ngAnimate'])
 				var initialized = false;
 
 				avatar.on('click', function() {
-					if (avatar.isWalking()) return;
-
-					if (avatar.isLeft()) {
-						location.assign('#/');
-					} else {
-						nav.toggle();
+					if (!avatar.isWalking()){
+						scope.isLeft ? scope.home() : nav.toggle();
 					}
 					initialized = true;
 				});
 
-
-				scope.$watch('state', function(state) {
-					if (state == null) return;
-
-					if (!!state != avatar.isLeft()){
+				scope.$watch('isLeft', function(value) {
+					if (value != avatar.isLeft()){
 						if (!initialized || avatar.isWalking()) {
-							avatar.reset().toggleClass('left');
-							avatar.animateRandom();
+							avatar.togglePosition(false);
 						}
 						else {
 							nav.toggle(false, function(){
-								avatar.togglePosition(function () {
-									nav.toggle(!avatar.isLeft());
+								avatar.togglePosition(true, function () {
+									nav.toggle(!scope.isLeft);
 								});
 							});
 						}
 					}
-					initialized = true;
+					//initialized = true;
 				});
 
 				avatar.animateRandom();
@@ -170,7 +285,21 @@ angular.module("app", ['ngRoute', 'ngAnimate'])
 			}
 
 		}
+	}).
+
+	controller('PortfolioController', function($scope, $state, $States) {
+
+		var subStates = $States.where({key:'portfolio'}).states;
+		$scope.navItems = subStates.filter(function(value){
+			return value.navEnabled;
+		});
+
+		$scope.$on('$stateChangeSuccess', function(event, state){
+			var item = $scope.navItems.where({name:state.name});
+			$scope.navIndex = $scope.navItems.indexOf(item);
+		});
+
+		$scope.$watch('navIndex',function(value) {
+			$state.go('^.'+$scope.navItems[value].key);
+		});
 	});
-
-
-

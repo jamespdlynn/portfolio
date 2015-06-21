@@ -10,6 +10,7 @@
   cursor: pointer;
 
   .background('sprites.png', transparent, left top);
+  .user-select(none);
 
   &.left{
     left: 10%;
@@ -34,7 +35,7 @@
   }
 
   &.dance{
-    .animation(dance 1s steps(8) 2);
+    .animation(dance 0.8s steps(8) 2);
   }
 
   &.wave{

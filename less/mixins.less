@@ -214,6 +214,18 @@
   .transform(translate(@x, @y));
 }
 
+.grab{
+  cursor: grab;
+  cursor: -webkit-grab;
+  cursor: -moz-grab;
+
+  &:active{
+      cursor: grabbing;
+      cursor: -webkit-grabbing;
+      cursor: -moz-grabbing;
+  }
+}
+
 .keyframe(@name,@to) {
   @-webkit-keyframes @name { to{@to();} }
   @-moz-keyframes @name { to{@to();} }
