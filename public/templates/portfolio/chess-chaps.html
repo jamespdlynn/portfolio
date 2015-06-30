@@ -1,0 +1,26 @@
+<section class="view">
+
+    <img class="img" src="/assets/img/portfolio/chess.png"/>
+
+    <div class="content">
+        <p>
+            <strong>Chess Chaps</strong> is a highly rated mobile game of my own design. It allows you to play casual or competitive chess games with other human opponents over mobile networks.
+            The game is cross platform and optimized for touch devices of most sizes. It is currently available for purchase on the <a href="https://itunes.apple.com/us/app/id555899088" target="_blank">Apple</a>,
+            <a href="https://play.google.com/store/apps/details?id=air.com.aristobot.chess" target="_blank">Google</a>, and  <a href="http://www.amazon.com/Aristobot-LLC-Chess-Chaps/dp/B0094KMY1K" target="_blank">Amazon</a>
+            app stores.
+        </p>
+        <p>
+            The game itself is built using the Flex 4 with AIR mobile framework, and cross compiled down to native code for Android and IOS devices (a few components such as push notifications are written natively in Objective C and Java however).
+            The client communicates to my AWS Java EE cloud server through an authenticated RESTful API. User and game data is stored and retrieved from a transactional MySQL database, while session information is cached in memory at the OS level.
+            Asynchronous and computationally intensive tasks are off loaded to an EJB Queue to allow for minimal response time between the client and server.
+        </p>
+        <p>
+            The server was architected in such a way to work with with any turn based multiplayer game, and thus is oblivous to the rules of chess which it leaves to the client. Instead it is responsible logic that can be used for many different games,
+            such as match making, ELO rankings, messaging and unlockables.
+        </p>
+    </div>
+    <footer class="footer">
+        <a href="https://itunes.apple.com/us/app/id55589908" class="btn btn-primary btn-lg" target="_blank">View Website</a>
+    </footer>
+</section>
+

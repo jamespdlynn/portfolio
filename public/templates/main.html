@@ -1,13 +1,13 @@
 <nav id="nav" class="hidden">
 
-    <a class="nav-item" href="#/{{item.key}}" ng-repeat="item in navItems">
+    <div class="nav-item" data-id="{{item.key}}" ng-repeat="item in navItems">
 
         <div class="bubble" ng-class="{main:$first}" ng-repeat="i in [1,2,3]">
             <div class="label" ng-if="$first">{{item.label}}</div>
         </div>
 
-    </a>
+    </div>
 
 </nav >
 
-<avatar id="avatar" ng-click="onClick"></avatar>
+<avatar id="avatar"></avatar>

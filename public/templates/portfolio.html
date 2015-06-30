@@ -1,19 +1,17 @@
 <portfolio id="portfolio" class="view">
     <div class="header">
-        <h1>Portfolio</h1>
 
         <slick current-index="navIndex"
                infinite="true"
                speed="500"
-               slides-to-show="3"
+               slides-to-show="5"
                swipe-to-slide="true"
                center-mode="true"
                center-padding="0px"
                focus-on-select="true"
                arrows="false">
 
-            <div class="{{item.key}}" ng-repeat="item in navItems">
-            </div>
+            <img src="/assets/img/portfolio/{{item.key}}.png" ng-repeat="item in navItems"/>
         </slick>
     </div>
 

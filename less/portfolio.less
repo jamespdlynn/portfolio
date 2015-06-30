@@ -2,12 +2,13 @@
 
   .header{
     position: relative;
+    height: 58px;
 
     .slick-slider{
       position: absolute;
       top: 0px;
       right: 0px;
-      left: 220px;
+      left: -15px;
       height: 100%;
       margin: 0;
       .grab;
@@ -16,28 +17,51 @@
 
 
       .slick-slide{
-
-        height: 58px;
-        .background('portfolio/hyper-galactic.png');
-        .rounded(5px);
-        background-size: 100%;
-
-        .scale(0.8);
-        opacity: 0.5;
+        margin: 2px;
+        height: auto;
+        .opacity(0.4);
+        .rounded(6px);
+        .scale(0.85);
         .transition(all 0.5s linear);
+        .box-shadow(0 0 2px 1px rgba(0,0,0,0.3));
 
 
         &.slick-center{
           .scale(1);
-          opacity: 1;
+          .opacity(1);
         }
 
       }
     }
   }
 
+
   .view{
+    height: 650px;
+    max-height: 85vh;
+    padding-right: 15px;
+    overflow-y: auto;
     transition-delay: 0s;
+
+    .img{
+      float: right;
+      margin: 20px 0 15px 15px;
+      .rounded(2px);
+    }
+
+    .footer{
+      padding: 10px 0;
+      text-align: right;
+
+      .btn{
+        text-decoration: none;
+        font-weight: bold;
+      }
+    }
+
+    @media (max-width: @screen-md-max) {
+      height: 790px;
+    }
   }
   
   

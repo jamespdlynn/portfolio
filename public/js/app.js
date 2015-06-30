@@ -1,34 +1,31 @@
-Array.prototype.where = function(obj){
-	var filter = this.filter(function(value){
-		for (var key in obj){
-			if (obj.hasOwnProperty(key)){
-				if (value[key] !== obj[key]){
-					return false;
-				}
+Array.prototype.find = function(match){
+	var i = this.length;
+	loop1 : while (i--){
+		var obj = this[i];
+		for (var key in match){
+			if (match.hasOwnProperty(key) && obj[key] !== match[key]){
+				continue loop1;
 			}
 		}
-		return true;
-	});
-	return filter.length ? filter[0] : null;
+		return obj;
+	}
+	return null;
 };
 
-angular.module("app", ['ui.router', 'ngAnimate', 'slick'])
-
-
+angular.module("app", ['ngAnimate', 'ui.router', 'slick'])
 
 	.constant("$States", [
 		{
 			key : 'home',
 			url : '/',
 			label : 'Home',
-			navEnabled : false
+			navDisabled : true
 		},
 
 		{
 			key : 'about',
 			label : 'About Me',
-			template : 'templates/about.html',
-			navEnabled : true
+			template : 'templates/about.html'
 		},
 
 		{
@@ -36,66 +33,58 @@ angular.module("app", ['ui.router', 'ngAnimate', 'slick'])
 			label : 'Portfolio',
 			controller : 'PortfolioController',
 			template : 'templates/portfolio.html',
-			navEnabled : true,
 			abstract : true,
 			states : [
 				{
 					url : '',
-					key : 'hyper',
+					key : 'hyper-galactic',
 					label : 'Hyper Galactic',
-					template : 'templates/portfolio/test.html',
-					navEnabled : true
+					template : 'templates/portfolio/hyper-galactic.html'
 				},
 
 				{
-					key : 'chess',
+					key : 'chess-chaps',
 					label : 'Chess Chaps',
-					template : 'templates/portfolio/test.html',
-					navEnabled : true
+					template : 'templates/portfolio/chess-chaps.html'
 				},
 
 				{
-					key : 'league',
+					key : 'league-champs',
 					label : 'League Champs',
-					template : 'templates/portfolio/test.html',
-					navEnabled : true
+					template : 'templates/portfolio/league-champs.html'
 				},
 
 				{
-					key : 'oracle',
-					label : 'Oracle ROI Calculator',
-					template : 'templates/portfolio/test.html',
-					navEnabled : true
+					key : 'inmar-digital-coupons',
+					label : 'Inmar Digital Coupons',
+					template : 'templates/portfolio/inmar-digital-coupons.html'
 				},
 
 				{
-					key : 'emerson',
+					key : 'emerson-io',
 					label : 'Emerson IO Calculator',
-					template : 'templates/portfolio/test.html',
-					navEnabled : true
+					template : 'templates/portfolio/emerson-io.html'
 				},
 
 				{
-					key : 'lowes',
-					label : 'Lowes Digital Coupons',
-					template : 'templates/portfolio/test.html',
-					navEnabled : true
+					key : 'oracle-roi-calculator',
+					label : 'Oracle ROI Calculator',
+					template : 'templates/portfolio/oracle-roi-calculator.html'
 				}
+
 			]
 		},
 
 		{
 			key : 'contact',
 			label : 'Contact',
-			template : 'templates/contact.html',
-			navEnabled : true
+			template : 'templates/contact.html'
 		},
 
 		{
 			key : 'resume',
 			label : 'Resume',
-			template : 'templates/resume.html',
-			navEnabled : true
+			template : 'templates/resume.html'
 		}
 
 	])
@@ -137,13 +126,16 @@ angular.module("app", ['ui.router', 'ngAnimate', 'slick'])
 
 	controller('MainController', function($scope, $state, $States){
 
-		$scope.isLeft = false;
-
 		$scope.navItems = $States.filter(function(value){
-			return value.navEnabled;
+			return !value.navDisabled;
 		});
 
-		$scope.home = $state.go.bind($state, 'home');
+		$scope.isLeft = false;
+
+		$scope.go = function(state){
+			state = state || '';
+			window.location = '/#/'+state;
+		}
 
 		$scope.$on('$stateChangeSuccess', function(event, state){
 			$scope.isLeft = !!(state.template || state.templateUrl);
@@ -151,7 +143,7 @@ angular.module("app", ['ui.router', 'ngAnimate', 'slick'])
 
 	}).
 
-	directive('main', function () {
+	directive('main', function ($timeout) {
 		return {
 			restrict: 'E',
 
@@ -161,126 +153,211 @@ angular.module("app", ['ui.router', 'ngAnimate', 'slick'])
 
 			link: function (scope, element) {
 
-				var avatar = element.find('avatar');
-				angular.extend(avatar, {
+				$timeout(function(){
+					var avatar = element.find('avatar');
+					angular.extend(avatar, {
 
-					animations : {
-						blink : 600,
-						wave : 2000,
-						dance : 1600,
-						walk : 2000
-					},
+						animations : [
+							{
+								key : 'blink',
+								duration : 600
+							},
 
-					reset : function(){
-						clearTimeout(avatar.timeout);
-						for (var key in avatar.animations){
-							if (avatar.animations.hasOwnProperty(key)){
-								avatar.removeClass(key);
+							{
+								key : 'wave',
+								duration : 2000
+							},
+
+							{
+								key : 'dance',
+								duration : 1600
+							},
+
+							{
+								key : 'walk',
+								sound : new Audio('/assets/sound/walk.ogg'),
+								duration : 2000
 							}
-						}
-						return this;
-					},
+						],
 
-					animate : function(type, callback){
+						reset : function(){
+							var animation = this.animation;
+							if (animation){
 
-						if (avatar.animations.hasOwnProperty(type)){
+								this.removeClass(animation.key);
 
-							avatar.reset().addClass(type);
+								if (animation.sound && !animation.sound.ended){
+									animation.sound.pause();
+									animation.sound.currentTime = 0;
+								}
 
+
+								delete(this.animation);
+							}
+
+							clearTimeout(this.timeout)
+							return this;
+						},
+
+						animate : function(type, callback){
+
+							avatar.reset();
+							avatar.animation = avatar.animations.find({key:type});
+
+							if (avatar.animation){
+								avatar.addClass(type);
+								if (avatar.animation.sound) avatar.animation.sound.play();
+								avatar.timeout = setTimeout(function(){
+									avatar.reset().animateRandom();
+									if (callback) callback();
+								}, avatar.animation.duration || 0);
+
+							}else{
+								console.error('Invalid animation: '+type);
+							}
+
+							return this;
+						},
+
+						isLeft : function(){
+							return avatar.hasClass('left');
+						},
+
+						isWalking : function(){
+							return avatar.hasClass('walk');
+						},
+
+						toggle : function(callback){
+							if (callback){
+								avatar.animate('walk', callback).toggleClass('left');
+							}else{
+								avatar.reset().toggleClass('left').animateRandom();
+							}
+						},
+
+						animateRandom : function(){
 							avatar.timeout = setTimeout(function(){
-								avatar.removeClass(type).animateRandom();
-								if (callback) callback();
-							}, avatar.animations[type]);
+								var num = Math.random();
+								var type = (num >= 0.3 ? 'blink' : (num >= 0.15 ? 'wave' : 'dance'));
+								avatar.animate(type);
+							}, 5000);
 
-						}else{
-							console.error('Invalid animation: '+type);
+							return this;
 						}
 
-						return this;
-					},
+					});
 
-					isLeft : function(){
-						return avatar.hasClass('left');
-					},
+					var nav = element.find('nav');
+					angular.extend(nav, {
 
-					isWalking : function(){
-						return avatar.hasClass('walk');
-					},
+						animations : [
+							{
+								key : 'show',
+								duration : 900,
+								sound : new Audio('/assets/sound/bloop.ogg')
+							},
 
-					togglePosition : function(animate, callback){
-						if (animate){
-							avatar.toggleClass('left').animate('walk', callback);
-						}else{
-							avatar.reset().toggleClass('left').animateRandom();
-						}
-						return this;
-					},
+							{
+								key : 'hide',
+								duration : 300,
+								sound : new Audio('/assets/sound/swoosh.ogg')
+							}
+						],
 
-					animateRandom : function(){
-						avatar.timeout = setTimeout(function(){
-							var num = Math.random();
-							var type = (num >= 0.25 ? 'blink' : (num >= 0.125 ? 'wave' : 'dance'));
-							avatar.animate(type);
-						}, 5000);
+						reset : avatar.reset.bind(nav),
 
-						return this;
-					}
 
-				});
+						isHidden : function(){
+							return nav.hasClass('hidden');
+						},
 
-				var nav = element.find('nav');
-				angular.extend(nav, {
+						show : function(callback){
+							nav.reset()
 
-					reset : function(){
-						clearTimeout(nav.timeout);
-						return this;
-					},
+							if (nav.isHidden()){
 
-					toggle : function(value, callback) {
-						if (value != null) {
-							value = !value;
+								nav.removeClass('hidden');
 
-							if (nav.hasClass('hidden') == value){
-								if (callback) callback();
-								return;
+								nav.animation = nav.animations.find({key:'show'});
+								nav.animation.sound.play();
+								nav.animation.timeout = setTimeout(function(){
+									nav.reset();
+									if (callback) callback();
+								}, nav.animation.duration);
+							}
+							else if (callback){
+								callback();
+							}
+						},
+
+						hide : function(callback){
+							nav.reset();
+
+							if (!nav.isHidden()){
+
+								nav.addClass('hidden');
+
+								nav.animation = nav.animations.find({key:'hide'});
+								nav.animation.sound.play();
+								nav.timeout = setTimeout(function(){
+									nav.reset();
+									if (callback) callback();
+								}, nav.animation.duration);
+							}
+							else if (callback){
+								callback();
+							}
+						},
+
+						toggle : function(callback){
+							if (nav.hasClass('hidden')){
+								nav.show(callback);
+							}else{
+								nav.hide(callback);
 							}
 						}
 
-						nav.reset().toggleClass('hidden', value);
-						if (callback){
-							nav.timeout = setTimeout(callback, 400);
+					});
+
+					avatar.click(function() {
+						if (avatar.isWalking()) return;
+						if (scope.isLeft){
+							avatar.toggle(function(){
+								nav.show();
+							});
+							scope.go();
+						}else{
+							nav.toggle();
 						}
+					});
 
-						return this;
-					}
-				});
-
-				var initialized = false;
-
-				avatar.on('click', function() {
-					if (!avatar.isWalking()){
-						scope.isLeft ? scope.home() : nav.toggle();
-					}
-					initialized = true;
-				});
-
-				scope.$watch('isLeft', function(value) {
-					if (value != avatar.isLeft()){
-						if (!initialized || avatar.isWalking()) {
-							avatar.togglePosition(false);
-						}
-						else {
-							nav.toggle(false, function(){
-								avatar.togglePosition(true, function () {
-									nav.toggle(!scope.isLeft);
+					var hoverSound =  new Audio('/assets/sound/click.mp3')
+					nav.children('.nav-item').
+						mouseenter(function(){
+							if (nav.isHidden() || nav.animation) return;
+							hoverSound.currentTime = 0;
+							hoverSound.play();
+						}).
+						click(function(evt){
+							if (nav.isHidden() || nav.animation) return;
+							var state = $(evt.currentTarget).attr('data-id');
+							nav.hide(function(){
+								avatar.toggle(function(){
+									scope.go(state);
 								});
 							});
-						}
-					}
-					//initialized = true;
-				});
+						});
 
-				avatar.animateRandom();
+
+					scope.$watch('isLeft', function(value) {
+						if (avatar.isLeft() !== value){
+							avatar.toggle();
+						}
+					});
+
+
+					avatar.animateRandom();
+				})
 
 			}
 
@@ -289,17 +366,44 @@ angular.module("app", ['ui.router', 'ngAnimate', 'slick'])
 
 	controller('PortfolioController', function($scope, $state, $States) {
 
-		var subStates = $States.where({key:'portfolio'}).states;
+		var subStates = $States.find({key:'portfolio'}).states;
 		$scope.navItems = subStates.filter(function(value){
-			return value.navEnabled;
+			return !value.navDisabled;
 		});
 
 		$scope.$on('$stateChangeSuccess', function(event, state){
-			var item = $scope.navItems.where({name:state.name});
+			var item = $scope.navItems.find({name:state.name});
 			$scope.navIndex = $scope.navItems.indexOf(item);
 		});
 
 		$scope.$watch('navIndex',function(value) {
+			value = Math.abs(value%$scope.navItems.length);
 			$state.go('^.'+$scope.navItems[value].key);
 		});
+	}).
+
+	directive('portfolio', function ($timeout) {
+		return {
+			restrict: 'E',
+
+			link: function (scope, element) {
+				$timeout(function(){
+					var el = element.find('slick');
+					var sound = new Audio('/assets/sound/click.mp3');
+					var last = 0;
+
+					el.on('afterChange', sound.play.bind(sound));
+
+					el.mousewheel(function(evt){
+						if (evt.timeStamp - last > 500){
+							scope.navIndex += evt.deltaY;
+							scope.$digest();
+							last = evt.timeStamp;
+						}
+					});
+
+
+				});
+			}
+		}
 	});
