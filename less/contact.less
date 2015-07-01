@@ -1,0 +1,62 @@
+#contact{
+
+  header{
+
+    width: 100%;
+    color: #efefef;
+
+    border-bottom: dashed 1px #efefef;
+    padding: 4px 0;
+
+    margin-bottom: 20px;
+
+    font-size: 11px;
+
+    > *{
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    .widgets{
+
+      >*{
+        display: inline-block;
+        vertical-align: top;
+        text-decoration: none;
+        margin-left: 5px;
+        border: none;
+      }
+    }
+  }
+
+  form{
+    input, textarea{
+      padding: 10px;
+      margin-bottom: 20px;
+      width: 100%;
+      resize: none;
+      outline: none;
+      border: none;
+      .rounded(5px);
+      .box-shadow(inset 0 0 2px #000);
+      .box-sizing(border-box);
+
+      &.ng-invalid.ng-touched{
+        .box-shadow(inset 0 0 1px 1px #c6000e);
+      }
+
+      &:focus, &.ng-invalid.ng-touched:focus{
+        .box-shadow(inset 0 0 1px 2px #4C9ED8);
+      }
+    }
+
+    &.ng-submitted > *.ng-invalid{
+      .box-shadow(inset 0 0 1px 1px #c6000e);
+
+      &:focus{
+        .box-shadow(inset 0 0 1px 2px #4C9ED8);
+      }
+    }
+  }
+
+}

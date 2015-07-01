@@ -1,6 +1,38 @@
 <contact id="contact" class="view">
-    <h1>Contact</h1>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur id blandit urna, nec dignissim justo. Fusce eu leo aliquet, commodo lorem at, imperdiet felis. Sed rutrum nisi sed nisi volutpat, ut vulputate sem dapibus. Vivamus tempor condimentum sapien sodales tempus. Mauris congue gravida dapibus. Integer tortor est, congue a nisi id, rhoncus tempor mauris. Mauris ullamcorper, sem vel ultrices vehicula, dui velit fermentum tellus, id pellentesque est nulla at sem.</p>
-    <p>Nullam cursus tempus pulvinar. Vivamus a finibus lorem, vitae porttitor enim. Cras nec sodales massa, eu fringilla lectus. In mollis, ex eu accumsan condimentum, dolor massa vestibulum lacus, quis bibendum nibh velit vel sapien. Aliquam at massa nisi. Duis ac suscipit est. Etiam ut justo nec risus porta semper sed quis velit.</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur id blandit urna, nec dignissim justo. Fusce eu leo aliquet, commodo lorem at, imperdiet felis. Sed rutrum nisi sed nisi volutpat, ut vulputate sem dapibus. Vivamus tempor condimentum sapien sodales tempus. Mauris congue gravida dapibus. Integer tortor est, congue a nisi id, rhoncus tempor mauris. Mauris ullamcorper, sem vel ultrices vehicula, dui velit fermentum tellus, id pellentesque est nulla at sem.</p>
+
+    <header>
+
+        <span>Required Field*</span>
+        <div class="widgets">
+            <a class="google-widget" href="//plus.google.com/u/0/113257118220394489350?prsrc=3" rel="publisher" target="_blank">
+                <img src="//ssl.gstatic.com/images/icons/gplus-16.png" alt="Google+"/>
+            </a>
+
+
+            <div class="linked-widget">
+                <script src="//platform.linkedin.com/in.js" type="text/javascript"></script>
+                <script type="IN/MemberProfile" data-id="https://www.linkedin.com/pub/james-lynn/13/a7/b26" data-format="click" data-related="false"></script>
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <form name="form" ng-submit="submit(form, data)" novalidate>
+        <input type="text" ng-model="data.name" class="form-control" placeholder="Name*" title="Name" required/>
+
+        <input type="email" ng-model="data.email" class="form-control" placeholder="Email*" title="Email" required/>
+
+        <input type="text" ng-model="data.company" class="form-control" placeholder="Company" title="Company" />
+
+        <input type="tel" ng-model="data.phone" class="form-control" placeholder="Phone" title="Phone" />
+
+        <textarea ng-model="data.message" class="form-control" rows="3" placeholder="Message*" title="Message" maxlength="1000" required/>
+
+        <input type="text" ng-model="data.secret" class="form-control" rows="3" placeholder="What is 8 + 4?*" title="What is 8 + 4?" secret required/>
+
+        <button class="btn btn-primary btn-lg" type="submit" ng-disabled="form.$invalid">Send</button>
+
+    </form>
 </contact>

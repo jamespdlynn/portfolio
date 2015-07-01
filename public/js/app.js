@@ -78,6 +78,7 @@ angular.module("app", ['ngAnimate', 'ui.router', 'slick'])
 		{
 			key : 'contact',
 			label : 'Contact',
+			controller : 'ContactController',
 			template : 'templates/contact.html'
 		},
 
@@ -351,6 +352,7 @@ angular.module("app", ['ngAnimate', 'ui.router', 'slick'])
 
 					scope.$watch('isLeft', function(value) {
 						if (avatar.isLeft() !== value){
+							nav.hide();
 							avatar.toggle();
 						}
 					});
@@ -404,6 +406,25 @@ angular.module("app", ['ngAnimate', 'ui.router', 'slick'])
 
 
 				});
+			}
+		}
+	})
+
+	.controller('ContactController', function($scope, $state, $States) {
+		$scope.submit = function(form, data){
+			console.log(form.$valid);
+			form.$setTouched();
+		}
+	}).
+
+	directive('secret', function() {
+		return {
+			require: 'ngModel',
+
+			link: function (scope, element, attrs, ctrl) {
+				ctrl.$validators.secret = function(modelValue){
+					return parseInt(modelValue) === 12;
+				}
 			}
 		}
 	});
