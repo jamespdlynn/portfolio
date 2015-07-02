@@ -2,42 +2,32 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <title>James Lynn</title>
 
     <link rel="icon" href="/assets/img/head.png">
-
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Bangers">
-
-    <link rel="stylesheet" href="/css/ng-tiny-scrollbar.min.css"/>
-    <link rel="stylesheet" href="/css/jquery.mCustomScrollbar.css" />
-
-    <link rel="stylesheet" href="/css/slick.css"/>
     <link rel="stylesheet" href="/css/style.css"/>
 </head>
-<body ng-app="app">
 
+<body>
 
 <div id="background">
     <div class="cloud" ng-repeat="i in [1,2,3,4,5]"></div>
 </div>
 
-<main id="main" ng-controller="MainController"></main>
+<main id="main" ng-controller="MainController">
+    <nav id="nav" class="hidden"></nav>
+    <avatar id="avatar" ng-click="avatar.onClick()"></avatar>
+</main>
 
-<ui-view id="view"></ui-view>
+<ui-view id="view">
+</ui-view>
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular.js"></script>
-<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular-animate.js"></script>
-
-<script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.js"></script>
-
-<script src="js/vendor/jquery.mCustomScrollbar.min.js"></script>
-<script src="js/vendor/slick.js"></script>
-<script src="js/vendor/jquery.mousewheel.min.js"></script>
-<script src="js/vendor/angular-slick.js"></script>
-<script src="js/app.js"></script>
-
-
+<script data-main="js/main.js" src="js/vendor/require.js"></script>
 
 </body>
+
 </html>
+

@@ -1,16 +1,15 @@
+@import "slick";
+
 #portfolio{
 
   .header{
+    width: 100%;
     position: relative;
-    height: 58px;
+    margin-bottom: 20px;
 
     .slick-slider{
-      position: absolute;
-      top: 0px;
-      right: 0px;
-      left: -15px;
+      width: 100%;
       height: 100%;
-      margin: 0;
       .grab;
       .box-sizing(border-box);
       .user-select(none);
@@ -23,7 +22,7 @@
         .rounded(6px);
         .scale(0.85);
         .transition(all 0.5s linear);
-        .box-shadow(0 0 2px 1px rgba(0,0,0,0.3));
+        .box-shadow(0 0 1px 1px rgba(0,0,0,0.3));
 
 
         &.slick-center{
@@ -37,9 +36,9 @@
 
 
   .view{
-    height: 650px;
-    max-height: 85vh;
-    padding-right: 15px;
+    height: 630px;
+    max-height: 90vh;
+    padding-right: 8px;
     overflow-y: auto;
     transition-delay: 0s;
 
@@ -50,7 +49,7 @@
     }
 
     @media (max-width: @screen-md-max) {
-      height: 790px;
+      height: 90vh;
     }
   }
   
