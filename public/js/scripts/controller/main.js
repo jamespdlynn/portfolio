@@ -1,13 +1,17 @@
 define(['angularAMD', 'directive/avatar', 'directive/nav'], function (angularAMD) {
-	angularAMD.controller('MainController', function($scope, $state, $States){
+	angularAMD.controller('MainController', function($scope, $state, $states, $preloader){
 
 		$scope.avatar = {
+
+			initialized : false,
+
+			isLeft : $state.current.name !== 'home',
 
 			onClick : function(){
 				if (this.isWalking()) return;
 
-				if (this.isLeft()){
-					this.toggle(function(){
+				if (this.isLeft){
+					this.toggle().then(function(){
 						$scope.nav.show();
 					});
 					$state.go('home');
@@ -17,32 +21,45 @@ define(['angularAMD', 'directive/avatar', 'directive/nav'], function (angularAMD
 				}
 
 			}
-		}
+		};
 
 		$scope.nav = {
 
-			items :  $States.filter(function(value){
+			initialized : false,
+
+			items :  $states.filter(function(value){
 				return !value.navDisabled;
 			}),
 
 			onClick : function(state){
-				if ($scope.nav.isHidden()) return;
+				if (this.isHidden()) return;
 
-				$scope.nav.hide(function(){
-					$scope.avatar.toggle(function(){
-						window.location = '/#/'+state;
-					});
+				this.hide().then(function(){
+					return $scope.avatar.toggle();
+				}).then(function(){
+					window.location = '/#/'+state;
 				});
+
+				$preloader.load(state);
 			}
 		};
 
-		$scope.$on('$stateChangeSuccess', function(event, state){
-			var isLeft = !!(state.template || state.templateUrl);
-			if ($scope.avatar.isLeft && $scope.avatar.isLeft() !== isLeft){
-				$scope.nav.hide();
-				$scope.avatar.toggle();
-			}
+		$scope.isLoading = true;
+
+		$preloader.load('main').finally(function(){
+			$scope.isLoading = false;
 		});
+
+		$scope.$on('$stateChangeSuccess', function(event, state){
+			var isLeft = (state.name !== 'home');
+
+			if ($scope.avatar.initialized && isLeft != $scope.avatar.isLeft){
+				$scope.avatar.animateRandom();
+			}
+
+			$scope.avatar.isLeft = isLeft;
+		});
+
 
 	});
 });

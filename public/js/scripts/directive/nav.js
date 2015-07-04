@@ -1,32 +1,35 @@
 define(['angularAMD'], function (angularAMD) {
 
-	var animations = {
 
-		show: {
-			duration: 900,
-			audio: new Audio('/assets/sound/bloop.mp3')
-		},
+	angularAMD.directive('nav', function ($timeout, $preloader, $q) {
 
-		hide: {
-			duration: 300,
-			audio: new Audio('/assets/sound/swoosh.mp3')
-		},
+		var animations = {
 
-		hover: {
-			duration: 100,
-			audio: new Audio('/assets/sound/click.mp3')
-		}
-	};
+			show: {
+				duration: 900,
+				audio: $preloader.fetch('bloop')
+			},
 
-	angularAMD.directive('nav', function () {
+			hide: {
+				duration: 300,
+				audio: $preloader.fetch('swoosh')
+			},
+
+			hover: {
+				duration: 100,
+				audio: $preloader.fetch('click')
+			}
+		};
+
+
 		return {
 			restrict: 'E',
-
-			templateUrl : 'templates/nav.html',
 
 			link: function (scope, element) {
 
 				angular.extend(scope.nav, {
+
+					initialized : true,
 
 					reset: function () {
 						var type = this._animation;
@@ -46,55 +49,55 @@ define(['angularAMD'], function (angularAMD) {
 						return this;
 					},
 
-					animate: function (type, callback) {
+					animate: function (type) {
 
 						if (animations.hasOwnProperty(type)){
 
+							var deferred = $q.defer();
 							this.reset();
 							if (animations[type].audio){
 								animations[type].audio.play();
 							}
 
 							this._animation = type;
-							this._timeout = setTimeout(function () {
+							this._timeout = $timeout(function(){
 								scope.nav.reset();
-								if (callback) callback();
-							}, animations[type].duration || 0);
+								deferred.resolve();
+							},animations[type].duration || 0);
+
+							return deferred.promise;
 
 						} else {
 							console.error('Invalid animation: ' + type);
+							return null;
 						}
 
-						return this;
 					},
 
 					isHidden: function () {
 						return element.hasClass('hidden');
 					},
 
-					show: function (callback) {
+					show: function () {
 						if (this.isHidden()) {
 							element.removeClass('hidden');
-							this.animate('show', callback);
+							return this.animate('show');
 						}
 						else if (callback) {
-							callback();
+							return $q.defer().resolve();
 						}
-
-						return this;
 					},
 
 					hide: function (callback) {
 
 						if (!this.isHidden()) {
 							element.addClass('hidden');
-							this.animate('hide', callback);
+							return this.animate('hide');
 						}
-						else if (callback) {
-							callback();
+						else{
+							return $q.defer().resolve();
 						}
 
-						return this;
 					},
 
 					onHover : function(){
@@ -103,14 +106,8 @@ define(['angularAMD'], function (angularAMD) {
 						}
 					},
 
-					toggle: function (callback) {
-						if (this.isHidden()) {
-							this.show(callback);
-						} else {
-							this.hide(callback);
-						}
-
-						return this;
+					toggle: function () {
+						return this.isHidden() ? this.show() : this.hide();
 					}
 
 				});

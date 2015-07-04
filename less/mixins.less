@@ -32,18 +32,15 @@
   box-shadow: @x-axis @y-axis @blur rgba(0, 0, 0, @alpha);
 }
 
-.circle(@radius: 2px, @background: #fff, @border: none){
-  width: @radius;
-  height: @radius;
-  background-color: @background;
-  border: @border;
-  .rounded(@radius);
-}
-
 .rounded(@radius: 2px) {
   -webkit-border-radius: @radius;
   -moz-border-radius: @radius;
   border-radius: @radius;
+}
+
+.circle(@radius: 2px){
+  .size(@radius, @radius);
+  .rounded(@radius);
 }
 
 .border-radius(@topright: 0, @bottomright: 0, @bottomleft: 0, @topleft: 0) {

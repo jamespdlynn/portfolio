@@ -1,0 +1,17 @@
+<nav id="nav" class="hidden" ng-if="!isLoading">
+    <div class="nav-item"
+         ng-hide="avatar.isLeft"
+         ng-repeat="item in nav.items"
+         ng-click="nav.onClick(item.id)"
+         ng-mouseenter="nav.onHover(item.id)">
+
+        <div class="bubble" ng-class="{main:$first}" ng-repeat="i in [1,2,3]">
+            <div class="label" ng-if="$first">{{item.label}}</div>
+        </div>
+
+    </div>
+</nav>
+<avatar id="avatar" ng-click="!isLoading && avatar.onClick()" ng-class="{left:avatar.isLeft, loading:isLoading}"></avatar>
+
+
+<span>{{avatar.isLeft}}</span>

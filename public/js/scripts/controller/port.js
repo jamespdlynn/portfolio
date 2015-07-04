@@ -1,19 +1,35 @@
-define(['angularAMD', 'directive/port'], function (angularAMD) {
-	angularAMD.controller('PortfolioController', function($scope, $state, $States) {
+define(['angularAMD', 'directive/mousewheel'], function (angularAMD) {
+	angularAMD.controller('PortfolioController', function($scope, $state, $states, $preloader) {
 
-		var subStates = $States.find({key:'portfolio'}).states;
-		$scope.navItems = subStates.filter(function(value){
-			return !value.navDisabled;
-		});
+		var subStates = $states.find({id:'portfolio'}).states;
+
+		$scope.nav = {
+			index : 0,
+
+			lastScroll : 0,
+
+			items : subStates.filter(function(item){
+				return !item.navDisabled;
+			}),
+
+			onScroll : function(delta, timeStamp){
+				if (timeStamp  - $scope.nav.lastScroll > 500){
+					$scope.nav.index += delta;
+					$scope.nav.lastScroll = timeStamp;
+				}
+			}
+		};
 
 		$scope.$on('$stateChangeSuccess', function(event, state){
-			var item = $scope.navItems.find({name:state.name});
-			$scope.navIndex = $scope.navItems.indexOf(item);
+			var item = $scope.nav.items.find({name:state.name});
+			$scope.nav.index = $scope.nav.items.indexOf(item);
 		});
 
-		$scope.$watch('navIndex',function(value) {
-			value = Math.abs(value%$scope.navItems.length);
-			$state.go('^.'+$scope.navItems[value].key);
+		$scope.$watch('nav.index',function(value) {
+			value = Math.abs(value%$scope.nav.items.length);
+			$state.go('^.'+$scope.nav.items[value].id);
 		});
+
+
 	});
 });

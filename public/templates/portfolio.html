@@ -1,7 +1,7 @@
 <portfolio id="portfolio" class="view">
-    <div class="header">
+    <div class="header" mouse-wheel="nav.onScroll($delta, $event.timeStamp)">
 
-        <slick current-index="navIndex"
+        <slick current-index="nav.index"
                infinite="true"
                speed="500"
                slides-to-show="5"
@@ -9,11 +9,13 @@
                center-mode="true"
                center-padding="0px"
                focus-on-select="true"
-               arrows="false">
+               arrows="false"
+               on-after-change="assets.play('click')">
 
-            <img src="/assets/img/portfolio/{{item.key}}.png" ng-repeat="item in navItems"/>
+            <img ng-src="{{assets.src(item.id+'-nav')}}" ng-repeat="item in nav.items"/>
         </slick>
     </div>
 
     <ui-view class="content"></ui-view>
+
 </portfolio>

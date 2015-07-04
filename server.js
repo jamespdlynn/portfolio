@@ -4,6 +4,7 @@
 var http = require("http");
 var path = require("path");
 var express = require("express");
+var bodyParser = require('body-parser');
 var less = require("less-middleware");
 
 var app = express();
@@ -26,6 +27,8 @@ switch (app.get('env'))
 			debug : true,
 			force : true
 		}));
+
+		app.use(bodyParser.json())
 		app.use(express.static(path.join(__dirname,'public')));
 
 		break;
@@ -43,10 +46,19 @@ switch (app.get('env'))
 			once : true
 		}));
 
+		app.use(bodyParser.json())
 		app.use(express.static(path.join(__dirname, 'public')));
 
 		break;
 }
+
+app.post('/mail', function(req, res, next){
+	console.log(req.body);
+
+	setTimeout(function(){
+		res.send(200);
+	}, 2000);
+});
 
 
 app.listen(app.get('port'), function(){

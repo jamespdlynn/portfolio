@@ -42,6 +42,13 @@
     .animation(wave 1s steps(8) alternate 2);
   }
 
+  &.loading{
+    .background('ajax-loader.gif') !important;
+    .animation(none) !important;
+    .transform(none) !important;
+    cursor: default;
+  }
+
 
   .keyframe(blink, {background-position: 0px 0px}, {background-position:-594px 0px});
   .keyframe(turn, {background-position:-198px -378px}, {background-position:-594px -378px});

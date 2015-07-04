@@ -2,24 +2,22 @@ require.config({
 	baseUrl: 'js/scripts',
 
 	paths: {
-		jquery : '//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min',
-		mouseWheel : '../vendor/jquery.mousewheel.min',
-		slick : '../vendor/slick',
+		jquery : '//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery',
+		mousewheel : '../lib/jquery.mousewheel',
+		slick : '../lib/slick',
 
-		angular: '//ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular.min',
-		angularAnimate : '//ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular-animate.min',
-		angularUIRouter : '../vendor/angular-ui-router.min',
-		angularSlick : '../vendor/angular-slick.min',
-		angularAMD: '../vendor/angularAMD.min',
-		ngload: '../vendor/ngload.min',
+		angular: '//ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular',
+		angularAnimate : '//ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular-animate',
+		angularUIRouter : '../lib/angular-ui-router',
+		angularSlick : '../lib/angular-slick',
+		angularAMD: '../lib/angularAMD',
+		ngload: '../lib/ngload',
 
 		PortfolioController : 'controller/port',
 		ContactController : 'controller/contact'
 	},
 
 	shim: {
-		slick : ['jquery'],
-		mouseWheel : ['jquery'],
 		angularUIRouter : ['angular'],
 		angularAnimate : ['angular'],
 		angularSlick : ['angular','slick'],
@@ -44,3 +42,14 @@ Array.prototype.find = function(match){
 	}
 	return null;
 };
+
+Array.prototype.where = function(match){
+	return this.filter(function(obj){
+		for (var key in match){
+			if (match.hasOwnProperty(key) && obj[key] !== match[key]){
+				return false;
+			}
+		}
+		return true;
+	});
+}

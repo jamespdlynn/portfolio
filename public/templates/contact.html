@@ -19,20 +19,26 @@
     </header>
 
 
-    <form name="form" ng-submit="submit(form, data)" novalidate>
-        <input type="text" ng-model="data.name" class="form-control" placeholder="Name*" title="Name" required/>
+    <form name="form" novalidate>
+        <input type="text" ng-model="data.name" class="form-control" placeholder="Name*"  ng-disabled="state != 0"  title="Name" required/>
 
-        <input type="email" ng-model="data.email" class="form-control" placeholder="Email*" title="Email" required/>
+        <input type="text" ng-model="data.company" class="form-control" placeholder="Company" ng-disabled="state != 0"  title="Company" />
 
-        <input type="text" ng-model="data.company" class="form-control" placeholder="Company" title="Company" />
+        <input type="email" ng-model="data.email" class="form-control" placeholder="Email*" ng-disabled="state != 0"  title="Email" required/>
 
-        <input type="tel" ng-model="data.phone" class="form-control" placeholder="Phone" title="Phone" />
+        <input type="tel" ng-model="data.phone" class="form-control" placeholder="Phone" ng-disabled="state != 0"  title="Phone" />
 
-        <textarea ng-model="data.message" class="form-control" rows="3" placeholder="Message*" title="Message" maxlength="1000" required></textarea>
+        <textarea ng-model="data.message" class="form-control" rows="4" placeholder="Message*" title="Message" maxlength="1000" ng-disabled="state != 0"  required></textarea>
 
-        <input type="text" ng-model="data.secret" class="form-control" rows="3" placeholder="What is 8 + 4?*" title="What is 8 + 4?" secret required/>
+        <input type="text" ng-model="data.secret" class="form-control" placeholder="What is 8 + 4?*" ng-disabled="state != 0"  title="What is 8 + 4?"  secret required/>
 
-        <button class="btn btn-primary btn-lg" type="submit" ng-disabled="form.$invalid">Send</button>
+        <div class="footer">
+            <button class="btn btn-primary btn-lg" type="submit" ng-click="form.$valid && submit(data)" ng-disabled="form.$invalid" ng-if="state == 0">Send</button>
+            <div class="loader" ng-if="state == 1"></div>
+            <span class="result success" ng-if="state == 2">Thank you for your message! I will try to get back to you as soon as possible.</span>
+            <span class="result error" ng-if="state == 3">Something went wrong :( Please try again later or contact me through the social media sites linked above.</span>
+        </div>
+
 
     </form>
 </contact>

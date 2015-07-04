@@ -1,8 +1,17 @@
 define(['angularAMD', 'directive/secret'], function (angularAMD) {
-	angularAMD.controller('ContactController', function($scope) {
-		$scope.submit = function(form, data){
-			console.log(form.$valid);
-			form.$setTouched();
+	angularAMD.controller('ContactController', function($scope, $http) {
+
+		$scope.state = 0;
+
+		$scope.submit = function(data){
+			$scope.state = 1;
+			$http.post('/mail', data).
+				success(function(){
+					$scope.state = 2;
+				}).
+				error(function(){
+					$scope.state = 3;
+				});
 		}
 	});
 });

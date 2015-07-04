@@ -1,6 +1,9 @@
 #contact{
 
+
   header{
+
+    max-width: 840px;
 
     width: 100%;
     color: #333333;
@@ -12,9 +15,11 @@
 
     font-size: 12px;
 
+
     > *{
       display: inline-block;
       vertical-align: middle;
+      font-weight: bold;
     }
 
     .widgets{
@@ -30,6 +35,8 @@
   }
 
   form{
+    max-width: 840px;
+
     input, textarea{
       padding: 10px;
       margin-bottom: 20px;
@@ -50,11 +57,19 @@
       }
     }
 
-    &.ng-submitted > *.ng-invalid{
-      .box-shadow(inset 0 0 1px 1px #c6000e);
+    .footer{
+      width: 100%;
+      height: 46px;
 
-      &:focus{
-        .box-shadow(inset 0 0 1px 2px #4C9ED8);
+      .loader{
+        .size(100%, 100%);
+        .background('ajax-loader.gif', transparent, 5px center);
+      }
+
+      .result{
+        line-height: 46px;
+        font-weight: bold;
+        font-size: 15px;
       }
     }
   }

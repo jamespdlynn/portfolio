@@ -1,6 +1,6 @@
 <section class="view">
 
-    <img class="img" src="/assets/img/portfolio/spacewars.png"/>
+    <img class="img" ng-src="{{assets.src('hyper-galactic')}}"/>
 
     <div class="content">
         <p>
@@ -10,10 +10,10 @@
         </p>
         <p>
             The game's HTML 5 client communicates with the Node.js server through low level binary web sockets. A major benefit to using Node.js here, aside from
-            it's inherit advantages for real time applications, is by utilizing RequireJS modules one can share javascript code between the client and server. This allows for certain logic,
+            its inherent advantages for real time applications, is by utilizing RequireJS modules one can share javascript code between the client and server. This allows for certain logic,
             such as the physics engine, to be leveraged by both ends, removing the need for duplicate code or overly chatty positioning communication.
             Apart from the <a href="http://www.createjs.com/" target="_blank">createjs suite</a>, which I leveraged to help with some of the more common HTML5 gaming elements, the entire game was
-            built from a relatively low level with few third party libraries. This allowed me both more fine grained control and to better understand some core concepts of real time gaming,
+            built from a relatively low level with few third party libraries. This allowed me both more fine-grained control and to better understand some core concepts of real time gaming,
             such as dead reckoning and zonal collision detection.
         </p>
         <p>

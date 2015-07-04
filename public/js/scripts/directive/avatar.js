@@ -1,31 +1,36 @@
 define(['angularAMD'], function (angularAMD) {
 
-	var animations = {
-		blink: {
-			duration: 600
-		},
 
-		wave: {
-			duration: 2000
-		},
 
-		dance: {
-			duration: 1600
-		},
+	angularAMD.directive('avatar', function ($timeout, $preloader, $q) {
 
-		walk: {
-			audio: new Audio('/assets/sound/walk.mp3'),
-			duration: 2000
-		}
-	};
+		var animations = {
+			blink: {
+				duration: 600
+			},
 
-	angularAMD.directive('avatar', function () {
+			wave: {
+				duration: 2000
+			},
+
+			dance: {
+				duration: 1600
+			},
+
+			walk: {
+				audio: $preloader.fetch('walk'),
+				duration: 2000
+			}
+		};
+
 		return {
 			restrict: 'E',
 
 			link: function (scope, element) {
 
 				angular.extend(scope.avatar, {
+
+					initialized : true,
 
 					reset: function () {
 						var type = this._animation;
@@ -48,51 +53,43 @@ define(['angularAMD'], function (angularAMD) {
 						return this;
 					},
 
-					animate: function (type, callback) {
+					animate: function (type) {
 
-						if (animations.hasOwnProperty(type)){
-
-							this.reset();
-
-							element.addClass(type);
-
-							if (animations[type].audio){
-								animations[type].audio.play();
-							}
-
-							this._animation = type;
-							this._timeout = setTimeout(function () {
-								scope.avatar.reset().animateRandom();
-								if (callback) callback();
-							}, animations[type].duration || 0);
-
-						} else {
+						if (!animations.hasOwnProperty(type)){
 							console.error('Invalid animation: ' + type);
+							return null;
 						}
 
-						return this;
-					},
+						var deferred = $q.defer();
+						this.reset();
 
-					isLeft: function () {
-						return element.hasClass('left');
+						element.addClass(type);
+
+						if (animations[type].audio){
+							animations[type].audio.play();
+						}
+
+						this._animation = type;
+						this._timeout = setTimeout(function () {
+							scope.avatar.animateRandom();
+							deferred.resolve();
+						}, animations[type].duration || 0);
+
+
+						return deferred.promise;
 					},
 
 					isWalking: function () {
 						return element.hasClass('walk');
 					},
 
-					toggle: function (callback) {
-						if (callback) {
-							this.animate('walk', callback)
-							element.toggleClass('left');
-						} else {
-							this.reset();
-							element.toggleClass('left');
-							this.animateRandom();
-						}
+					toggle: function () {
+						this.isLeft = !this.isLeft;
+						return this.animate('walk')
 					},
 
 					animateRandom: function () {
+						this.reset();
 						this._timeout = setTimeout(function () {
 							var num = Math.random();
 							var type = (num >= 0.3 ? 'blink' : (num >= 0.15 ? 'wave' : 'dance'));
@@ -103,6 +100,9 @@ define(['angularAMD'], function (angularAMD) {
 					}
 
 				});
+
+
+				scope.avatar.animateRandom();
 
 			}
 		}
