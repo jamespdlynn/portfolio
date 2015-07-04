@@ -8,6 +8,7 @@
   width: 198px;
   height: 378px;
   cursor: pointer;
+  z-index: 3;
 
   .background('sprites.png', transparent, left top);
   .user-select(none);
@@ -58,4 +59,37 @@
   .keyframe(dance, {background-position:0px -1134px}, {background-position:-1584px -1134px});
   .keyframe(wave, {background-position: 0px -1512px}, {background-position:-1584px -1512px});
 
+
+
+
+  @media (max-width: @screen-phone) {
+
+
+    .arrow{
+      position: relative;
+      left: 203px;
+      top: 324px;
+      .size(0, 0);
+      border-top: 18px solid transparent;
+      border-bottom: 18px solid transparent;
+
+      opacity: 0.5;
+      border-right:20px solid #000;
+      display: none;
+
+    }
+
+    &.left{
+
+      left: -99px;
+
+      .arrow{
+        display: block;
+      }
+
+      &.walk .arrow{
+          display: none;
+      }
+    }
+  }
 }

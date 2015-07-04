@@ -6,20 +6,23 @@
     max-width: 840px;
 
     width: 100%;
-    color: #333333;
 
     border-bottom: dashed 1px #efefef;
     padding: 4px 0;
 
     margin-bottom: 20px;
 
-    font-size: 12px;
-
 
     > *{
       display: inline-block;
-      vertical-align: middle;
+      vertical-align: bottom;
       font-weight: bold;
+    }
+
+    span{
+      font-family: 'Bangers', cursive;
+      font-size: 32px;
+      margin-right: 10px;
     }
 
     .widgets{
@@ -71,6 +74,12 @@
         font-weight: bold;
         font-size: 15px;
       }
+    }
+  }
+
+  @media (max-width: @screen-phone) {
+    .footer{
+      text-align: right;
     }
   }
 

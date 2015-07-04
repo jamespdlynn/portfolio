@@ -1,10 +1,10 @@
-<portfolio id="portfolio" class="view">
+<portfolio id="portfolio" class="content">
     <div class="header" mouse-wheel="nav.onScroll($delta, $event.timeStamp)">
 
         <slick current-index="nav.index"
                infinite="true"
                speed="500"
-               slides-to-show="5"
+               slides-to-show="{{nav.slides}}"
                swipe-to-slide="true"
                center-mode="true"
                center-padding="0px"
@@ -16,6 +16,6 @@
         </slick>
     </div>
 
-    <ui-view class="content"></ui-view>
+    <ui-view></ui-view>
 
 </portfolio>

@@ -2,6 +2,7 @@
 
   .nav-item {
 
+    z-index: 4;
     position:absolute;
     left: 50%;
     cursor: pointer;
@@ -162,6 +163,39 @@
     }
   }
 
+  @media (max-width: @screen-phone) {
+    .nav-item{
+      .bubble{
+        margin: 2px auto;
+        .scale(0.9);
 
+        &.main{
+          margin: -8px auto;
+        }
+      }
+
+
+      &:nth-child(1) {
+        margin-left: -175px;
+      }
+
+      &:nth-child(2) {
+        bottom: 355px;
+      }
+
+      &:nth-child(3) {
+        bottom: 355px;
+      }
+
+      &:nth-child(4) {
+        margin-left: 55px;
+        bottom: 250px;
+      }
+    }
+
+    &.hidden .nav-item .bubble{
+      .scale(0);
+    }
+  }
 
 }

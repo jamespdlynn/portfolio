@@ -6,6 +6,8 @@ define(['angularAMD', 'directive/mousewheel'], function (angularAMD) {
 		$scope.nav = {
 			index : 0,
 
+			slides : window.innerWidth > 480 ? 5 : 3,
+
 			lastScroll : 0,
 
 			items : subStates.filter(function(item){
