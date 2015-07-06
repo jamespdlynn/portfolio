@@ -39,11 +39,11 @@ define(['angularAMD'], function (angularAMD) {
 
 							element.removeClass(type);
 
-							var audio = animations[type].audio;
+							/*var audio = animations[type].audio;
 							if (audio && !audio.ended) {
 								audio.pause();
 								audio.currentTime = 0;
-							}
+							}*/
 
 							delete(this._animation);
 						}

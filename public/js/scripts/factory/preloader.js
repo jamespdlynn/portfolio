@@ -45,6 +45,7 @@ define(['angularAMD', 'config/preload'],function(angularAMD, preload){
 							case 'audio':
 								asset = new Audio(data.src);
 								asset.addEventListener('canplaythrough',  defer.resolve, false);
+								asset.addEventListener('load',  defer.resolve, false);
 								asset.addEventListener('error', defer.resolve, false);
 								break;
 						}
