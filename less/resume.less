@@ -16,12 +16,21 @@
 
     a{
       position: absolute;
+
       bottom: 20px;
+
     }
   }
 
   @media (max-width: @screen-phone) {
     left:0;
+
+    #object a{
+      left: 50%;
+      top: 50%;
+      bottom: auto;
+      margin-left: -85px;
+    }
   }
 
 }
