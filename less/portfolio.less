@@ -5,36 +5,46 @@
 
   overflow: hidden;
 
+
+
   .header{
     width: 100%;
     position: relative;
     margin-bottom: 20px;
 
-    .slick-slider{
-      width: 100%;
-      height: 100%;
-      .grab;
-      .box-sizing(border-box);
-      .user-select(none);
+    .slider{
+      display: none;
+
+      &.slick-slider{
+        display: block;
+        width: 100%;
+        height: 100%;
+        .grab;
+        .box-sizing(border-box);
+        .user-select(none);
 
 
-      .slick-slide{
-        margin: 2px;
-        height: auto;
-        .opacity(0.4);
-        .rounded(6px);
-        .scale(0.85);
-        .transition(all 0.5s linear);
-        .box-shadow(0 0 1px 1px rgba(0,0,0,0.3));
+
+        .slick-slide{
+          margin: 2px;
+          height: auto;
+          .opacity(0.4);
+          .rounded(6px);
+          .scale(0.85);
+          .transition(all 0.5s linear);
+          .box-shadow(0 0 1px 1px rgba(0,0,0,0.3));
 
 
-        &.slick-center{
-          .scale(1);
-          .opacity(1);
+          &.slick-center{
+            .scale(1);
+            .opacity(1);
+          }
+
         }
-
       }
     }
+
+
   }
 
 

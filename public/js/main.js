@@ -11,10 +11,8 @@ require.config({
 		angularUIRouter : '../lib/angular-ui-router',
 		angularSlick : '../lib/angular-slick',
 		angularAMD: '../lib/angularAMD',
-		ngload: '../lib/ngload',
+		ngload: '../lib/ngload'
 
-		PortfolioController : 'controller/port',
-		ContactController : 'controller/contact'
 	},
 
 	shim: {

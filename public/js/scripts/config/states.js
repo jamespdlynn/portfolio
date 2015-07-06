@@ -4,8 +4,8 @@ define(function(){
 			id : 'home',
 			url : '/',
 			label : 'Home',
-			navDisabled : true,
-			default : true
+			default : true,
+			navDisabled : true
 		},
 
 		{
@@ -17,6 +17,7 @@ define(function(){
 		{
 			id : 'portfolio',
 			label : 'Portfolio',
+			require : ['controller/port'],
 			controller : 'PortfolioController',
 			template : 'portfolio.html',
 			abstract : true,
@@ -64,12 +65,14 @@ define(function(){
 		{
 			id : 'resume',
 			label : 'Resume',
+			require : ['directive/file'],
 			template : 'resume.html'
 		},
 
 		{
 			id : 'contact',
 			label : 'Contact',
+			require : ['controller/contact'],
 			controller : 'ContactController',
 			template : 'contact.html'
 		}

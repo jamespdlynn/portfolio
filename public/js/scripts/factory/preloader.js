@@ -1,6 +1,6 @@
 define(['angularAMD', 'config/preload'],function(angularAMD, preload){
 
-	angularAMD.factory('$preloader',function($q){
+	angularAMD.factory('$preloader',function($q, $http){
 
 		var promises = {}
 		var assets = Object.create({
@@ -36,7 +36,6 @@ define(['angularAMD', 'config/preload'],function(angularAMD, preload){
 
 						switch (data.type){
 							case 'image':
-							default :
 								asset = new Image();
 								asset.onload = asset.onerror = defer.resolve;
 								asset.src = data.src;
@@ -48,11 +47,20 @@ define(['angularAMD', 'config/preload'],function(angularAMD, preload){
 								asset.addEventListener('load',  defer.resolve, false);
 								asset.addEventListener('error', defer.resolve, false);
 								break;
+
+							default :
+								asset = data;
+								$http.get(data.src).success(defer.resolve).error(defer.resolve);
+								break;
 						}
 
 						if (data.cache){
 							assets[data.id] = asset;
 						}
+
+						defer.promise.then(function(){
+							console.log(data.id + " loaded");
+						});
 
 						promise.push(defer.promise);
 					}

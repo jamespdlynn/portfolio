@@ -1,6 +1,5 @@
 #view{
-
-  transition: 0.5s linear opacity;
+  .transition(0.5s linear opacity);
 
   .content{
 
@@ -82,10 +81,10 @@
   }
 
   &.ng-leave{
-    opacity: 1;
-    &.ng-leave-active{
-      opacity: 0;
-    }
+      opacity: 1;
+      &.ng-leave-active{
+        opacity: 0;
+      }
   }
 
 

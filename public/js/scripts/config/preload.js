@@ -152,6 +152,14 @@ define(function(){
 			cache : true
 		},
 
+		{
+			id:'resume',
+			type:'binary',
+			src:'/assets/JamesLynnRes.pdf',
+			group : 'resume',
+			cache : true
+		},
+
 
 	]
 });

@@ -1,6 +1,8 @@
 define(['angularAMD', 'directive/avatar', 'directive/nav'], function (angularAMD) {
 	angularAMD.controller('MainController', function($scope, $state, $states, $preloader){
 
+		$scope.isLoading = true;
+
 		$scope.avatar = {
 
 			initialized : false,
@@ -44,12 +46,6 @@ define(['angularAMD', 'directive/avatar', 'directive/nav'], function (angularAMD
 			}
 		};
 
-		$scope.isLoading = true;
-
-		$preloader.load('main').finally(function(){
-			$scope.isLoading = false;
-		});
-
 		$scope.$on('$stateChangeSuccess', function(event, state){
 			var isLeft = (state.name !== 'home');
 
@@ -57,9 +53,16 @@ define(['angularAMD', 'directive/avatar', 'directive/nav'], function (angularAMD
 				$scope.avatar.animateRandom();
 			}
 
+			if ($scope.nav.initialized){
+				$scope.nav.hide();
+			}
+
 			$scope.avatar.isLeft = isLeft;
 		});
 
+		$preloader.load('main').then(function(){
+			$scope.isLoading = false;
+		});
 
 	});
 });

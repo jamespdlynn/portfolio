@@ -1,4 +1,4 @@
-define(['angularAMD', 'config/states','angularAnimate', 'angularUIRouter', 'angularSlick', 'factory/preloader','controller/main'], function (angularAMD, states) {
+define(['angularAMD', 'config/states','angularAnimate', 'angularUIRouter', 'angularSlick', 'factory/preloader', 'directive/file', 'controller/main'], function (angularAMD, states) {
 
 	var app = angular.module("app", ['ngAnimate', 'ui.router', 'slick']);
 
@@ -13,6 +13,7 @@ define(['angularAMD', 'config/states','angularAnimate', 'angularUIRouter', 'angu
 				state.name = state.name || path+state.id;
 				state.url = state.url || '/'+state.id;
 				state.abstract = !!state.abstract;
+				state.require  = state.require || [undefined];
 
 				if (state.template && !state.templateUrl){
 					state.templateUrl = 'templates/'+path.replace('.','/') +state.template;
@@ -29,9 +30,9 @@ define(['angularAMD', 'config/states','angularAnimate', 'angularUIRouter', 'angu
 							return $preloader.load(state.id);
 						},
 
-						loadController: function ($q) {
+						dependencies: function ($q) {
 							var deferred = $q.defer();
-							require([state.controller], deferred.resolve);
+							require(state.require, deferred.resolve);
 							return deferred.promise;
 						}
 					},
