@@ -84,8 +84,9 @@ define(['angularAMD'], function (angularAMD) {
 					},
 
 					toggle: function () {
+						element.toggleClass('left');
 						this.isLeft = !this.isLeft;
-						return this.animate('walk')
+						return this.animate('walk');
 					},
 
 					animateRandom: function () {
