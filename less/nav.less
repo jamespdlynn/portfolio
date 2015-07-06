@@ -9,6 +9,7 @@
     text-decoration: none;
     outline: none;
     border: none;
+    .user-select(none);
 
     .bubble {
       position: relative;
@@ -176,20 +177,23 @@
 
 
       &:nth-child(1) {
-        margin-left: -175px;
+        margin-left: -170px;
+        bottom: 260px;
       }
 
       &:nth-child(2) {
+        margin-left: -115px;
         bottom: 355px;
       }
 
       &:nth-child(3) {
+        margin-left: 0;
         bottom: 355px;
       }
 
       &:nth-child(4) {
         margin-left: 55px;
-        bottom: 250px;
+        bottom: 260px;
       }
     }
 

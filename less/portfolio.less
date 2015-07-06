@@ -2,6 +2,9 @@
 
 #portfolio{
 
+
+  overflow: hidden;
+
   .header{
     width: 100%;
     position: relative;
@@ -37,8 +40,7 @@
 
   .view{
     height: 630px;
-    max-height: 90vh;
-    padding-right: 8px;
+    max-height: 85vh;
     overflow-y: auto;
     transition-delay: 0s;
 
@@ -48,9 +50,27 @@
       text-align: right;
     }
 
-    @media (max-width: @screen-tablet) {
+
+  }
+
+  @media (max-width: @screen-tablet) {
+
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 10px;
+    bottom: 10px;
+
+    .view{
       height: 90vh;
+      padding: 0 10px;
+
+      .footer{
+        padding: 5px 0;
+        margin-bottom: 20px;
+      }
     }
+
   }
   
   

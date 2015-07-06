@@ -13,15 +13,15 @@
 
 <body>
 
-<div id="background" ng-include src="'templates/background.html'">
+<div id="background">
+    <div class="cloud" ng-repeat="i in [1,2,3,4,5]"></div>
 </div>
 
-<main id="main" ng-controller="MainController" ng-include src="'templates/main.html'">
+<main id="main" ng-controller="MainController" ng-include="'templates/main.html'">
     <div id="avatar" class="loading"></div>
 </main>
 
-<ui-view id="view">
-</ui-view>
+<ui-view id="view"></ui-view>
 
 <script data-main="js/main.js" src="js/lib/require.js"></script>
 
