@@ -1,5 +1,7 @@
 define(['angularAMD', 'config/preload'],function(angularAMD, preload){
 
+	var iOS = ( navigator.userAgent.match(/iPad|iPhone|iPod/g) ? true : false );
+
 	angularAMD.factory('$preloader',function($q, $http){
 
 		var promises = {}
@@ -43,9 +45,14 @@ define(['angularAMD', 'config/preload'],function(angularAMD, preload){
 
 							case 'audio':
 								asset = new Audio(data.src);
-								asset.addEventListener('canplaythrough',  defer.resolve, false);
-								asset.addEventListener('load',  defer.resolve, false);
-								asset.addEventListener('error', defer.resolve, false);
+
+								if (!iOS){
+									asset.addEventListener('loadeddata',  defer.resolve, false);
+									asset.addEventListener('error', defer.resolve, false);
+								}else{
+									$http.get(data.src).success(defer.resolve).error(defer.resolve);
+								}
+
 								break;
 
 							default :
