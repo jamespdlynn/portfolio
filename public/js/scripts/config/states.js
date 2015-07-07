@@ -70,7 +70,6 @@ define(function(){
 		{
 			id : 'resume',
 			label : 'Resume',
-			require : ['directive/file'],
 			template : 'resume.html'
 		},
 
