@@ -1,4 +1,4 @@
-define(['angularAMD', 'config/states','angularAnimate', 'angularUIRouter', 'angularSlick', 'factory/preloader', 'directive/file', 'controller/main'], function (angularAMD, states) {
+define(['angularAMD', 'config/states','angularAnimate', 'angularUIRouter', 'angularSlick', 'factory/preloader', 'controller/main'], function (angularAMD, states) {
 
 	var app = angular.module("app", ['ngAnimate', 'ui.router', 'slick']);
 
@@ -61,7 +61,14 @@ define(['angularAMD', 'config/states','angularAnimate', 'angularUIRouter', 'angu
 	});
 
 	app.run(function($rootScope, $preloader) {
-		$rootScope.assets = $preloader.assets;
+		$rootScope.audio = {
+			play : function(id){
+				$preloader.fetch(id).play();
+			},
+			pause : function(id){
+				$preloader.fetch(id).play();
+			}
+		};
 	});
 
 

@@ -27,17 +27,22 @@
 
         .slick-slide{
           margin: 2px;
-          height: auto;
           .opacity(0.4);
-          .rounded(6px);
+
           .scale(0.85);
           .transition(all 0.5s linear);
-          .box-shadow(0 0 1px 1px rgba(0,0,0,0.3));
-
 
           &.slick-center{
             .scale(1);
             .opacity(1);
+          }
+
+          img{
+            width: 100%;
+            height: auto;
+            .rounded(6px);
+            .box-shadow(0 0 1px 1px rgba(0,0,0,0.3));
+
           }
 
         }
@@ -63,7 +68,7 @@
 
   }
 
-  @media (max-width: @screen-tablet) {
+  @media (max-width: @screen-phone) {
 
     position: fixed;
     left: 0;

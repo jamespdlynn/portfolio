@@ -11,10 +11,9 @@
                center-padding="0px"
                focus-on-select="true"
                arrows="false"
-               on-after-change="assets.play('click')"
-               on-init="assets.play('click')" >
+               on-after-change="audio.play('click')">
 
-            <img ng-src="{{assets.src(item.id+'-nav')}}" ng-repeat="item in nav.items"/>
+            <file src="item.id+'Nav'" ng-repeat="item in nav.items"></file>
         </slick>
     </div>
 

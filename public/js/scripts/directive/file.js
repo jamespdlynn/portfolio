@@ -1,26 +1,45 @@
 define(['angularAMD'], function (angularAMD) {
 
-	angularAMD.directive('file', function() {
+	angularAMD.directive('file', function($preloader) {
 
 		return {
-			restrict : 'AE',
 
 			scope : {
-				src : "="
+				src : "=",
+				data : "="
 			},
 
-			link : function(scope, element, attr) {
-				scope.$watch('src',function(value){
+			link : function(scope, element) {
+
+				scope.$watch('src', function(value){
+
+					if (!value) return;
+
+					var image = $preloader.fetch(value);
+					if (!image){
+						image = new Image();
+						image.src = value;
+					}
+
+					element.empty().append(image);
+				});
+
+				scope.$watch('data',function(value){
+					if (!value) return;
+
+					var data = $preloader.fetch(value) ? $preloader.fetch(value).src : value;
+
 					var object = angular.element(document.createElement("object"));
-					object.attr("data", value);
+					object.attr("data", data);
 
 					var link = angular.element(document.createElement("a"));
-					link.attr('href', value);
+					link.attr('href', data);
 					link.attr('class', 'btn btn-primary btn-lg');
 					link.text('Download');
 
 					object.append(link);
-					element.append(object);
+					element.empty().append(object);
+
 				});
 			}
 		};

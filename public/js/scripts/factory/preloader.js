@@ -1,25 +1,13 @@
-define(['angularAMD', 'config/preload'],function(angularAMD, preload){
+define(['angularAMD', 'config/preload', 'directive/file'],function(angularAMD, preload){
 
 	var iOS = ( navigator.userAgent.match(/iPad|iPhone|iPod/g) ? true : false );
 
 	angularAMD.factory('$preloader',function($q, $http){
 
 		var promises = {}
-		var assets = Object.create({
-			src : function(id){
-				return this[id] ? this[id].src : null;
-			},
-
-			play : function(id) {
-				if (this[id] && this[id] instanceof Audio) {
-					this[id].play();
-				}
-			}
-		});
+		var assets = {};
 
 		return {
-
-			assets : assets,
 
 			fetch : function(id){
 				return assets[id];
@@ -64,11 +52,6 @@ define(['angularAMD', 'config/preload'],function(angularAMD, preload){
 						if (data.cache){
 							assets[data.id] = asset;
 						}
-
-						defer.promise.then(function(){
-							console.log(data.id + " loaded");
-						});
-
 						promise.push(defer.promise);
 					}
 				})

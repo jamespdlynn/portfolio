@@ -23,7 +23,6 @@ require.config({
 		ngload: ['angularAMD']
 	},
 
-
 	deps: ['app']
 });
 

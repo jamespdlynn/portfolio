@@ -23,38 +23,43 @@ define(function(){
 			abstract : true,
 			states : [
 				{
-					url : '',
-					id : 'hyper-galactic',
+					id : 'hyper',
+					url : '/hyper-galactic',
 					label : 'Hyper Galactic',
 					template : 'hyper-galactic.html'
 				},
 
 				{
-					id : 'chess-chaps',
+					id : 'chess',
+					url : '/chess-chaps',
 					label : 'Chess Chaps',
 					template : 'chess-chaps.html'
 				},
 
 				{
-					id : 'league-champs',
+					id : 'league',
+					url : '/league-champs',
 					label : 'League Champs',
 					template : 'league-champs.html'
 				},
 
 				{
-					id : 'inmar-digital-coupons',
+					id : 'inmar',
+					url : '/inmar-digital-coupons',
 					label : 'Inmar Digital Coupons',
 					template : 'inmar-digital-coupons.html'
 				},
 
 				{
-					id : 'emerson-io',
+					id : 'emerson',
+					url : '/emeson-io',
 					label : 'Emerson IO Calculator',
 					template : 'emerson-io.html'
 				},
 
 				{
-					id : 'oracle-roi-calculator',
+					id : 'oracle',
+					url : '/oracle-roi-calculator',
 					label : 'Oracle ROI Calculator',
 					template : 'oracle-roi-calculator.html'
 				}

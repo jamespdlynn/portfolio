@@ -57,7 +57,7 @@ define(function(){
 		},
 
 		{
-			id:'hyper-galactic',
+			id:'hyper',
 			type:'image',
 			src:'/assets/img/portfolio/hyper.png',
 			group : 'portfolio',
@@ -65,7 +65,7 @@ define(function(){
 		},
 
 		{
-			id:'hyper-galactic-nav',
+			id:'hyperNav',
 			type:'image',
 			src:'/assets/img//portfolio/hyper-nav.png',
 			group : 'portfolio',
@@ -73,7 +73,7 @@ define(function(){
 		},
 
 		{
-			id:'league-champs',
+			id:'league',
 			type:'image',
 			src:'/assets/img/portfolio/league.png',
 			group : 'portfolio',
@@ -81,7 +81,7 @@ define(function(){
 		},
 
 		{
-			id:'league-champs-nav',
+			id:'leagueNav',
 			type:'image',
 			src:'/assets/img/portfolio/league-nav.png',
 			group : 'portfolio',
@@ -89,7 +89,7 @@ define(function(){
 		},
 
 		{
-			id:'chess-chaps',
+			id:'chess',
 			type:'image',
 			src:'/assets/img/portfolio/chess.png',
 			group : 'portfolio',
@@ -97,7 +97,7 @@ define(function(){
 		},
 
 		{
-			id:'chess-chaps-nav',
+			id:'chessNav',
 			type:'image',
 			src:'/assets/img/portfolio/chess-nav.png',
 			group : 'portfolio',
@@ -105,7 +105,7 @@ define(function(){
 		},
 
 		{
-			id:'oracle-roi-calculator',
+			id:'oracle',
 			type:'image',
 			src:'/assets/img/portfolio/oracle.png',
 			group : 'portfolio',
@@ -113,7 +113,7 @@ define(function(){
 		},
 
 		{
-			id:'oracle-roi-calculator-nav',
+			id:'oracleNav',
 			type:'image',
 			src:'/assets/img/portfolio/oracle-nav.png',
 			group : 'portfolio',
@@ -121,7 +121,7 @@ define(function(){
 		},
 
 		{
-			id:'emerson-io',
+			id:'emerson',
 			type:'image',
 			src:'/assets/img/portfolio/emerson.png',
 			group : 'portfolio',
@@ -129,7 +129,7 @@ define(function(){
 		},
 
 		{
-			id:'emerson-io-nav',
+			id:'emersonNav',
 			type:'image',
 			src:'/assets/img/portfolio/emerson-nav.png',
 			group : 'portfolio',
@@ -137,7 +137,7 @@ define(function(){
 		},
 
 		{
-			id:'inmar-digital-coupons',
+			id:'inmar',
 			type:'image',
 			src:'/assets/img/portfolio/inmar.png',
 			group : 'portfolio',
@@ -145,7 +145,7 @@ define(function(){
 		},
 
 		{
-			id:'inmar-digital-coupons-nav',
+			id:'inmarNav',
 			type:'image',
 			src:'/assets/img/portfolio/inmar-nav.png',
 			group : 'portfolio',
