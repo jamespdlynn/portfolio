@@ -6,22 +6,30 @@
     position: absolute;
     max-width: 1080px;
     left:20%;
-    right: 2%;
-    bottom: 20px;
+    right: 0;
+    bottom: 0;
     color: #111;
+    .box-sizing(border-box);
 
-    max-height: 95vh;
-    overflow: auto;
+    max-height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
 
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-size: 20px;
     line-height: 28px;
+    padding: 15px 15px 15px 0;
 
-    overflow: auto;
 
+    p{
+      &:first-of-type{
+        margin-top: 0;
+      }
 
-    p:first-of-type{
-      margin-top: 0;
+      &:last-of-type{
+        margin-bottom: 0;
+      }
+
     }
 
 
@@ -31,9 +39,11 @@
       margin: 0 0 15px 15px;
       .rounded(4px);
       max-width: 55%;
-      height: auto;
+
 
       img{
+        width: 100%;
+        height: auto;
         .rounded(4px);
       }
     }
@@ -50,9 +60,10 @@
 
     @media (max-width: @screen-phone) {
 
-      left: 10px;
-      right: 10px;
-      bottom: 10px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 10px;
 
       font-size: 17px;
       line-height: 20px;

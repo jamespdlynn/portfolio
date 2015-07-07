@@ -4,13 +4,13 @@
 
 
   overflow: hidden;
-
-
+  padding: 0;
 
   .header{
     width: 100%;
     position: relative;
-    margin-bottom: 20px;
+    padding: 20px 0;
+    .box-sizing(border-box);
 
     .slider{
       display: none;
@@ -56,13 +56,13 @@
   .view{
     height: 630px;
     max-height: 85vh;
+    overflow-x: hidden;
     overflow-y: auto;
-    transition-delay: 0s;
-
+    padding: 0 15px;
 
     .footer{
-      padding: 10px 0;
       text-align: right;
+      margin-bottom: 15px;
     }
 
 
@@ -70,21 +70,20 @@
 
   @media (max-width: @screen-phone) {
 
-    position: fixed;
-    left: 0;
-    right: 0;
-    top: 10px;
-    bottom: 10px;
+    top: 0;
+
+    .header{
+      padding: 12px 0;
+      height: 9vh;
+      .box-sizing(border-box);
+    }
 
     .view{
-      height: 90vh;
-      padding: 0 10px;
-
-      .footer{
-        padding: 5px 0;
-        margin-bottom: 20px;
-      }
+      height: 91vh;
+      max-height: none;
+      .box-sizing(border-box);
     }
+
 
   }
   
