@@ -1,7 +1,5 @@
 define(['angularAMD'], function (angularAMD) {
 
-
-
 	angularAMD.directive('avatar', function ($timeout, $preloader, $q) {
 
 		var animations = {
@@ -33,21 +31,9 @@ define(['angularAMD'], function (angularAMD) {
 					initialized : true,
 
 					reset: function () {
-						var type = this._animation;
 
-						if (type) {
-
-							element.removeClass(type);
-
-							/*var audio = animations[type].audio;
-							if (audio && !audio.ended) {
-								audio.pause();
-								audio.currentTime = 0;
-							}*/
-
-							delete(this._animation);
-						}
-
+						element.removeClass(this._animation);
+						delete(this._animation);
 						clearTimeout(this._timeout)
 
 						return this;

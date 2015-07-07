@@ -32,18 +32,8 @@ define(['angularAMD'], function (angularAMD) {
 					initialized : true,
 
 					reset: function () {
-						var type = this._animation;
 
-						if (type) {
-							/*var audio = animations[type].audio;
-							if (audio && !audio.ended) {
-								audio.pause();
-								audio.currentTime = 0;
-							}*/
-
-							delete(this._animation);
-						}
-
+						delete(this._animation);
 						clearTimeout(this._timeout)
 
 						return this;
@@ -74,13 +64,9 @@ define(['angularAMD'], function (angularAMD) {
 
 					},
 
-					isHidden: function () {
-						return element.hasClass('hidden');
-					},
-
 					show: function () {
-						if (this.isHidden()) {
-							element.removeClass('hidden');
+						if (this.isHidden) {
+							this.isHidden = false;
 							return this.animate('show');
 						}
 						else if (callback) {
@@ -88,10 +74,10 @@ define(['angularAMD'], function (angularAMD) {
 						}
 					},
 
-					hide: function (callback) {
+					hide: function () {
 
-						if (!this.isHidden()) {
-							element.addClass('hidden');
+						if (!this.isHidden) {
+							this.isHidden = true;
 							return this.animate('hide');
 						}
 						else{
@@ -101,13 +87,13 @@ define(['angularAMD'], function (angularAMD) {
 					},
 
 					onHover : function(){
-						if (!this.isHidden() && !this._animation){
+						if (!this.isHidden && !this._animation){
 							this.animate('hover');
 						}
 					},
 
 					toggle: function () {
-						return this.isHidden() ? this.show() : this.hide();
+						return this.isHidden ? this.show() : this.hide();
 					}
 
 				});

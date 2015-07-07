@@ -29,12 +29,14 @@ define(['angularAMD', 'directive/avatar', 'directive/nav'], function (angularAMD
 
 			initialized : false,
 
+			isHidden : true,
+
 			items :  $states.filter(function(value){
 				return !value.navDisabled;
 			}),
 
 			onClick : function(state){
-				if (this.isHidden()) return;
+				if (this.isHidden) return;
 
 				this.hide().then(function(){
 					return $scope.avatar.toggle();
