@@ -4,16 +4,15 @@
   max-height: none;
   overflow: hidden;
   padding:0;
-  overflow: auto;
-  -webkit-overflow-scrolling: touch;
+
 
 
   object{
     width: 100%;
-    height: 2000px;
+    height: 100%;
     max-width: 860px;
     margin: 0 auto;
-    background: #fff;
+
 
     a{
       position: absolute;
@@ -21,13 +20,34 @@
     }
   }
 
-  @media (max-width: @screen-phone) {
+  @media only screen{
 
-    object a{
-      left: 50%;
-      bottom: 50%;
-      margin-left: -20px;
+
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+
+    object{
+      background-color: #fff;
+      height: 4800px;
+
+      @media (max-width: @screen-tablet) {
+        height: 3200px;
+      }
+
+      @media (max-width: @screen-phone) {
+
+        height: 2000px;
+
+         a{
+            left: 50%;
+            bottom: 50%;
+            margin-left: -51px;
+          }
+      }
     }
+
   }
+
+
 
 }
