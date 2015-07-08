@@ -57,8 +57,7 @@ switch (app.get('env'))
 
 var emailServer  = email.server.connect({
 	host: "localhost",
-	domain : "destructor.com",
-	user : "root"
+	domain : "destructor.com"
 });
 
 app.post('/mail', function(req, res, next){
@@ -71,7 +70,7 @@ app.post('/mail', function(req, res, next){
 
 	var subject, body;
 
-	subject = "Contact Form Submission:" + form.name;
+	subject = form.name;
 	if (form.company) subject += " - "+form.company;
 
 	body = form.email+"\n\n";
@@ -80,7 +79,7 @@ app.post('/mail', function(req, res, next){
 
 	emailServer.send({
 		to : "jamespdlynn@gmail.com",
-		from : "contact@destructor.com",
+		from : "Contact Form <contact@destructor.com>",
 		subject : subject,
 		text : body
 	}, function(err){
