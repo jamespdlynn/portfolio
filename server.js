@@ -78,6 +78,7 @@ app.post('/mail', function(req, res, next){
 
 	emailServer.send({
 		to : "jamespdlynn@gmail.com",
+		from : "root@destructorserver.com",
 		subject : subject,
 		text : body
 	}, function(err){
