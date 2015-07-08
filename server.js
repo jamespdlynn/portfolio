@@ -77,8 +77,7 @@ app.post('/mail', function(req, res, next){
 	body += form.message+"\n\n"
 
 	emailServer.send({
-		to : "jamespdlynn@gmail.com",
-		from : "contact@destructorserver.com",
+		to : "jamespdlynn@gmail.com"
 		subject : subject,
 		text : body
 	}, function(err){
