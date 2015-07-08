@@ -1,5 +1,5 @@
-define(['angularAMD', 'directive/mousewheel'], function (angularAMD) {
-	angularAMD.controller('PortfolioController', function($scope, $state, $states, $preloader) {
+define(['angularAMD', 'ngload!angularSlick', 'directive/mousewheel'], function (angularAMD) {
+	angularAMD.controller('PortfolioController', function($scope, $state, $states) {
 
 		var subStates = $states.find({id:'portfolio'}).states;
 

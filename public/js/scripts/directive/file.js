@@ -1,6 +1,6 @@
 define(['angularAMD'], function (angularAMD) {
 
-	angularAMD.directive('file', function($preloader) {
+	angularAMD.directive('file', function($preloader, $userAgent) {
 
 		return {
 
@@ -10,6 +10,8 @@ define(['angularAMD'], function (angularAMD) {
 			},
 
 			link : function(scope, element) {
+
+				console.log(scope.type);
 
 				scope.$watch('src', function(value){
 
@@ -31,6 +33,10 @@ define(['angularAMD'], function (angularAMD) {
 
 					var object = angular.element(document.createElement("object"));
 					object.attr("data", data);
+
+					if ($userAgent.isIOS() && $userAgent.isSafari()){
+						object.css('height','auto');
+					}
 
 					var link = angular.element(document.createElement("a"));
 					link.attr('href', data);

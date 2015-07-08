@@ -157,7 +157,7 @@ define(function(){
 			type:'binary',
 			src:'/assets/JamesLynnRes.pdf',
 			group : 'resume',
-			cache : true
+			cache : false
 		},
 
 

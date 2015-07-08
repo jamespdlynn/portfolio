@@ -6,6 +6,7 @@ var path = require("path");
 var express = require("express");
 var bodyParser = require('body-parser');
 var less = require("less-middleware");
+var mailer = require("mailer");
 
 var app = express();
 
@@ -53,11 +54,35 @@ switch (app.get('env'))
 }
 
 app.post('/mail', function(req, res, next){
-	console.log(req.body);
 
-	setTimeout(function(){
-		res.send(200);
-	}, 2000);
+	var form = req.body;
+
+	if (!form || !form.email || !form.name || !form.message || form.secret != 12){
+		return res.status(400).send('Invalid parameters');
+	}
+
+	var subject, body;
+
+	subject = "Contact Form Submission:" + form.name;
+	if (form.company) subject += " - "+form.company;
+
+	body = form.email+"\n\n";
+	if (form.phone) body+= form.phone+"\n\n";
+	body += form.message+"\n\n"
+
+	mailer.send({
+		host : "localhost",
+		port : 25,
+		domain : "destructorserver.com",
+		to : "jamespdlynn@gmail.com",
+		from : "contact@destructorserver.com",
+		subject : subject,
+		body : body
+	}, function(err){
+		if (err) return next(err);
+		res.status(200).send();
+	});
+
 });
 
 

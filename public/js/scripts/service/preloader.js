@@ -1,8 +1,6 @@
-define(['angularAMD', 'config/preload', 'directive/file'],function(angularAMD, preload){
+define(['angularAMD', 'config/preload'],function(angularAMD, preload){
 
-	var iOS = ( navigator.userAgent.match(/iPad|iPhone|iPod/g) ? true : false );
-
-	angularAMD.factory('$preloader',function($q, $http){
+	angularAMD.factory('$preloader',function($q, $http, $userAgent){
 
 		var promises = {}
 		var assets = {};
@@ -34,24 +32,25 @@ define(['angularAMD', 'config/preload', 'directive/file'],function(angularAMD, p
 							case 'audio':
 								asset = new Audio(data.src);
 
-								if (!iOS){
+								if ($userAgent.isIOS() && $userAgent.isSafari()){
+									$http.get(data.src).success(defer.resolve).error(defer.resolve);
+								}else{
 									asset.addEventListener('loadeddata',  defer.resolve, false);
 									asset.addEventListener('error', defer.resolve, false);
-								}else{
-									$http.get(data.src).success(defer.resolve).error(defer.resolve);
 								}
 
 								break;
 
 							default :
 								asset = data;
-								$http.get(data.src).success(defer.resolve).error(defer.resolve);
+								$http.get(data.src).success(function(res){
+									asset = res;
+									defer.resolve();
+								}).error(defer.resolve);
 								break;
 						}
 
-						if (data.cache){
-							assets[data.id] = asset;
-						}
+						assets[data.id] = data.cache ? asset : data;
 						promise.push(defer.promise);
 					}
 				})

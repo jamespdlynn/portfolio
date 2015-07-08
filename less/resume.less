@@ -1,47 +1,36 @@
 #resume{
   right: 0;
-  top: 0;
+  height: 100%;
   max-height: none;
-  overflow: hidden;
   padding:0;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
 
 
-
-  object{
+  #file > *{
+    display: inline-block;
+    vertical-align: bottom;
     width: 100%;
     height: 100%;
     max-width: 860px;
     margin: 0 auto;
+    background-color: #fff;
 
 
-    a{
+    > a{
       position: absolute;
       bottom: 20px;
     }
   }
 
-  @media only screen{
-    overflow: auto;
-    -webkit-overflow-scrolling: touch;
+  @media (max-width: @screen-phone){
 
-    object{
-      height: 3200px;
-
-
-      @media (max-width: @screen-phone) {
-        background-color: #fff;
-        height: 2000px;
-
-         a{
-            left: 50%;
-            bottom: 50%;
-            margin-left: -51px;
-          }
+    #file > *  > a {
+          left: 50%;
+          bottom: 50%;
+          margin-left: -51px;
       }
-    }
-
   }
-
 
 
 }

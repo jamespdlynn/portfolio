@@ -1,6 +1,6 @@
-define(['angularAMD', 'config/states','angularAnimate', 'angularUIRouter', 'angularSlick', 'factory/preloader', 'controller/main'], function (angularAMD, states) {
+define(['angularAMD', 'config/states','angularAnimate','angularUIRouter'], function (angularAMD, states) {
 
-	var app = angular.module("app", ['ngAnimate', 'ui.router', 'slick']);
+	var app = angular.module("app", ['ngAnimate', 'ui.router']);
 
 	app.constant("$states", states);
 
@@ -72,5 +72,9 @@ define(['angularAMD', 'config/states','angularAnimate', 'angularUIRouter', 'angu
 	});
 
 
-	return angularAMD.bootstrap(app);
+	require(['service/preloader', 'service/useragent', 'directive/file','controller/main'], function(){
+		angularAMD.bootstrap(app);
+	});
+
+	return app;
 });
