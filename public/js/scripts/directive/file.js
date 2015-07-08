@@ -11,8 +11,6 @@ define(['angularAMD'], function (angularAMD) {
 
 			link : function(scope, element) {
 
-				console.log(scope.type);
-
 				scope.$watch('src', function(value){
 
 					if (!value) return;

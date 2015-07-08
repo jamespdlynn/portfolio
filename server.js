@@ -6,7 +6,7 @@ var path = require("path");
 var express = require("express");
 var bodyParser = require('body-parser');
 var less = require("less-middleware");
-var mailer = require("mailer");
+var email = require("emailjs");
 
 var app = express();
 
@@ -50,8 +50,14 @@ switch (app.get('env'))
 		app.use(bodyParser.json())
 		app.use(express.static(path.join(__dirname, 'public')));
 
+
+
 		break;
 }
+
+var emailServer  = email.server.connect({
+	host: "localhost"
+});
 
 app.post('/mail', function(req, res, next){
 
@@ -70,14 +76,11 @@ app.post('/mail', function(req, res, next){
 	if (form.phone) body+= form.phone+"\n\n";
 	body += form.message+"\n\n"
 
-	mailer.send({
-		host : "localhost",
-		port : 25,
-		domain : "destructorserver.com",
+	emailServer.send({
 		to : "jamespdlynn@gmail.com",
 		from : "contact@destructorserver.com",
 		subject : subject,
-		body : body
+		text : body
 	}, function(err){
 		if (err) return next(err);
 		res.status(200).send();

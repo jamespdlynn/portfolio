@@ -5,9 +5,9 @@
   "main": "app.js",
   "dependencies": {
     "body-parser": "^1.13.1",
+    "emailjs": "^0.3.16",
     "express": "^4.12.4",
-    "less-middleware": "^2.0.1",
-    "mailer": "^0.6.7"
+    "less-middleware": "^2.0.1"
   },
   "devDependencies": {
     "angular": "^1.4.1",
