@@ -56,7 +56,9 @@ switch (app.get('env'))
 }
 
 var emailServer  = email.server.connect({
-	host: "localhost"
+	host: "localhost",
+	domain : "destructorserver.com",
+	user : "root"
 });
 
 app.post('/mail', function(req, res, next){
@@ -78,7 +80,6 @@ app.post('/mail', function(req, res, next){
 
 	emailServer.send({
 		to : "jamespdlynn@gmail.com",
-		from : "root@destructorserver.com",
 		subject : subject,
 		text : body
 	}, function(err){
