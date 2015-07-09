@@ -16,7 +16,7 @@
     height: 120px;
     position: absolute;
     width: 350px;
-    margin-left: 120%;
+    left: 100%;
     .animation(move linear 15s infinite);
 
     &:after, &:before {
@@ -44,31 +44,31 @@
 
     &:nth-child(1) {
       .scale(0.35);
-      top: 5vh;
+      top: 5%;
     }
 
     &:nth-child(2) {
       .scale(0.4);
       .animation-delay(3s);
-      top: 12vh;
+      top: 12%;
     }
 
     &:nth-child(3) {
       .scale(0.3);
       .animation-delay(6s);
-      top: 4vh;
+      top: 4%;
     }
 
     &:nth-child(4) {
       .animation-delay(9s);
       .scale(0.35);
-      top: 15vh;
+      top: 15%;
     }
 
     &:nth-child(5) {
       .scale(0.3);
       .animation-delay(12s);
-      top: 3vh;
+      top: 3%;
     }
 
   }
@@ -82,11 +82,10 @@
       &:nth-child(2) {
         .scale(0.25);
         .animation-delay(5s);
-        top: 10vh;
+        top: 10%;
       }
 
       &:nth-child(3) {
-
         .animation-delay(10s);
       }
 
@@ -101,7 +100,6 @@
 
   }
 
-  .keyframe(move, {margin-left: 100% }, { margin-left: -350px });
-
+  .keyframe(move, {left: 100% }, { left: -350px });
 
 }
