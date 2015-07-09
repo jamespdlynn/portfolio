@@ -32,7 +32,16 @@ define(['angularAMD'], function (angularAMD) {
 
 					reset: function () {
 
-						element.removeClass(this._animation);
+						if (this._animation){
+							element.removeClass(this._animation);
+
+							var audio = animations[this._animation].audio;
+							if (audio && !audio.ended) {
+								audio.pause();
+								audio.currentTime = 0.1;
+							}
+						}
+
 						delete(this._animation);
 						clearTimeout(this._timeout)
 

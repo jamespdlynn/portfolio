@@ -32,7 +32,13 @@ define(['angularAMD'], function (angularAMD) {
 					initialized : true,
 
 					reset: function () {
-
+						if (this._animation){
+							var audio = animations[this._animation].audio;
+							if (audio && !audio.ended) {
+								audio.pause();
+								audio.currentTime = 0.1;
+							}
+						}
 						delete(this._animation);
 						clearTimeout(this._timeout)
 

@@ -33,7 +33,7 @@ define(['angularAMD'], function (angularAMD) {
 					object.attr("data", data);
 
 					if ($userAgent.isIOS() && $userAgent.isSafari()){
-						object.css('height','auto');
+						object.css({'height':'auto','background':'#fff'});
 					}
 
 					var link = angular.element(document.createElement("a"));
