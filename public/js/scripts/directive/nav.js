@@ -1,7 +1,7 @@
 define(['angularAMD'], function (angularAMD) {
 
 
-	angularAMD.directive('nav', function ($timeout, $preloader, $q) {
+	angularAMD.directive('nav', function ($timeout, $q, $preloader, $userAgent) {
 
 		var animations = {
 
@@ -34,9 +34,9 @@ define(['angularAMD'], function (angularAMD) {
 					reset: function () {
 						if (this._animation){
 							var audio = animations[this._animation].audio;
-							if (audio && !audio.ended) {
+							if (audio && !audio.ended && !$userAgent.isIOS()) {
 								audio.pause();
-								audio.currentTime = 0.01;
+								audio.currentTime = 0;
 							}
 						}
 						delete(this._animation);

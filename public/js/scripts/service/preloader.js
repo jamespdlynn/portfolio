@@ -32,7 +32,7 @@ define(['angularAMD', 'config/preload'],function(angularAMD, preload){
 							case 'audio':
 								asset = new Audio(data.src);
 
-								if ($userAgent.isIOS() && $userAgent.isSafari()){
+								if ($userAgent.isIOS()){
 									$http.get(data.src).success(defer.resolve).error(defer.resolve);
 								}else{
 									asset.addEventListener('loadeddata',  defer.resolve, false);

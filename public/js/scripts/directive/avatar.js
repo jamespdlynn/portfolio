@@ -1,6 +1,6 @@
 define(['angularAMD'], function (angularAMD) {
 
-	angularAMD.directive('avatar', function ($timeout, $preloader, $q) {
+	angularAMD.directive('avatar', function ($timeout, $q, $preloader,$userAgent) {
 
 		var animations = {
 			blink: {
@@ -36,9 +36,9 @@ define(['angularAMD'], function (angularAMD) {
 							element.removeClass(this._animation);
 
 							var audio = animations[this._animation].audio;
-							if (audio && !audio.ended) {
+							if (audio && !audio.ended && !$userAgent.isIOS()) {
 								audio.pause();
-								audio.currentTime = 0.1;
+								audio.currentTime = 0;
 							}
 						}
 
@@ -65,7 +65,7 @@ define(['angularAMD'], function (angularAMD) {
 						}
 
 						this._animation = type;
-						this._timeout = setTimeout(function () {
+						this._timeout = $timeout(function () {
 							scope.avatar.animateRandom();
 							deferred.resolve();
 						}, animations[type].duration || 0);
