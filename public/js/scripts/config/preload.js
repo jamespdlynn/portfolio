@@ -51,7 +51,7 @@ define(function(){
 		{
 			id:'portrait',
 			type:'image',
-			src:'/assets/img/about/portrait.png',
+			src:'/assets/img/portrait.png',
 			group : 'about',
 			cache : true
 		},
@@ -154,11 +154,27 @@ define(function(){
 
 		{
 			id:'resume',
-			type:'binary',
+			type:'pdf',
 			src:'/assets/JamesLynnRes.pdf',
 			group : 'resume',
 			cache : false
 		},
+
+		{
+			id : 'check',
+			type : 'image',
+			src : '/assets/img/check.png',
+			group : 'contact',
+			cache : false
+		},
+
+		{
+			id : 'mail',
+			type : 'audio',
+			src : '/assets/audio/mail.mp3',
+			group : 'contact',
+			cache : true
+		}
 
 
 	]

@@ -16,7 +16,7 @@ define(['angularAMD'], function (angularAMD) {
 			},
 
 			hover: {
-				duration: 100,
+				duration: 150,
 				audio: $preloader.fetch('click')
 			}
 		};
@@ -36,7 +36,7 @@ define(['angularAMD'], function (angularAMD) {
 							var audio = animations[this._animation].audio;
 							if (audio && !audio.ended) {
 								audio.pause();
-								audio.currentTime = 0.1;
+								audio.currentTime = 0.01;
 							}
 						}
 						delete(this._animation);
