@@ -1,5 +1,6 @@
 #avatar {
 
+  //Center position by default
   position: absolute;
   bottom: 0;
   left: 50%;
@@ -17,19 +18,25 @@
     left: 10%;
   }
 
+  //Animations
   &.blink{
     .animation(blink 0.3s steps(3) 2 alternate);
   }
 
+
   &.walk{
     cursor: default;
+
+    //Walking consists of three animations executed in succession
     .animation(~"turn 0.2s steps(2), walk 0.8s steps(8), turnReverse 0.2s steps(2)");
     .animation-iteration-count(~"1, 2, 1");
     .animation-delay(~"0s, 0.2s, 1.8s");
 
+    //The walking class also triggers a transition to physically move the avatar left or right
     .transition(1.6s linear left);
     .transition-delay(0.2s);
 
+    //Flip the background backwards when walking left
     &.left{
       .transform(scaleX(-1));
     }
@@ -43,14 +50,9 @@
     .animation(wave 1s steps(8) alternate 2);
   }
 
-  &.loading{
-    .background('ajax-loader.gif') !important;
-    .animation(none) !important;
-    .transform(none) !important;
-    cursor: default;
-  }
 
 
+  //Animation keyframes
   .keyframe(blink, {background-position: 0px 0px}, {background-position:-594px 0px});
   .keyframe(turn, {background-position:-198px -378px}, {background-position:-594px -378px});
   .keyframe(turnReverse, {background-position:-396px -378px}, {background-position:0 -378px});
@@ -60,9 +62,12 @@
   .keyframe(wave, {background-position: 0px -1512px}, {background-position:-1584px -1512px});
 
 
+  //Phone media styles
   @media (max-width: @screen-phone) {
 
 
+    //For the phone shift the avatar off the screen on the left state
+    //and have an opaque arrow display instead to allow the user to navigate back
     .arrow{
       position: fixed;
       left: 5px;
@@ -89,10 +94,8 @@
       &.walk .arrow{
           display: none;
       }
-
-      &.loading .arrow{
-        display: none;
-      }
     }
   }
+
+
 }

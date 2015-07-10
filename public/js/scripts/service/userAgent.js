@@ -1,6 +1,6 @@
 /*global define, navigator*/
 /**
- * Helper factory for determining browser type
+ * Helper angular factory for determining current browser agent
  * @module service/userAgent
  * @author James Lynn
  */
@@ -13,19 +13,29 @@ define(['angularAMD'],function(angularAMD){
 
 		return {
 
-			isFirefox : ua.match.bind(ua, /Firefox/g),
+			isFirefox : function(){
+				return ua && ua.match(/Firefox/g);
+			},
 
-			isOpera : ua.match.bind(ua, /Opera/g),
+			isChrome : function(){
+				return ua && ua.match(/Chrome/g);
+			},
 
-			isChrome : ua.match.bind(ua, /Chrome/g),
+			isSafari: function(){
+				return ua && ua.match(/Safari/g);
+			},
 
-			isSafari : ua.match.bind(ua, /Safari/g),
+			isIE : function(){
+				return ua && ua.match(/NET4|Trident|MSIE/g);
+			},
 
-			isWebkit : ua.match.bind(ua, /Webkit/g),
+			isAndroid : function(){
+				return ua && ua.match(/Android/g);
+			},
 
-			isIOS : ua.match.bind(ua, /iPad|iPhone|iPod/g),
-
-			isAndroid : ua.match.bind(ua, /Android/g)
+			isIOS : function(){
+				return ua && ua.match(/iPad|iPhone|iPod/g);
+			}
 
 		};
 	});

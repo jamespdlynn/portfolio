@@ -1,5 +1,6 @@
+//Default view container styles
 #view{
-  .transition(0.5s linear opacity);
+
   position: absolute;
   left: 20%;
   bottom: 0;
@@ -17,13 +18,10 @@
     color: #111;
     .box-sizing(border-box);
 
-
-
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-size: 20px;
     line-height: 28px;
     padding: 15px 15px 15px 0;
-
 
     p{
       &:first-of-type{
@@ -35,8 +33,6 @@
       }
 
     }
-
-
 
     .img{
       float: right;
@@ -64,8 +60,7 @@
 
   }
 
-
-
+  //User angular animation classes to fade view in and out when it is added/removed from DOM
   &.ng-enter{
     opacity: 0;
     &.ng-enter-active{
@@ -80,8 +75,7 @@
     }
   }
 
-
-
+  //On small devices view takes up the entire width of the screen
   @media (max-width: @screen-phone) {
 
     left: 0;
@@ -92,7 +86,6 @@
       padding: 15px;
       font-size: 17px;
       line-height: 20px;
-
 
       .btn{
         font-size: 16px;
@@ -107,8 +100,6 @@
         margin-left: 10px;
       }
     }
-
-
   }
 
 

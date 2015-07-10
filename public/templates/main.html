@@ -1,6 +1,4 @@
-<nav id="nav"
-     ng-class="{hidden:nav.isHidden}"
-     ng-if="!isLoading">
+<nav id="nav" ng-class="{hidden:nav.isHidden}">
 
     <div class="nav-item"
          ng-repeat="item in nav.items"
@@ -11,12 +9,9 @@
             <div class="label" ng-if="$first">{{item.label}}</div>
         </div>
     </div>
+
 </nav>
 
-<avatar id="avatar"
-        ng-class="{loading:isLoading, left:avatar.isLeft}"
-        ng-click="avatar.onClick()">
-
-    <div class="arrow" ng-click="audio.play('click')"></div>
-
+<avatar id="avatar" ng-class="{left:avatar.isLeft}" ng-click="avatar.onClick()">
+    <div class="arrow"></div>
 </avatar>

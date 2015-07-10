@@ -27,7 +27,7 @@ define(['angularAMD', 'directive/secret'], function (angularAMD) {
 		 */
 		$scope.submit = function(data){
 
-			$scope.currentState = $scope.LOADING;
+			$scope.currentState = states.LOADING;
 
 			$http.post('/mail', data).
 

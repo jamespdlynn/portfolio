@@ -1,15 +1,16 @@
+//RequireJS main configuration
 require.config({
 	baseUrl: 'js/scripts',
 
 	paths: {
-		jquery : '//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery',
-		angular: '//ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular',
-		angularAnimate : '//ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular-animate',
-		angularUIRouter : '../lib/angular-ui-router',
-		angularSlick : '../lib/angular-slick',
-		angularAMD: '../lib/angularAMD',
-		ngload: '../lib/ngload',
-		slick : '../lib/slick'
+		jquery : ['//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min', '../lib/jquery.min'],
+		angular: ['//ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular..min', '../lib/angular.min'],
+		angularAnimate : ['//ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular-animate', '../lib/angular-animate.min'],
+		angularUIRouter : ['../lib/angular-ui-router.min'],
+		angularSlick : ['../lib/angular-slick.min'],
+		angularAMD: ['../lib/angularAMD.min'],
+		ngload: ['../lib/ngload.min'],
+		slick : ['../lib/slick.min']
 	},
 
 	shim: {
@@ -20,24 +21,9 @@ require.config({
 		ngload: ['angularAMD']
 	},
 
-	deps: ['app']
+	deps: ['app'] //Load in app file to kick off application
 });
 
-
-Array.prototype.find = function(match){
-	'use strict';
-	var i = this.length, obj, key;
-	loop1 : while (i--){
-		obj = this[i];
-		for (key in match){
-			if (match.hasOwnProperty(key) && obj[key] !== match[key]){
-				continue loop1;
-			}
-		}
-		return obj;
-	}
-	return null;
-};
 
 
 

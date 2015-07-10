@@ -40,7 +40,6 @@ define(function(){
 		{
 			id : 'portfolio',
 			label : 'Portfolio',
-			require : ['controller/portfolio'],
 			controller : 'PortfolioController',
 			template : 'portfolio.html',
 			abstract : true,
@@ -99,7 +98,6 @@ define(function(){
 		{
 			id : 'contact',
 			label : 'Contact',
-			require : ['controller/contact'],
 			controller : 'ContactController',
 			template : 'contact.html'
 		}

@@ -1,28 +1,5 @@
 #contact{
 
-
-  header{
-
-    max-width: 840px;
-
-    width: 100%;
-
-    .widgets{
-
-      >*{
-        display: inline-block;
-        vertical-align: bottom;
-        text-decoration: none;
-        margin-left: 5px;
-        border: none;
-
-        .IN-widget{
-          margin-top: 5px;
-        }
-      }
-    }
-  }
-
   form{
     max-width: 840px;
 
@@ -37,10 +14,12 @@
       .box-shadow(inset 0 0 2px #000);
       .box-sizing(border-box);
 
+      //Red box shadow on touched and invalid input
       &.ng-invalid.ng-touched{
         .box-shadow(inset 0 0 1px 1px #c6000e);
       }
 
+      //Blue box shadow on focused input
       &:focus, &.ng-invalid.ng-touched:focus{
         .box-shadow(inset 0 0 1px 2px #4C9ED8);
       }
@@ -54,7 +33,7 @@
 
       .loader{
         .size(100%, 100%);
-        .background('ajax-loader.gif', transparent, 5px center);
+        .background('ajax-loader.gif', transparent, center left);
       }
 
       .result{
@@ -87,9 +66,15 @@
     }
   }
 
+  //Align footer to the right on small devices, to allow room for avatar's back arrow
   @media (max-width: @screen-phone) {
     form .footer{
       text-align: right;
+
+
+      .loader{
+        background-position: right center;
+      }
 
       .result{
         text-align: left;

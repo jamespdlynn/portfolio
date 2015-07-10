@@ -12,10 +12,11 @@ module.exports = function (config) {
 
 		// list of files / patterns to load in the browser
 		files: [
-			{pattern: 'public/js/lib/*.js', included: false},
-			{pattern: 'public/templates/*.html', included: false},
-			{pattern: 'public/js/scripts/*.js', included: false},
-			'test/main.js'
+			{pattern: 'public/js/lib/**/*.js', included: false},
+			{pattern: 'public/js/scripts/**/*.js', included: false},
+			{pattern: 'public/templates/**/*.html', included: false},
+			{pattern: 'test/spec/**/*.js', included: false},
+			{pattern: 'test/main.js', included: true}
 		],
 
 		// list of files to exclude
@@ -33,7 +34,7 @@ module.exports = function (config) {
 		reporters: ['progress'],
 
 		// web server port
-		port: process.env.PORT || '80',
+		port: '3000',
 
 		// enable / disable colors in the output (reporters and logs)
 		colors: true,
@@ -47,7 +48,7 @@ module.exports = function (config) {
 
 		// start these browsers
 		// available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-		browsers: ['PhantomJS'],
+		browsers: ['Chrome'],
 
 		// Continuous Integration mode
 		// if true, Karma captures browsers, runs the tests and exits

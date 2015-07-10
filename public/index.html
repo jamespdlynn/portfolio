@@ -22,11 +22,15 @@
     <div class="cloud"></div>
 </div>
 
-<main id="main" ng-controller="MainController" ng-include="'templates/main.html'">
-    <div id="avatar" class="loading"></div>
+<main id="main"
+      ng-controller="MainController"
+      ng-include="'templates/main.html'"
+      ng-if="initialized">
 </main>
 
-<ui-view id="view"></ui-view>
+<ui-view id="view" ng-if="initialized"></ui-view>
+
+<div id="loader" ng-if="!initialized"></div>
 
 <script data-main="js/main.js" src="js/lib/require.js"></script>
 

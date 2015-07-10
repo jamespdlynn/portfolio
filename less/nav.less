@@ -1,5 +1,6 @@
 #nav {
 
+  //Each navigation item contains three bubble elements
   .nav-item {
 
     z-index: 4;
@@ -11,6 +12,7 @@
     border: none;
     .user-select(none);
 
+    //The first bubble element is uses a background image, the second two are merely circles
     .bubble {
       position: relative;
       margin: 6px auto;
@@ -19,11 +21,12 @@
       background-color: #fff;
       border: solid 2px #000;
 
+
       &.main {
         width: 115px;
         .background('bubble.png',transparent,0 0);
         .box-sizing(border-box);
-        .transition-delay(0.6s);
+        .transition-delay(0.6s); //Each bubble has a slight transition delay which creates a cascading animation
         border: none;
 
         .label {
@@ -51,6 +54,7 @@
 
     }
 
+    //Manually rotate and position each of the four navigation items
     &:nth-child(1) {
      .rotate(-60deg);
       margin-left: -190px;

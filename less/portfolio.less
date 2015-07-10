@@ -2,10 +2,10 @@
 
 #portfolio{
 
-
   overflow: hidden;
   padding: 0;
 
+  //Slick slider navigation controls
   .header{
     width: 100%;
     position: relative;
@@ -23,8 +23,7 @@
         .box-sizing(border-box);
         .user-select(none);
 
-
-
+        //Override some of the slick slider styles to shrink and fade out non centered items
         .slick-slide{
           margin: 2px;
           .opacity(0.4);
@@ -53,6 +52,8 @@
   }
 
 
+   //Set a default minimum height for the sub view container to prevent the nav from jumping up and down
+   //This height is dependent on the screen size
   .view{
     min-height: 630px;
     padding: 0 15px;

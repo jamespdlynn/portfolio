@@ -16,13 +16,11 @@ define(['angularAMD', 'directive/avatar', 'directive/nav'], function (angularAMD
 		   This is kind of ugly and unangular but it works and it allows me to clump the overhead logic all in one file.
 		*/
 
-		$scope.isLoading = true; //Don't allow interaction with avatar or nav while assets are loading
-
 		$scope.avatar = {
 
 			initialized : false, //set to true once directive overrides scopes functionality
 
-			isLeft : ($state.current.name !== 'home'), //Center on home state, left otherwise
+			isLeft : !!($state.current.templateUrl || $state.current.template), //Left if current state has a template, center otherwise
 
 			onClick : function(){
 				if (!this.isWalking()){
@@ -68,14 +66,13 @@ define(['angularAMD', 'directive/avatar', 'directive/nav'], function (angularAMD
 
 					//Get ahead start on preloading this state's assets
 					$preloader.load(state.id);
-					require(state.require);
 				}
 			}
 		};
 
 		//Listen for a state change from the router to manually change the avatar's current position
 		$scope.$on('$stateChangeSuccess', function(){
-			var isLeft = ($state.current.name !== 'home');
+			var isLeft = !!($state.current.templateUrl || $state.current.template);
 
 			//Had to do some a bit hacky DOM manipulation here to make sure the sub elements don't get into a weird state
 			if ($scope.avatar.initialized && isLeft != $scope.avatar.isLeft){
@@ -88,10 +85,6 @@ define(['angularAMD', 'directive/avatar', 'directive/nav'], function (angularAMD
 			$scope.avatar.isLeft = isLeft;
 		});
 
-		//Fully load all the associated assets before allowing interaction with this state
-		$preloader.load('main').then(function(){
-			$scope.isLoading = false;
-		});
 
 	});
 });

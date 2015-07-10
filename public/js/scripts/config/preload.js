@@ -13,25 +13,31 @@ define(function(){
 	 * @property {string} type - The type of asset (image, audio, etc)
 	 * @property {string} src - The path to this asset from the server root @type string
 	 * @property {string} group - Identifier of the batch group this asset belongs to (necessary for loading and unloading in clumps)
-	 * @property {string} cache - Flag determining whether to store this object in memory after loading
+	 * @property {boolean} [cache=false] - Flag determining whether to store this object in memory after loading
 	 */
 
 	/**@return asset[] */
 	 return [
+
+		 {
+			 id : 'FileDirective',
+			 type : 'module',
+			 src : 'directive/file',
+			 group : 'main'
+		 },
+
 		{
 			id:'sprites',
 			type:'image',
 			src:'/assets/img/sprites.png',
-			group : 'main',
-			cache : false
+			group : 'main'
 		},
 
 		{
 			id:'bubble',
 			type:'image',
 			src:'/assets/img/bubble.png',
-			group : 'main',
-			cache : false
+			group : 'main'
 		},
 
 		{
@@ -73,6 +79,13 @@ define(function(){
 			group : 'about',
 			cache : true
 		},
+
+		 {
+			 id:'PortfolioController',
+			 type:'module',
+			 src:'controller/portfolio',
+			 group : 'portfolio'
+		 },
 
 		{
 			id:'hyper',
@@ -174,16 +187,21 @@ define(function(){
 			id:'resume',
 			type:'pdf',
 			src:'/assets/JamesLynnRes.pdf',
-			group : 'resume',
-			cache : false
+			group : 'resume'
 		},
+
+		 {
+			 id:'ContactController',
+			 type:'module',
+			 src:'controller/contact',
+			 group : 'contact'
+		 },
 
 		{
 			id : 'check',
 			type : 'image',
 			src : '/assets/img/check.png',
-			group : 'contact',
-			cache : false
+			group : 'contact'
 		},
 
 		{
@@ -195,5 +213,4 @@ define(function(){
 		}
 	];
 
-	return preload;
 });

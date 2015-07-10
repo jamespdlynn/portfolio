@@ -1,9 +1,7 @@
 #resume{
-  right: 0;
-  height: 100vh;
-  max-height: none;
   padding:0;
 
+  //Have the embed file object take up the entire screen height
   #file > *{
     display: inline-block;
     vertical-align: bottom;
@@ -17,6 +15,7 @@
     }
   }
 
+  //Position the link button horizontally and vertically center on small devices
   @media (max-width: @screen-phone){
 
     #file > *  > a {

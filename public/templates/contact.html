@@ -1,35 +1,17 @@
 <contact id="contact" class="content">
 
-    <!-- <<header>
-
-         <div class="widgets">
-             <a class="google-widget" href="//plus.google.com/u/0/113257118220394489350?prsrc=3" rel="publisher" target="_blank">
-                 <img src="//ssl.gstatic.com/images/icons/gplus-16.png" alt="Google+"/>
-             </a>
-
-
-             <div class="linked-widget">
-                 <script src="//platform.linkedin.com/in.js" type="text/javascript"></script>
-                 <script type="IN/MemberProfile" data-id="https://www.linkedin.com/pub/james-lynn/13/a7/b26" data-format="click" data-related="false"></script>
-             </div>
-
-         </div>
-
-     </header>-->
-
-
     <form name="form" novalidate>
-        <input type="text" ng-model="data.name" class="form-control" placeholder="Name*"  ng-disabled="state != 0"  title="Name (Required)" required/>
+        <input type="text" ng-model="data.name" class="form-control" placeholder="Name*"  ng-disabled="currentState != states.DEFAULT"  title="Name (Required)" required/>
 
-        <input type="text" ng-model="data.company" class="form-control" placeholder="Company" ng-disabled="state != 0"  title="Company" />
+        <input type="text" ng-model="data.company" class="form-control" placeholder="Company" ng-disabled="currentState != states.DEFAULT"  title="Company" />
 
-        <input type="email" ng-model="data.email" class="form-control" placeholder="Email*" ng-disabled="state != 0"  title="Email (Required)" required/>
+        <input type="email" ng-model="data.email" class="form-control" placeholder="Email*" ng-disabled="currentState != states.DEFAULT"  title="Email (Required)" required/>
 
-        <input type="tel" ng-model="data.phone" class="form-control" placeholder="Phone" ng-disabled="state != 0"  title="Phone" />
+        <input type="tel" ng-model="data.phone" class="form-control" placeholder="Phone" ng-disabled="currentState != states.DEFAULT"  title="Phone"/>
 
-        <textarea ng-model="data.message" class="form-control" rows="4" placeholder="Message*" title="Message (Required)" maxlength="1000" ng-disabled="state != 0"  required></textarea>
+        <textarea ng-model="data.message" class="form-control" rows="4" placeholder="Message*" title="Message (Required)" maxlength="1000" ng-disabled="currentState != states.DEFAULT"  required></textarea>
 
-        <input type="text" ng-model="data.secret" class="form-control" placeholder="What is 8 + 4?*" ng-disabled="state != 0"  title="What is 8 + 4? (Required)"  secret required/>
+        <input type="text" ng-model="data.secret" class="form-control" placeholder="What is 8 + 4?*" ng-disabled="currentState != states.DEFAULT"  title="What is 8 + 4? (Required)"  secret required/>
 
         <div class="footer">
 
@@ -37,18 +19,18 @@
                     type="submit"
                     ng-click="form.$valid && submit(data)"
                     ng-disabled="form.$invalid"
-                    ng-if="state == 0">
+                    ng-if="currentState == states.DEFAULT">
                 Send
             </button>
 
-            <div class="loader" ng-if="state == 1"></div>
+            <div class="loader" ng-if="currentState == states.LOADING"></div>
 
-            <div class="result" ng-if="state == 2">
+            <div class="result" ng-if="currentState == states.SUCCESS">
                 <div class="icon success"></div>
                 <span> Thank you for your message! I will try to get back to you as soon as possible.</span>
             </div>
 
-            <div class="result" ng-if="state == 3">
+            <div class="result" ng-if="currentState == states.ERROR">
                 <div class="icon error"></div>
                 Something went wrong :( Please try again later
             </div>
