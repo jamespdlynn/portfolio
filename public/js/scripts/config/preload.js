@@ -1,5 +1,23 @@
+/*global define*/
+/**
+ *Configuration json containing all the assets for the app to preload
+ * @module config/preload
+ * @author James Lynn
+ */
 define(function(){
-	return [
+	'use strict';
+
+	/**
+	 * @typedef {Object} asset
+	 * @property {string} id - Unique identifier of the asset
+	 * @property {string} type - The type of asset (image, audio, etc)
+	 * @property {string} src - The path to this asset from the server root @type string
+	 * @property {string} group - Identifier of the batch group this asset belongs to (necessary for loading and unloading in clumps)
+	 * @property {string} cache - Flag determining whether to store this object in memory after loading
+	 */
+
+	/**@return asset[] */
+	 return [
 		{
 			id:'sprites',
 			type:'image',
@@ -175,7 +193,7 @@ define(function(){
 			group : 'contact',
 			cache : true
 		}
+	];
 
-
-	]
+	return preload;
 });

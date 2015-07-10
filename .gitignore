@@ -1,3 +1,4 @@
-.idea/
+.idea/*
+*.iml
 node_modules/*
 public/css/style.css

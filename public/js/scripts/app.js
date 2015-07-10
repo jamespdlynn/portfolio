@@ -6,7 +6,7 @@ define(['angularAMD', 'config/states','angularAnimate','angularUIRouter'], funct
 
 	app.config(function($stateProvider, $urlRouterProvider, $states) {
 
-		var createStates = function(states, path){
+		var createStates = function(states,  path){
 			path = path || '';
 			states.forEach(function(state){
 
@@ -14,6 +14,7 @@ define(['angularAMD', 'config/states','angularAnimate','angularUIRouter'], funct
 				state.url = state.url || '/'+state.id;
 				state.abstract = !!state.abstract;
 				state.require  = state.require || [undefined];
+				state.navEnabled = state.navEnabled==null ? true : !!state.navEnabled;
 
 				if (state.template && !state.templateUrl){
 					state.templateUrl = 'templates/'+path.replace('.','/') +state.template;
@@ -30,7 +31,7 @@ define(['angularAMD', 'config/states','angularAnimate','angularUIRouter'], funct
 							return $preloader.load(state.id);
 						},
 
-						dependencies: function ($q) {
+						require: function ($q) {
 							var deferred = $q.defer();
 							require(state.require, deferred.resolve);
 							return deferred.promise;
@@ -42,7 +43,7 @@ define(['angularAMD', 'config/states','angularAnimate','angularUIRouter'], funct
 					}
 				});
 
-				if (state.default){
+				if (state.isDefault){
 					$urlRouterProvider.otherwise('/');
 				}
 
@@ -72,7 +73,7 @@ define(['angularAMD', 'config/states','angularAnimate','angularUIRouter'], funct
 	});
 
 
-	require(['service/preloader', 'service/useragent', 'directive/file','controller/main'], function(){
+	require(['service/preloader', 'service/userAgent', 'directive/file','controller/main'], function(){
 		angularAMD.bootstrap(app);
 	});
 

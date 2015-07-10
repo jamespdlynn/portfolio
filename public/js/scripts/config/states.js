@@ -1,11 +1,34 @@
+/*global define*/
+/**
+ * Configuration json containing all states and sub states used by this applications router
+ * @module config/states
+ * @author James Lynn
+ */
 define(function(){
+	'use strict';
+
+	/**
+	 * @typedef {Object} state
+	 * @property {string} id - Unique identifier of the state
+	 * @property {string} [url=/{id}] - The relative url of the stat
+	 * @property {string} [label] - The name of the state as displayed in the nav
+	 * @property {string} [require=[]] The javascript file paths needed for requirejs to preload before the state changes
+	 * @property {string} [controller] The angular js controller name
+	 * @property {string} [template] The html template file name
+	 * @property {boolean} [isDefault=false] - Flag determines whether this is the default state to redirect to
+	 * @property {boolean} [navEnabled=true] - Flag determines whether to show this state in the nav
+	 * @property {boolean} [abstract=false] - Flag determines whether this is a non directly accessible state
+	 * @property {state[]} [states] - Optional array of sub states
+	 */
+
+	/**@return state[] */
 	return [
 		{
 			id : 'home',
 			url : '/',
 			label : 'Home',
-			default : true,
-			navDisabled : true
+			isDefault : true,
+			navEnabled : false
 		},
 
 		{
@@ -17,7 +40,7 @@ define(function(){
 		{
 			id : 'portfolio',
 			label : 'Portfolio',
-			require : ['controller/port'],
+			require : ['controller/portfolio'],
 			controller : 'PortfolioController',
 			template : 'portfolio.html',
 			abstract : true,

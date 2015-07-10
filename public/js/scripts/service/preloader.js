@@ -1,4 +1,5 @@
-define(['angularAMD', 'config/preload'],function(angularAMD, preload){
+
+define(['angularAMD', 'config/preload'],function(angularAMD,preload){
 
 	angularAMD.factory('$preloader',function($q, $http, $userAgent){
 
@@ -67,7 +68,7 @@ define(['angularAMD', 'config/preload'],function(angularAMD, preload){
 				delete promises[group];
 			}
 
-		}
+		};
 	});
 
 });

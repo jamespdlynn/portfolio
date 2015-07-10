@@ -4,8 +4,8 @@
 
     <div class="nav-item"
          ng-repeat="item in nav.items"
-         ng-click="nav.onClick(item.id)"
-         ng-mouseenter="nav.onHover(item.id)">
+         ng-click="nav.onClick(item)"
+         ng-mouseenter="nav.onHover(item)">
 
         <div class="bubble" ng-class="{main:$first}" ng-repeat="i in [1,2,3]">
             <div class="label" ng-if="$first">{{item.label}}</div>

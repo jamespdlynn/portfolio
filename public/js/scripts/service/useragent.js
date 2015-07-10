@@ -1,9 +1,15 @@
+/*global define, navigator*/
+/**
+ * Helper factory for determining browser type
+ * @module service/userAgent
+ * @author James Lynn
+ */
 define(['angularAMD'],function(angularAMD){
+	'use strict';
 
 	angularAMD.factory('$userAgent',function(){
 
 		var ua = navigator.userAgent;
-		console.log(ua);
 
 		return {
 
@@ -21,7 +27,7 @@ define(['angularAMD'],function(angularAMD){
 
 			isAndroid : ua.match.bind(ua, /Android/g)
 
-		}
+		};
 	});
 
 });

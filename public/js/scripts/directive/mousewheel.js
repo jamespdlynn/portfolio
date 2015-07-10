@@ -1,16 +1,22 @@
+/*global define, angular, document*/
+/**
+ * Directive used for handling mouse wheel events
+ * @module directive/file
+ * @author James Lynn
+ */
 define(['angularAMD'], function (angularAMD) {
 
+	'use strict';
 
 	angularAMD.directive('mouseWheel', function($parse) {
+
 		return function(scope, element, attr) {
-			var fn = $parse(attr['mouseWheel'], null,  true);
+
+			var fn = $parse(attr.mouseWheel, null,  true);
 
 			element.bind("DOMMouseScroll mousewheel onmousewheel", function(event) {
 
-				// cross-browser wheel delta
-				var event = window.event || event; // old IE support
 				var delta = Math.max(-1, Math.min(1, (event.wheelDelta || -event.detail)));
-
 
 				scope.$apply(function(){
 					fn(scope, {$event: event, $delta: delta});
