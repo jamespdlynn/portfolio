@@ -21,11 +21,13 @@ define(['angularAMD', 'ngload!angularSlick', 'directive/mouseWheel'], function (
 
 			index : 0, //current slick nav index
 
-			slidesToShow : window.innerWidth > 768 ? 5 : 3, //Number of slick nav items showing at one time (depends on screen size)
+			slidesToShow : window.innerWidth > 768 ? 5 : 1, //Number of slick nav items showing at one time (depends on screen size)
 
 			speed : 500, //Animation speed of slider
 
 			lastScroll : 0, //Timestamp of last mouse wheel scroll event
+
+			padding : window.innerWidth > 768 ? 0 : 100,
 
 			/**
 			 * Update the nav index on mouse wheel scroll
