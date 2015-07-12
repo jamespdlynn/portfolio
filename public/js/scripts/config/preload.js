@@ -83,7 +83,7 @@ define(function(){
 		 {
 			 id:'PortfolioController',
 			 type:'module',
-			 src:'controller/portfolio',
+			 src:'controller/_portfolio',
 			 group : 'portfolio'
 		 },
 

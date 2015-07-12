@@ -4,13 +4,13 @@
 
         <slick class="slider"
                current-index="nav.index"
-               speed="{{nav.speed}}"
-               slides-to-show="{{nav.slidesToShow}}"
-               center-padding="{{nav.padding}}px"
+               speed="500"
+               slides-to-show="5"
+               center-padding="0"
+               responsive = "[{breakpoint: 768, settings:{slidesToShow: 3}},{breakpoint:480, settings:{slidesToShow:1, centerPadding:'90px'}}]"
                infinite="true"
                swipe-to-slide="true"
                center-mode="true"
-
                focus-on-select="true"
                arrows="false"
                on-after-change="audio.play('click')">

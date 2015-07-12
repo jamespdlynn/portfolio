@@ -7,7 +7,7 @@
 define(['angularAMD'],function(angularAMD){
 	'use strict';
 
-	angularAMD.factory('$userAgent',function(){
+	angularAMD.service('$userAgent',function(){
 
 		var ua = navigator.userAgent;
 

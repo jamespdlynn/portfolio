@@ -74,15 +74,13 @@ define(['angularAMD', 'directive/avatar', 'directive/nav'], function (angularAMD
 		$scope.$on('$stateChangeSuccess', function(){
 			var isLeft = !!($state.current.templateUrl || $state.current.template);
 
-			//Had to do some a bit hacky DOM manipulation here to make sure the sub elements don't get into a weird state
+			//Had to do some a bit hacky DOM manipulation here to make sure avatar animation resets
 			if ($scope.avatar.initialized && isLeft != $scope.avatar.isLeft){
 				$scope.avatar.animateRandom();
 			}
-			if ($scope.nav.initialized){
-				$scope.nav.hide();
-			}
 
 			$scope.avatar.isLeft = isLeft;
+			$scope.nav.isHidden = true;
 		});
 
 

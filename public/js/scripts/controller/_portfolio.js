@@ -21,13 +21,7 @@ define(['angularAMD', 'ngload!angularSlick', 'directive/mouseWheel'], function (
 
 			index : 0, //current slick nav index
 
-			slidesToShow : window.innerWidth > 768 ? 5 : 1, //Number of slick nav items showing at one time (depends on screen size)
-
-			speed : 500, //Animation speed of slider
-
 			lastScroll : 0, //Timestamp of last mouse wheel scroll event
-
-			padding : window.innerWidth > 768 ? 0 : 100,
 
 			/**
 			 * Update the nav index on mouse wheel scroll
@@ -36,13 +30,12 @@ define(['angularAMD', 'ngload!angularSlick', 'directive/mouseWheel'], function (
 			 */
 			onScroll : function(delta, timeStamp){
 				//Make sure scroll events don't fire faster than the animation time otherwise weird stuff will happen
-				if (timeStamp  - this.lastScroll > this.speed){
+				if (timeStamp  - this.lastScroll > 500){
 					$scope.nav.index += delta;
 					$scope.nav.lastScroll = timeStamp;
 				}
 			}
 		};
-
 
 		//When the nav index changes (through bidirectional binding or otherwise) tell the U.I router to navigate to the associated state
 		$scope.$watch('nav.index',function(value) {

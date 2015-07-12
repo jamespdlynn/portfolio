@@ -144,6 +144,7 @@ define(['angularAMD'], function (angularAMD) {
 
 				});
 
+
 				//Start the random animation timer
 				window.avatar = scope.avatar.animateRandom();
 			}

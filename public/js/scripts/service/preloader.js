@@ -7,11 +7,13 @@
 define(['angularAMD', 'config/preload'],function(angularAMD,preload){
 	'use strict';
 
-	angularAMD.factory('$preloader',function($q, $http, $userAgent){
+	angularAMD.service('$preloader',function($q, $http, $userAgent){
 
 		var promises = {}, assets = {};
 
 		return {
+
+			assets : assets,
 
 			/**
 			 * Load a set of assets from the server
@@ -19,12 +21,22 @@ define(['angularAMD', 'config/preload'],function(angularAMD,preload){
 			 * @returns {*} promise
 			 */
 			load : function(group){
+
+				var promiseArray = [];
+
+				//If passed an array, recursively call this function of each of the values and return the chained promise
+				if (Array.isArray(group)){
+					var self = this;
+					group.forEach(function(value){
+						promiseArray.push(self.load(value));
+					});
+					return $q.all(promiseArray);
+				}
+
 				//If this group has already been loaded return the pre-exiting promise
 				if (promises[group]){
 					return promises[group];
 				}
-
-				var promiseArray = [];
 
 				//Loop through configuration file search for objects with the given group identifier
 				preload.forEach(function(asset){
@@ -87,16 +99,32 @@ define(['angularAMD', 'config/preload'],function(angularAMD,preload){
 
 			/**
 			 * Removes a set of assets from cache
-			 * @param group {string} batch identifier attached to all the assets to be unloaded
+			 * @param [group] {string} batch identifier attached to all the assets to be unloaded, if none specified all are unloaded
 			 */
-			unload : function(group){
-				preload.forEach(function(data) {
-					if (data.group == group) {
-						delete assets[data.id];
-					}
-				});
-				delete promises[group];
+			unload : function(group) {
+
+				//If not passed set group to the array of all active promise values
+				if (!group) {
+
+					group = Object.keys(promises);
+					console.log(typeof group);
+				}
+
+				//If array recursively call this function on all its values
+				if (Array.isArray(group)) {
+					group.forEach(this.unload.bind(this));
+				}
+				else {
+					preload.forEach(function (data) {
+						if (!group || data.group === group) {
+							delete assets[data.id];
+						}
+					});
+
+					delete promises[group];
+				}
 			},
+
 
 			/**
 			 * Fetch an asset from cache

@@ -11,7 +11,7 @@ define(['app', 'angularAMD'], function (app, angularAMD) {
 
 		it('angularAMD must be bootstrapped', function (done) {
 			setTimeout(function () {
-				angularAMD.appname();
+				expect(app.name).toBe(angularAMD.appname());
 				console.log('### angularAMD boostrapped ');
 				done();
 			}, 999);
