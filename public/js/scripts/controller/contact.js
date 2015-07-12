@@ -32,12 +32,12 @@ define(['angularAMD', 'directive/secret'], function (angularAMD) {
 			$http.post('/mail', data).
 
 				success(function(){
-					$scope.state = states.SUCCESS;
+					$scope.currentState = states.SUCCESS;
 					$preloader.fetch('mail').play();
 				}).
 
 				error(function(){
-					$scope.state = states.ERROR;
+					$scope.currentState = states.ERROR;
 				});
 		};
 	});
