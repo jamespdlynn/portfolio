@@ -24,7 +24,7 @@
 	}
 
 	require.config({
-		baseUrl: '/base/public/js/scripts',
+		baseUrl: '/base/src/js/scripts',
 
 		paths: {
 			jquery : ['../lib/jquery.min'],

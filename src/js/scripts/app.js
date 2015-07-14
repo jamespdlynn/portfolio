@@ -4,13 +4,13 @@
  * @module app
  * @author James Lynn
  */
-define(['angularAMD','config/states','service/preloader','service/userAgent','controller/main','angularAnimate','angularUIRouter'], function (angularAMD, $states) {
+define(['angularAMD','config/states','service/preloader','service/userAgent','directive/file','controller/main','angularAnimate','angularUIRouter'], function (angularAMD, $states) {
 
 	'use strict';
-	var app = angular.module("app", ['ngAnimate', 'ui.router']);
+	var app = angular.module('app', ['ngAnimate', 'ui.router']);
 
 	//Save state configuration data to angular constant that can pulled in as a dependency
-	app.constant("$states", $states);
+	app.constant('$states', $states);
 
 	app.config(function($stateProvider, $urlRouterProvider, $states) {
 
@@ -24,7 +24,7 @@ define(['angularAMD','config/states','service/preloader','service/userAgent','co
 				state.url = state.url || '/'+state.id;
 				state.abstract = !!state.abstract;
 				state.require  = state.require || [undefined];
-				state.navEnabled = state.navEnabled==null ? true : !!state.navEnabled;
+				state.navEnabled = state.navEnabled===undefined ? true : !!state.navEnabled;
 
 				//Dynamically set the template URL path
 				if (state.template && !state.templateUrl){
@@ -101,6 +101,7 @@ define(['angularAMD','config/states','service/preloader','service/userAgent','co
  * @param match {object} Object containing key/value pairs to match off of
  * @returns {object} First object in array found that matches all key/value pairs passed in
  */
+/* jshint ignore:start */
 Array.prototype.find = function(match){
 	'use strict';
 	var obj, key, i = this.length;
@@ -115,3 +116,4 @@ Array.prototype.find = function(match){
 	}
 	return null; //No matches found
 };
+/* jshint ignore:end */

@@ -1,4 +1,4 @@
-/*global define, describe, it, expect*/
+/*global define, describe, it, expect, beforeEach*/
 define(['app', 'angularAMD', 'controller/main'], function (app, angularAMD) {
 	'use strict';
 

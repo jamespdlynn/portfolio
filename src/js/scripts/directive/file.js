@@ -7,13 +7,13 @@
 define(['angularAMD'], function (angularAMD) {
 	'use strict';
 
-	angularAMD.directive('file', function($preloader, $userAgent) {
+	angularAMD.directive('file', function($preloader) {
 
 		return {
 
 			scope : {
-				src : "=", //Either the preloader identifier or path to an image file
-				data : "=" //Either the preloader identifier or path to an embeded file
+				src : '=', //Either the preloader identifier or path to an image file
+				data : '=' //Either the preloader identifier or path to an embeded file
 			},
 
 			link : function(scope, element) {
@@ -25,7 +25,7 @@ define(['angularAMD'], function (angularAMD) {
 						//First see if this image exists in the preloader
 						var image = $preloader.fetch(value);
 						if (!image){
-							image = angular.element(document.createElement("img"));
+							image = angular.element(document.createElement('img'));
 							image.attr('src',value);
 						}
 
@@ -44,15 +44,15 @@ define(['angularAMD'], function (angularAMD) {
 						data = $preloader.fetch(value) ? $preloader.fetch(value).src : value;
 
 						//Create an html object element used to embed this data
-						object = angular.element(document.createElement("object"));
-						object.attr("data", data);
+						object = angular.element(document.createElement('object'));
+						object.attr('data', data);
 
 						/*if ($userAgent.isIOS()){
 						 object.css({'height':'auto','background':'#fff'});
 						 }*/
 
 						//Create a download link to append to the object element, which will only display if the user's browser doesn't have the associated object plugin
-						link = angular.element(document.createElement("a"));
+						link = angular.element(document.createElement('a'));
 						link.attr('href', data);
 						link.attr('class', 'btn btn-primary btn-lg');
 						link.text('Download');

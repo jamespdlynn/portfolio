@@ -5,7 +5,7 @@ require.config({
 	paths: {
 		jquery : ['//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min', '../lib/jquery.min'],
 		angular: ['//ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular.min', '../lib/angular.min'],
-		angularAnimate : ['//ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular-animate', '../lib/angular-animate.min'],
+		angularAnimate : ['//ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular-animate.min', '../lib/angular-animate.min'],
 		angularUIRouter : ['../lib/angular-ui-router.min'],
 		angularSlick : ['../lib/angular-slick.min'],
 		angularAMD: ['../lib/angularAMD.min'],

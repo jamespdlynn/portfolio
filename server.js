@@ -1,12 +1,11 @@
 /**
  * Created by James Lynn on 6/10/2015.
  */
-var http = require("http");
-var path = require("path");
-var express = require("express");
+var path = require('path');
+var express = require('express');
 var bodyParser = require('body-parser');
-var less = require("less-middleware");
-var email = require("emailjs");
+var less = require('less-middleware');
+var email = require('emailjs');
 
 var app = express();
 
@@ -17,69 +16,47 @@ switch (app.get('env'))
 {
 	case 'development':
 	default :
-		app.use(less(path.join(__dirname, 'less'),{
+		app.use(less(path.join(__dirname,'src'),{
 			preprocess: {
 				path: function(value) {
 					return value.replace(/(?:\/css|\\css)/, '');
 				}
 			},
-			dest : path.join(__dirname, 'public'),
+			dest : path.join(__dirname, 'src'),
 			compress : false,
 			debug : true,
 			force : true
 		}));
 
-		app.use(bodyParser.json())
-		app.use(express.static(path.join(__dirname,'public')));
+		app.use(bodyParser.json());
+		app.use(express.static(path.join(__dirname,'src')));
 
 		break;
 
 	case 'production':
-
-		app.use(less(path.join(__dirname, 'less'),{
-			preprocess: {
-				path: function(pathname) {
-					return pathname.replace(/(?:\/css\/|\\css\\)/, '/');
-				}
-			},
-			dest : path.join(__dirname, 'public'),
-			compress : true,
-			once : true
-		}));
-
 		app.use(bodyParser.json())
-		app.use(express.static(path.join(__dirname, 'public')));
-
-
-
+		app.use(express.static(path.join(__dirname, 'dist')));
 		break;
 }
 
 var emailServer  = email.server.connect({
-	host: "localhost",
-	domain : "destructor.com"
+	host: 'localhost',
+	domain : 'estructor.com'
 });
 
 app.post('/mail', function(req, res, next){
 
 	var form = req.body;
-
 	if (!form || !form.email || !form.name || !form.message || form.secret != 12){
 		return res.status(400).send('Invalid parameters');
 	}
 
-	var subject, body;
-
-	subject = form.name;
-	if (form.company) subject += " - "+form.company;
-
-	body = form.email+"\n\n";
-	if (form.phone) body+= form.phone+"\n\n";
-	body += form.message+"\n\n"
+	var subject = form.name +  (form.company?' - '+form.company : '');
+	var body = form.email+'\n\n' + (form.phone ? form.phone + '\n\n' : '') + form.message;
 
 	emailServer.send({
-		to : "jamespdlynn@gmail.com",
-		from : "Contact Form <contact@destructor.com>",
+		to : 'jamespdlynn@gmail.com',
+		from : 'Contact Form <contact@destructor.com>',
 		subject : subject,
 		text : body
 	}, function(err){
@@ -89,9 +66,8 @@ app.post('/mail', function(req, res, next){
 
 });
 
-
 app.listen(app.get('port'), function(){
-	console.log("Express "+app.get('env')+" server listening on port "+app.get('port'));
+	console.log('Express '+app.get('env')+' server listening on port '+app.get('port'));
 });
 
 

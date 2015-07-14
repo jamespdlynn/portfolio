@@ -1,11 +1,11 @@
-/*global define, window*/
+/*global define*/
 /**
  * Controller for the Portfolio State
  * @module controller/portfolio
  * @author James Lynn
  */
 //Dynamically bootstrap the angular slick module used for this state's navigation
-define(['angularAMD', 'ngload!angularSlick', 'directive/mouseWheel'], function (angularAMD) {
+define(['angularAMD', 'angularSlick', 'directive/mouseWheel'], function (angularAMD) {
 	'use strict';
 
 	angularAMD.controller('PortfolioController', function($scope, $state, $states) {

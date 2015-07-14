@@ -75,7 +75,7 @@ define(['angularAMD', 'directive/avatar', 'directive/nav'], function (angularAMD
 			var isLeft = !!($state.current.templateUrl || $state.current.template);
 
 			//Had to do some a bit hacky DOM manipulation here to make sure avatar animation resets
-			if ($scope.avatar.initialized && isLeft != $scope.avatar.isLeft){
+			if ($scope.avatar.initialized && isLeft !== $scope.avatar.isLeft){
 				$scope.avatar.animateRandom();
 			}
 

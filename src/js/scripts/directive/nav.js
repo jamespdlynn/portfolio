@@ -96,11 +96,7 @@ define(['angularAMD'], function (angularAMD) {
 						//Originally I was using event callbacks to determine when animations finished
 						//but, while less dynamic, I found using hardcoded durations to be more reliable
 						this._animation = type;
-						this._promise = $timeout(function(){
-							$timeout(function(){
-								scope.nav.reset();
-							});
-						},animations[type].duration || 0);
+						this._promise = $timeout(null,animations[type].duration || 0);
 
 						return this._promise;
 					},
@@ -135,7 +131,7 @@ define(['angularAMD'], function (angularAMD) {
 					 * Play sound on hover
 					 */
 					onHover : function(){
-						if (!this.isHidden && !this._animation){
+						if (!this.isHidden){
 							this.animate('hover');
 						}
 					},

@@ -19,12 +19,6 @@ define(function(){
 	/**@return asset[] */
 	 return [
 
-		 {
-			 id : 'FileDirective',
-			 type : 'module',
-			 src : 'directive/file',
-			 group : 'main'
-		 },
 
 		{
 			id:'sprites',
@@ -83,7 +77,7 @@ define(function(){
 		 {
 			 id:'PortfolioController',
 			 type:'module',
-			 src:'controller/_portfolio',
+			 src:'controller/portfolio',
 			 group : 'portfolio'
 		 },
 
@@ -186,7 +180,7 @@ define(function(){
 		{
 			id:'resume',
 			type:'pdf',
-			src:'/assets/JamesLynnRes.pdf',
+			src:'/assets/docs/resume.pdf',
 			group : 'resume'
 		},
 

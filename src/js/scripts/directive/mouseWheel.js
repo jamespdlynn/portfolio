@@ -1,4 +1,4 @@
-/*global define, angular, document*/
+/*global define*/
 /**
  * Directive used for handling mouse wheel events
  * @module directive/file
@@ -14,7 +14,7 @@ define(['angularAMD'], function (angularAMD) {
 
 			var fn = $parse(attr.mouseWheel, null,  true);
 
-			element.bind("DOMMouseScroll mousewheel onmousewheel", function(event) {
+			element.bind('DOMMouseScroll mousewheel onmousewheel', function(event) {
 
 				var delta = Math.max(-1, Math.min(1, (event.wheelDelta || -event.detail)));
 

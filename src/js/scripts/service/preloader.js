@@ -40,7 +40,7 @@ define(['angularAMD', 'config/preload'],function(angularAMD,preload){
 
 				//Loop through configuration file search for objects with the given group identifier
 				preload.forEach(function(asset){
-					if (asset.group == group){
+					if (asset.group === group){
 						var media = null, defer = $q.defer();
 
 						switch (asset.type){
