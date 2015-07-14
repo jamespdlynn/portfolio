@@ -1,4 +1,4 @@
-/*global define, describe, it, expect, beforeEach*/
+/*global define, describe, it, expect, beforeEach, afterEach*/
 define(['app', 'angularAMD', 'controller/main'], function (app, angularAMD) {
 	'use strict';
 
@@ -14,13 +14,16 @@ define(['app', 'angularAMD', 'controller/main'], function (app, angularAMD) {
 					$scope : scope
 				});
 				state = $state;
+				state.current = state.get('home');
 			});
 		});
 
+		afterEach(function(){
+			scope.$destroy();
+		});
 
 		it('is defined', function () {
 			expect(ctrl).toBeDefined();
-
 		});
 
 		it('default scope values', function () {
@@ -28,18 +31,22 @@ define(['app', 'angularAMD', 'controller/main'], function (app, angularAMD) {
 			expect(scope.avatar.isLeft).toBe(false);
 			expect(scope.nav).toBeDefined();
 			expect(scope.nav.isHidden).toBe(true);
+			expect(scope.nav.items).toBeDefined();
+			expect(scope.nav.items.length).toBeGreaterThan(0);
 		});
 
-		it('avatar to left', function (done) {
-			expect(ctrl).toBeDefined();
+		it('avatar moves left', function () {
+			scope.avatar.isLeft = false;
+			state.current = state.get('about');
+			scope.$broadcast('$stateChangeSuccess');
+			expect(scope.avatar.isLeft).toBe(true);
+		});
 
-			scope.$watch('avatar.isLeft', function(value){
-				if (value){
-					done();
-				}
-			});
-
-			state.go('contact');
+		it('avatar moves right', function () {
+			scope.avatar.isLeft = true;
+			state.current = state.get('home');
+			scope.$broadcast('$stateChangeSuccess');
+			expect(scope.avatar.isLeft).toBe(false);
 		});
 
 	});

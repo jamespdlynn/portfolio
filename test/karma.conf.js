@@ -15,6 +15,7 @@ module.exports = function (config) {
 			{pattern: 'src/js/lib/**/*.js', included: false},
 			{pattern: 'src/js/scripts/**/*.js', included: false},
 			{pattern: 'src/templates/**/*.html', included: false},
+			{pattern: 'src/assets/**/*', included:false},
 			{pattern: 'test/spec/**/*.js', included: false},
 			{pattern: 'test/main.js', included: true}
 		],
@@ -34,7 +35,7 @@ module.exports = function (config) {
 		reporters: ['progress'],
 
 		// web server port
-		port: '80',
+		port: '8080',
 
 		// enable / disable colors in the output (reporters and logs)
 		colors: true,

@@ -5,7 +5,7 @@
  * @author James Lynn
  */
 //Dynamically bootstrap the angular slick module used for this state's navigation
-define(['angularAMD', 'angularSlick', 'directive/mouseWheel'], function (angularAMD) {
+define(['angularAMD', 'angularSlick', 'directive/mouseWheel', 'directive/file'], function (angularAMD) {
 	'use strict';
 
 	angularAMD.controller('PortfolioController', function($scope, $state, $states) {
@@ -50,4 +50,5 @@ define(['angularAMD', 'angularSlick', 'directive/mouseWheel'], function (angular
 		});
 
 	});
+
 });

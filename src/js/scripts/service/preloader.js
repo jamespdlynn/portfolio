@@ -105,9 +105,7 @@ define(['angularAMD', 'config/preload'],function(angularAMD,preload){
 
 				//If not passed set group to the array of all active promise values
 				if (!group) {
-
 					group = Object.keys(promises);
-					console.log(typeof group);
 				}
 
 				//If array recursively call this function on all its values

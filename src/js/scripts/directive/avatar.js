@@ -4,7 +4,7 @@
  * @module directive/avatar
  * @author James Lynn
  */
-define(['angularAMD'], function (angularAMD) {
+define(['angularAMD','service/preloader','service/userAgent'], function (angularAMD) {
 	'use strict';
 
 	angularAMD.directive('avatar', function ($timeout, $q, $preloader,$userAgent) {

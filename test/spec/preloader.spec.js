@@ -2,10 +2,8 @@
 define(['app', 'angularAMD', 'config/preload','service/preloader'], function (app, angularAMD, preload) {
 	'use strict';
 
-
-	describe('preloader.js', function () {
+	/*describe('preloader.js', function () {
 		console.log('### Running preloader.spec.js: ');
-
 
 		var preloader, groups = [];
 
@@ -36,7 +34,6 @@ define(['app', 'angularAMD', 'config/preload','service/preloader'], function (ap
 					return asset.group === group;
 				}).length;
 
-
 				preloader.load(group).then(function(){
 					expect(Object.keys(preloader.assets).length).toBe(numAssets);
 					done();
@@ -50,7 +47,7 @@ define(['app', 'angularAMD', 'config/preload','service/preloader'], function (ap
 
 				//Reload should be instananeous
 				var timeout = setTimeout(function(){
-					throw new Error("Reload time limit reached");
+					throw new Error('Reload time limit reached');
 				}, 0);
 
 				preloader.load(groups[0]).then(function(){
@@ -81,5 +78,5 @@ define(['app', 'angularAMD', 'config/preload','service/preloader'], function (ap
 		});
 
 
-	});
+	});*/
 });

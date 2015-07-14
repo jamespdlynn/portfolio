@@ -4,8 +4,10 @@
  * @module config/states
  * @author James Lynn
  */
-define(function(){
+define(function(require, exports, module){
 	'use strict';
+
+	var path = module.config().path;
 
 	/**
 	 * @typedef {Object} state
@@ -14,7 +16,7 @@ define(function(){
 	 * @property {string} [label] - The name of the state as displayed in the nav
 	 * @property {string} [require=[]] The javascript file paths needed for requirejs to preload before the state changes
 	 * @property {string} [controller] The angular js controller name
-	 * @property {string} [template] The html template file name
+	 * @property {string} [templateUrl] The html templateUrl path
 	 * @property {boolean} [isDefault=false] - Flag determines whether this is the default state to redirect to
 	 * @property {boolean} [navEnabled=true] - Flag determines whether to show this state in the nav
 	 * @property {boolean} [abstract=false] - Flag determines whether this is a non directly accessible state
@@ -34,56 +36,56 @@ define(function(){
 		{
 			id : 'about',
 			label : 'About Me',
-			template : 'about.html'
+			templateUrl : path+'/about.html'
 		},
 
 		{
 			id : 'portfolio',
 			label : 'Portfolio',
 			controller : 'PortfolioController',
-			template : 'portfolio.html',
+			templateUrl : path+'/portfolio.html',
 			abstract : true,
 			states : [
 				{
 					id : 'hyper',
 					url : '/hyper-galactic',
 					label : 'Hyper Galactic',
-					template : 'hyper-galactic.html'
+					templateUrl : path+'/portfolio/hyper-galactic.html'
 				},
 
 				{
 					id : 'chess',
 					url : '/chess-chaps',
 					label : 'Chess Chaps',
-					template : 'chess-chaps.html'
+					templateUrl : path+'/portfolio/chess-chaps.html'
 				},
 
 				{
 					id : 'league',
 					url : '/league-champs',
 					label : 'League Champs',
-					template : 'league-champs.html'
+					templateUrl : path+'/portfolio/league-champs.html'
 				},
 
 				{
 					id : 'inmar',
 					url : '/inmar-digital-coupons',
 					label : 'Inmar Digital Coupons',
-					template : 'inmar-digital-coupons.html'
+					templateUrl : path+'/portfolio/inmar-digital-coupons.html'
 				},
 
 				{
 					id : 'emerson',
 					url : '/emeson-io',
 					label : 'Emerson IO Calculator',
-					template : 'emerson-io.html'
+					templateUrl : path+'/portfolio/emerson-io.html'
 				},
 
 				{
 					id : 'oracle',
 					url : '/oracle-roi-calculator',
 					label : 'Oracle ROI Calculator',
-					template : 'oracle-roi-calculator.html'
+					templateUrl : path+'/portfolio/oracle-roi-calculator.html'
 				}
 
 			]
@@ -92,14 +94,14 @@ define(function(){
 		{
 			id : 'resume',
 			label : 'Resume',
-			template : 'resume.html'
+			templateUrl : path+'/resume.html'
 		},
 
 		{
 			id : 'contact',
 			label : 'Contact',
 			controller : 'ContactController',
-			template : 'contact.html'
+			templateUrl : path+'/contact.html'
 		}
 
 	];

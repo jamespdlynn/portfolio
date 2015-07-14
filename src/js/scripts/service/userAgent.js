@@ -1,6 +1,6 @@
 /*global define, navigator*/
 /**
- * Helper angular factory for determining current browser agent
+ * Helper angular service for determining current browser agent
  * @module service/userAgent
  * @author James Lynn
  */

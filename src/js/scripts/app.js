@@ -1,16 +1,17 @@
-/*global define, angular*/
+/*global, define, angular*/
 /**
  * Top level angular application
  * @module app
  * @author James Lynn
  */
-define(['angularAMD','config/states','service/preloader','service/userAgent','directive/file','controller/main','angularAnimate','angularUIRouter'], function (angularAMD, $states) {
+define(['angularAMD','config/states', 'service/preloader','controller/main','angularAnimate','angularUIRouter'], function (angularAMD, states) {
 
 	'use strict';
+
 	var app = angular.module('app', ['ngAnimate', 'ui.router']);
 
 	//Save state configuration data to angular constant that can pulled in as a dependency
-	app.constant('$states', $states);
+	app.constant('$states', states);
 
 	app.config(function($stateProvider, $urlRouterProvider, $states) {
 
@@ -26,19 +27,16 @@ define(['angularAMD','config/states','service/preloader','service/userAgent','di
 				state.require  = state.require || [undefined];
 				state.navEnabled = state.navEnabled===undefined ? true : !!state.navEnabled;
 
-				//Dynamically set the template URL path
-				if (state.template && !state.templateUrl){
-					state.templateUrl = 'templates/'+path.replace('.','/') +state.template;
-				}
-
 				//Actually register the state within the provider
 				$stateProvider.state(state.name, {
 					url : state.url,
 					controller : state.controller,
 					templateUrl : state.templateUrl,
-					abstract : !!state.abstract,
+					abstract : state.abstract,
+					data : {navEnabled : state.navEnabled},
+
+					//Before the state resolves preload all associated modules and assets
 					resolve : {
-						//Before the state resolves preload all associated modules and assets
 						preload : function($preloader){
 							return $preloader.load(state.id);
 						}
@@ -55,7 +53,7 @@ define(['angularAMD','config/states','service/preloader','service/userAgent','di
 				}
 
 				if (state.states){
-					//If state has a substate array then recursively call this function again
+					//If state has a substate array then recursively call this function again with the updated path variable
 					createStates(state.states, state.name+'.');
 
 					//If state is abstract (not directly accessible) then reroute its url requests to its first child state
@@ -98,6 +96,7 @@ define(['angularAMD','config/states','service/preloader','service/userAgent','di
 
 /**
  * Globally accessible array helper function for quickly finding an object by its property(ies)
+ * @global
  * @param match {object} Object containing key/value pairs to match off of
  * @returns {object} First object in array found that matches all key/value pairs passed in
  */

@@ -27,14 +27,14 @@
 		baseUrl: '/base/src/js/scripts',
 
 		paths: {
-			jquery : ['../lib/jquery.min'],
-			angular: ['../lib/angular.min'],
-			angularAnimate : ['../lib/angular-animate.min'],
-			angularUIRouter : ['../lib/angular-ui-router.min'],
-			angularSlick : ['../lib/angular-slick.min'],
-			angularAMD: ['../lib/angularAMD.min'],
-			ngload: ['../lib/ngload.min'],
-			slick : ['../lib/slick.min']
+			jquery : ['../lib/jquery'],
+			angular: ['../lib/angular'],
+			angularAnimate : ['../lib/angular-animate'],
+			angularUIRouter : ['../lib/angular-ui-router'],
+			angularSlick : ['../lib/angular-slick'],
+			angularAMD: ['../lib/angularAMD'],
+			ngload: ['../lib/ngload'],
+			slick : ['../lib/slick']
 		},
 
 		shim: {
@@ -43,6 +43,15 @@
 			angularSlick : ['angular','slick'],
 			angularAMD: ['angular'],
 			ngload: ['angularAMD']
+		},
+
+		config : {
+			'config/preload' : {
+				path :  '/base/src/assets'
+			},
+			'config/states' : {
+				path : '/base/src/templates'
+			}
 		},
 
 		deps: testFiles,

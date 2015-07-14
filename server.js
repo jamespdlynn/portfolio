@@ -14,7 +14,11 @@ app.set('port', process.env.PORT || '80');
 
 switch (app.get('env'))
 {
-	case 'development':
+	case 'production':
+		app.use(bodyParser.json())
+		app.use(express.static(path.join(__dirname, 'dist')));
+		break;
+
 	default :
 		app.use(less(path.join(__dirname,'src'),{
 			preprocess: {
@@ -30,12 +34,6 @@ switch (app.get('env'))
 
 		app.use(bodyParser.json());
 		app.use(express.static(path.join(__dirname,'src')));
-
-		break;
-
-	case 'production':
-		app.use(bodyParser.json())
-		app.use(express.static(path.join(__dirname, 'dist')));
 		break;
 }
 
@@ -45,6 +43,8 @@ var emailServer  = email.server.connect({
 });
 
 app.post('/mail', function(req, res, next){
+
+	'use strict';
 
 	var form = req.body;
 	if (!form || !form.email || !form.name || !form.message || form.secret != 12){
@@ -67,6 +67,7 @@ app.post('/mail', function(req, res, next){
 });
 
 app.listen(app.get('port'), function(){
+	'use strict';
 	console.log('Express '+app.get('env')+' server listening on port '+app.get('port'));
 });
 

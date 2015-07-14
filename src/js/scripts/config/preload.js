@@ -4,8 +4,10 @@
  * @module config/preload
  * @author James Lynn
  */
-define(function(){
+define(function(require, exports, module){
 	'use strict';
+
+	var path = module.config().path;
 
 	/**
 	 * @typedef {Object} asset
@@ -23,21 +25,21 @@ define(function(){
 		{
 			id:'sprites',
 			type:'image',
-			src:'/assets/img/sprites.png',
+			src: path+'/img/sprites.png',
 			group : 'main'
 		},
 
 		{
 			id:'bubble',
 			type:'image',
-			src:'/assets/img/bubble.png',
+			src: path+'/img/bubble.png',
 			group : 'main'
 		},
 
 		{
 			id:'click',
 			type:'audio',
-			src:'/assets/audio/click.mp3',
+			src: path+'/audio/click.mp3',
 			group : 'main',
 			cache : true
 		},
@@ -45,7 +47,7 @@ define(function(){
 		{
 			id:'bloop',
 			type:'audio',
-			src:'/assets/audio/bloop.mp3',
+			src: path+'/audio/bloop.mp3',
 			group : 'main',
 			cache : true
 		},
@@ -53,7 +55,7 @@ define(function(){
 		{
 			id:'swoosh',
 			type:'audio',
-			src:'/assets/audio/swoosh.mp3',
+			src: path+'/audio/swoosh.mp3',
 			group : 'main',
 			cache : true
 		},
@@ -61,7 +63,7 @@ define(function(){
 		{
 			id:'walk',
 			type:'audio',
-			src:'/assets/audio/walk.mp3',
+			src: path+'/audio/walk.mp3',
 			group : 'main',
 			cache : true
 		},
@@ -69,7 +71,7 @@ define(function(){
 		{
 			id:'portrait',
 			type:'image',
-			src:'/assets/img/portrait.png',
+			src: path+'/img/portrait.png',
 			group : 'about',
 			cache : true
 		},
@@ -84,7 +86,7 @@ define(function(){
 		{
 			id:'hyper',
 			type:'image',
-			src:'/assets/img/portfolio/hyper.png',
+			src: path+'/img/portfolio/hyper.png',
 			group : 'portfolio',
 			cache : true
 		},
@@ -92,7 +94,7 @@ define(function(){
 		{
 			id:'hyperNav',
 			type:'image',
-			src:'/assets/img//portfolio/hyper-nav.png',
+			src: path+'/img/portfolio/hyper-nav.png',
 			group : 'portfolio',
 			cache : true
 		},
@@ -100,7 +102,7 @@ define(function(){
 		{
 			id:'league',
 			type:'image',
-			src:'/assets/img/portfolio/league.png',
+			src: path+'/img/portfolio/league.png',
 			group : 'portfolio',
 			cache : true
 		},
@@ -108,7 +110,7 @@ define(function(){
 		{
 			id:'leagueNav',
 			type:'image',
-			src:'/assets/img/portfolio/league-nav.png',
+			src: path+'/img/portfolio/league-nav.png',
 			group : 'portfolio',
 			cache : true
 		},
@@ -116,7 +118,7 @@ define(function(){
 		{
 			id:'chess',
 			type:'image',
-			src:'/assets/img/portfolio/chess.png',
+			src: path+'/img/portfolio/chess.png',
 			group : 'portfolio',
 			cache : true
 		},
@@ -124,7 +126,7 @@ define(function(){
 		{
 			id:'chessNav',
 			type:'image',
-			src:'/assets/img/portfolio/chess-nav.png',
+			src: path+'/img/portfolio/chess-nav.png',
 			group : 'portfolio',
 			cache : true
 		},
@@ -132,7 +134,7 @@ define(function(){
 		{
 			id:'oracle',
 			type:'image',
-			src:'/assets/img/portfolio/oracle.png',
+			src: path+'/img/portfolio/oracle.png',
 			group : 'portfolio',
 			cache : true
 		},
@@ -140,7 +142,7 @@ define(function(){
 		{
 			id:'oracleNav',
 			type:'image',
-			src:'/assets/img/portfolio/oracle-nav.png',
+			src: path+'/img/portfolio/oracle-nav.png',
 			group : 'portfolio',
 			cache : true
 		},
@@ -148,7 +150,7 @@ define(function(){
 		{
 			id:'emerson',
 			type:'image',
-			src:'/assets/img/portfolio/emerson.png',
+			src: path+'/img/portfolio/emerson.png',
 			group : 'portfolio',
 			cache : true
 		},
@@ -156,7 +158,7 @@ define(function(){
 		{
 			id:'emersonNav',
 			type:'image',
-			src:'/assets/img/portfolio/emerson-nav.png',
+			src: path+'/img/portfolio/emerson-nav.png',
 			group : 'portfolio',
 			cache : true
 		},
@@ -164,7 +166,7 @@ define(function(){
 		{
 			id:'inmar',
 			type:'image',
-			src:'/assets/img/portfolio/inmar.png',
+			src: path+'/img/portfolio/inmar.png',
 			group : 'portfolio',
 			cache : true
 		},
@@ -172,7 +174,7 @@ define(function(){
 		{
 			id:'inmarNav',
 			type:'image',
-			src:'/assets/img/portfolio/inmar-nav.png',
+			src: path+'/img/portfolio/inmar-nav.png',
 			group : 'portfolio',
 			cache : true
 		},
@@ -180,7 +182,7 @@ define(function(){
 		{
 			id:'resume',
 			type:'pdf',
-			src:'/assets/docs/resume.pdf',
+			src: path+'/docs/resume.pdf',
 			group : 'resume'
 		},
 
@@ -194,14 +196,14 @@ define(function(){
 		{
 			id : 'check',
 			type : 'image',
-			src : '/assets/img/check.png',
+			src :  path+'/img/check.png',
 			group : 'contact'
 		},
 
 		{
 			id : 'mail',
 			type : 'audio',
-			src : '/assets/audio/mail.mp3',
+			src :  path+'/audio/mail.mp3',
 			group : 'contact',
 			cache : true
 		}

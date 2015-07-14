@@ -2,7 +2,10 @@
   "globals": {
     "define": false,
     "require": false,
-    "angular": false
+    "angular": false,
+    "expect" : false,
+    "it" : false,
+    "beforeEach" : false
   },
   "node": true,
   "esnext": true,
