@@ -4,7 +4,7 @@
  * @module controller/contact
  * @author James Lynn
  */
-define(['angularAMD', 'directive/secret'], function (angularAMD) {
+define(['angularAMD'], function (angularAMD) {
 	'use strict';
 
 	/**@readdonly *@enum {number} */

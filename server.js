@@ -5,7 +5,6 @@
 var path = require('path');
 var express = require('express');
 var bodyParser = require('body-parser');
-var os = require('os');
 
 //Attempts to connect to an unauthenticated mail server on the local host
 var emailServer = require('emailjs').server.connect({host:'localhost'});
@@ -42,37 +41,39 @@ switch (app.get('env'))
 }
 
 //Contact data email endpoint
-app.post('/mail', function(req, res, next){
-
+app.post('/mail', function(req, res){
 	'use strict';
 
 	var data = req.body;
 
 	//Do some very basic validation on the incoming data object
-	if (!data || !data.name || !data.email || !data.message || data.secret != 12){
+	if (!data || !data.name || !data.email || !data.message){
 		return res.status(400).send('Invalid data params');
 	}
 
+	var emailTo = pkg.author;
+
+	var emailFrom =  data.name+'<contact@destructor.com>';
+
 	var subject = 'New Contact Form Submitted';
-	var body = data.name+'\n' +
+
+	var text = data.name+'\n' +
 		 (data.company ? data.company+'\n' : '') +
 		 data.email+'\n' +
 		 (data.phone ? data.phone+'\n' : '') +
 		 '\n'+data.message;
 
-		console.log(body);
-
 		emailServer.send({
-			to : pkg.author,
-			from : data.name+'<contact@destructor.com>',
+			to : emailTo,
+			from : emailFrom,
 			subject : subject,
-			text : body
+			text : text
 		}, function(err){
 			if (err){
 				console.error(err);
-				return res.send(500);
+				return res.sendStatus(500);
 			}
-			res.send(200);
+			res.sendStatus(200);
 		});
 });
 
