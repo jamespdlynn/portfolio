@@ -54,14 +54,13 @@ app.post('/mail', function(req, res, next){
 
 	var subject = 'New Contact Form Submitted';
 	var body = data.name + '\n\n' +
-	     data.company ?' - ' + data.company : '' +
+	     data.company ? + data.company + '\n\n' : '' +
 		 data.email+'\n\n' +
 		 data.phone ? data.phone + '\n\n' : '' +
 		 data.message;
 
 		emailServer.send({
 			to : pkg.author,
-			from : data.name,
 			subject : subject,
 			text : body
 		}, function(err){
