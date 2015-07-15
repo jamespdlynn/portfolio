@@ -5,6 +5,7 @@
 var path = require('path');
 var express = require('express');
 var bodyParser = require('body-parser');
+var os = require('os');
 
 //Attempts to connect to an unauthenticated mail server on the local host
 var emailServer = require('emailjs').server.connect({host:'localhost'});
@@ -59,16 +60,19 @@ app.post('/mail', function(req, res, next){
 		 data.phone ? data.phone + '\n\n' : '' +
 		 data.message;
 
-		emailServer.send({
-			to : pkg.author,
-			subject : subject,
-			text : body
-		}, function(err){
-			if (err){
-				return next(err);
-			}
-			res.status(200).send('success');
-		});
+	console.log(emailServer.host);
+
+	emailServer.send({
+		to : pkg.author,
+		subject : subject,
+		text : body
+	}, function(err){
+		if (err){
+			console.error(err);
+			res.status(500).send('error');
+		}
+		res.status(200).send('success');
+	});
 });
 
 //Kick up a new express server on the given port (default 80)
