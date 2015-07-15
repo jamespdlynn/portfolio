@@ -64,7 +64,7 @@ app.post('/mail', function(req, res, next){
 
 		emailServer.send({
 			to : pkg.author,
-			from : data.name + '<contact@'+os.hostname()+'>',
+			from : data.name+'<contact@destructor.com>',
 			subject : subject,
 			text : body
 		}, function(err){
