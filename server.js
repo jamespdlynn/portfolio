@@ -60,19 +60,20 @@ app.post('/mail', function(req, res, next){
 		 data.phone ? data.phone + '\n\n' : '' +
 		 data.message;
 
-	console.log(emailServer.host);
+	console.log(os.hostname());
 
-	emailServer.send({
-		to : pkg.author,
-		subject : subject,
-		text : body
-	}, function(err){
-		if (err){
-			console.error(err);
-			res.status(500).send('error');
-		}
-		res.status(200).send('success');
-	});
+		emailServer.send({
+			to : pkg.author,
+			from : data.name + '<contact@'+os.hostname()+'>',
+			subject : subject,
+			text : body
+		}, function(err){
+			if (err){
+				console.error(err);
+				res.status(500).send('error');
+			}
+			res.status(200).send('success');
+		});
 });
 
 //Kick up a new express server on the given port (default 80)
