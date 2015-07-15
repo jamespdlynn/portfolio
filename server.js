@@ -49,18 +49,18 @@ app.post('/mail', function(req, res, next){
 	var data = req.body;
 
 	//Do some very basic validation on the incoming data object
-	if (!data || !data.email || !data.name || !data.message || data.secret != 12){
+	if (!data || !data.name || !data.email || !data.message || data.secret != 12){
 		return res.status(400).send('Invalid data params');
 	}
 
 	var subject = 'New Contact Form Submitted';
-	var body = data.name + '\n\n' +
-	     data.company ? + data.company + '\n\n' : '' +
-		 data.email+'\n\n' +
-		 data.phone ? data.phone + '\n\n' : '' +
-		 data.message;
+	var body = data.name+'\n' +
+		 (data.company ? data.company+'\n' : '') +
+		 data.email+'\n' +
+		 (data.phone ? data.phone+'\n' : '') +
+		 '\n'+data.message;
 
-	console.log(os.hostname());
+		console.log(body);
 
 		emailServer.send({
 			to : pkg.author,
@@ -70,9 +70,9 @@ app.post('/mail', function(req, res, next){
 		}, function(err){
 			if (err){
 				console.error(err);
-				res.status(500).send('error');
+				return res.send(500);
 			}
-			res.status(200).send('success');
+			res.send(200);
 		});
 });
 
