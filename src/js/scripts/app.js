@@ -1,7 +1,7 @@
 /*global, define, angular*/
 /**
- * Top level angular application
- * @module app
+ * App Test File
+ * Should be run before all other tests to ensure AngularAMD is bootstrapped
  * @author James Lynn
  */
 define(['angularAMD','config/states', 'service/preloader','controller/main','angularAnimate','angularUIRouter'], function (angularAMD, states) {
@@ -37,8 +37,10 @@ define(['angularAMD','config/states', 'service/preloader','controller/main','ang
 
 					//Before the state resolves preload all associated modules and assets
 					resolve : {
-						preload : function($preloader){
-							return $preloader.load(state.id);
+						preload : function($q, $preloader){
+							var deferred = $q.defer();
+							$preloader.load(state.id).finally(deferred.resolve);
+							return deferred.promise;
 						}
 					},
 
@@ -84,7 +86,7 @@ define(['angularAMD','config/states', 'service/preloader','controller/main','ang
 		//Wait for main assets to load and the initial state to initialize before allowing user interaction with the app
 		var promise = $preloader.load('main');
 		$rootScope.$on('$stateChangeSuccess', function(){
-			promise.then(function(){
+			promise.finally(function(){
 				$rootScope.initialized = true;
 			});
 		});

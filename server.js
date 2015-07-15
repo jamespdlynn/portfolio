@@ -1,11 +1,14 @@
 /**
- * Created by James Lynn on 6/10/2015.
+ * Node JS Server
+ * @author James Lynn
  */
 var path = require('path');
 var express = require('express');
 var bodyParser = require('body-parser');
-var less = require('less-middleware');
-var email = require('emailjs');
+
+//Attempts to connect to an unauthenticated mail server on the local host
+var emailServer = require('emailjs').server.connect({host:'localhost'});
+var pkg = require('./package.json');
 
 var app = express();
 
@@ -14,18 +17,18 @@ app.set('port', process.env.PORT || '80');
 
 switch (app.get('env'))
 {
+	//In a production environment point the requests to the 'dist' directory
+	//that should have been deployed by Grunt
 	case 'production':
-		app.use(bodyParser.json())
+		app.use(bodyParser.json());
 		app.use(express.static(path.join(__dirname, 'dist')));
 		break;
 
+	//In a development environment use the less-middleware module to manually compile
+	//the LESS files on each request and
 	default :
+		var less = require('less-middleware');
 		app.use(less(path.join(__dirname,'src'),{
-			preprocess: {
-				path: function(value) {
-					return value.replace(/(?:\/css|\\css)/, '');
-				}
-			},
 			dest : path.join(__dirname, 'src'),
 			compress : false,
 			debug : true,
@@ -37,35 +40,39 @@ switch (app.get('env'))
 		break;
 }
 
-var emailServer  = email.server.connect({
-	host: 'localhost',
-	domain : 'estructor.com'
-});
-
+//Contact data email endpoint
 app.post('/mail', function(req, res, next){
 
 	'use strict';
 
-	var form = req.body;
-	if (!form || !form.email || !form.name || !form.message || form.secret != 12){
-		return res.status(400).send('Invalid parameters');
+	var data = req.body;
+
+	//Do some very basic validation on the incoming data object
+	if (!data || !data.email || !data.name || !data.message || data.secret != 12){
+		return res.status(400).send('Invalid data params');
 	}
 
-	var subject = form.name +  (form.company?' - '+form.company : '');
-	var body = form.email+'\n\n' + (form.phone ? form.phone + '\n\n' : '') + form.message;
+	var subject = 'New Contact Form Submitted';
+	var body = data.name + '\n\n' +
+	     data.company ?' - ' + data.company : '' +
+		 data.email+'\n\n' +
+		 data.phone ? data.phone + '\n\n' : '' +
+		 data.message;
 
-	emailServer.send({
-		to : 'jamespdlynn@gmail.com',
-		from : 'Contact Form <contact@destructor.com>',
-		subject : subject,
-		text : body
-	}, function(err){
-		if (err) return next(err);
-		res.status(200).send();
-	});
-
+		emailServer.send({
+			to : pkg.author,
+			from : data.name,
+			subject : subject,
+			text : body
+		}, function(err){
+			if (err){
+				return next(err);
+			}
+			res.status(200).send('success');
+		});
 });
 
+//Kick up a new express server on the given port (default 80)
 app.listen(app.get('port'), function(){
 	'use strict';
 	console.log('Express '+app.get('env')+' server listening on port '+app.get('port'));

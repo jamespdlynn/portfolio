@@ -1,6 +1,6 @@
 /*global define*/
 /**
- *Configuration json containing all the assets for the app to preload
+ *Configuration dat containing all the assets for the app to preload
  * @module config/preload
  * @author James Lynn
  */

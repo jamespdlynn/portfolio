@@ -1,4 +1,8 @@
 /*global define, describe, it, expect, beforeEach, afterEach*/
+/**
+ * Main Controller Tests
+ * @author James Lynn
+ */
 define(['app', 'angularAMD', 'controller/main'], function (app, angularAMD) {
 	'use strict';
 
@@ -22,7 +26,7 @@ define(['app', 'angularAMD', 'controller/main'], function (app, angularAMD) {
 			scope.$destroy();
 		});
 
-		it('is defined', function () {
+		it('controller is defined', function () {
 			expect(ctrl).toBeDefined();
 		});
 
@@ -50,4 +54,6 @@ define(['app', 'angularAMD', 'controller/main'], function (app, angularAMD) {
 		});
 
 	});
+
+
 });

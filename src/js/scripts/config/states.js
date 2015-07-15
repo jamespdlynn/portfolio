@@ -1,6 +1,6 @@
 /*global define*/
 /**
- * Configuration json containing all states and sub states used by this applications router
+ * Configuration data containing all states and sub states used by this applications router
  * @module config/states
  * @author James Lynn
  */

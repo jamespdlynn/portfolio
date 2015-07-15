@@ -41,7 +41,7 @@ define(['angularAMD', 'config/preload'],function(angularAMD,preload){
 				//Loop through configuration file search for objects with the given group identifier
 				preload.forEach(function(asset){
 					if (asset.group === group){
-						var media = null, defer = $q.defer();
+						var media = null, deferred = $q.defer();
 
 						switch (asset.type){
 
@@ -49,37 +49,38 @@ define(['angularAMD', 'config/preload'],function(angularAMD,preload){
 							case 'module' :
 								require([asset.src], function(res){
 									media = res;
-									defer.resolve();
-								});
+									deferred.resolve();
+								},deferred.reject);
 							break;
 
 							//Load image asset
 							case 'image':
 								media = new Image();
-								media.onload = media.onerror = defer.resolve;
+								media.onload = deferred.resolve;
+								media.onerror = deferred.reject;
 								media.src = asset.src;
 								break;
 
 							//Load audio asset
 							case 'audio':
 								media = new Audio(asset.src);
-								media.addEventListener('loadeddata',  defer.resolve, false);
-								media.addEventListener('error', defer.resolve, false);
+								media.addEventListener('loadeddata',  deferred.resolve, false);
+								media.addEventListener('error', deferred.reject, false);
 
 								// IOS does not let us preload HTML audio objects (LAME)
 								// Use a regular http get call instead so the browser at least caches the data source
-								if ($userAgent.isIOS()){
-									$http.get(asset.src).finally(defer.resolve);
+								if ($userAgent.isIOS() || $userAgent.isPhantomJS()){
+									$http.get(asset.src).then(deferred.resolve,deferred.reject);
 								}
 
 								break;
 
 							//For any other asset just use an http get call and save the returned data in whatever format it comes back in
 							default :
-								$http.get(asset.src).success(function(res){
+								$http.get(asset.src).then(function(res){
 									media = res;
-									defer.resolve();
-								}).error(defer.resolve);
+									deferred.resolve();
+								},deferred.reject);
 								break;
 						}
 
@@ -88,13 +89,12 @@ define(['angularAMD', 'config/preload'],function(angularAMD,preload){
 						assets[asset.id] = asset.cache ? media : asset;
 
 						//Save the asset load callback to the array
-						promiseArray.push(defer.promise);
+						promiseArray.push(deferred.promise);
 					}
 				});
 
 				//Combine all the load promises for the group into a single promise, then save it off and return it
-				promises[group] = $q.all(promiseArray);
-				return promises[group];
+				return (promises[group] = $q.all(promiseArray));
 			},
 
 			/**
@@ -110,7 +110,10 @@ define(['angularAMD', 'config/preload'],function(angularAMD,preload){
 
 				//If array recursively call this function on all its values
 				if (Array.isArray(group)) {
-					group.forEach(this.unload.bind(this));
+					var self = this;
+					group.forEach(function(value){
+						self.unload(value);
+					});
 				}
 				else {
 					preload.forEach(function (data) {

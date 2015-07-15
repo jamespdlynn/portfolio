@@ -1,4 +1,7 @@
-//RequireJS main configuration
+/**
+ * Main RequireJS config file
+ * @author James Lynn
+ */
 require.config({
 	baseUrl: 'js/scripts',
 
@@ -30,7 +33,7 @@ require.config({
 		}
 	},
 
-	deps: ['app'] //Load in app file to kick off application
+	deps: ['app'] //Load in app.js to kick off the angular application
 });
 
 

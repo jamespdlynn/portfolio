@@ -1,4 +1,8 @@
-/*global define, describe, it, expect, beforeEach, beforeAll*/
+/*global define, describe, it, expect, beforeEach, beforeAll, afterEach*/
+ /**
+ * Portfolio Controller Tests
+ * @author James Lynn
+ */
 define(['app', 'angularAMD'], function (app, angularAMD) {
 	'use strict';
 
@@ -7,6 +11,7 @@ define(['app', 'angularAMD'], function (app, angularAMD) {
 
 		var scope, ctrl, state;
 
+		//Load controller module using the preloader
 		beforeAll(function(done){
 			angularAMD.inject(function($preloader){
 				$preloader.load('portfolio').then(done);
@@ -28,7 +33,7 @@ define(['app', 'angularAMD'], function (app, angularAMD) {
 			scope.$destroy();
 		});
 
-		it('is defined', function () {
+		it('controller is defined', function () {
 			expect(ctrl).toBeDefined();
 		});
 

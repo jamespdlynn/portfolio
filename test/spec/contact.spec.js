@@ -1,12 +1,17 @@
 /*global define, describe, it, expect, beforeEach, beforeAll, afterEach*/
+/**
+ * Contact Controller Tests
+ * @author James Lynn
+ */
 define(['app', 'angularAMD'], function (app, angularAMD) {
 	'use strict';
 
 	describe('contact.js', function () {
 		console.log('### Running contact.spec.js: ');
 
-		var scope, ctrl, deferred;
+		var scope, ctrl, httpDeferred;
 
+		//Load controller module through the preloader
 		beforeAll(function(done){
 			angularAMD.inject(function($preloader){
 				$preloader.load('contact').then(done);
@@ -20,9 +25,11 @@ define(['app', 'angularAMD'], function (app, angularAMD) {
 					$scope : scope
 				});
 
-				deferred = $q.defer();
+				//Unfortunately AngularAMD does not play well with Angular Mocks so I don't get access to mock injections like the $httpBackend
+				//Instead I'm overriding the $http services post method, so I can manually resolve or reject its associated promise
+				httpDeferred = $q.defer();
 				$http.post = function(){
-					var promise = deferred.promise;
+					var promise = httpDeferred.promise;
 					promise.success = function(fn){
 						promise.then(fn);
 						return promise;
@@ -37,7 +44,11 @@ define(['app', 'angularAMD'], function (app, angularAMD) {
 			});
 		});
 
-		it('is defined', function () {
+		afterEach(function(){
+			scope.$destroy();
+		});
+
+		it('controller is defined', function () {
 			expect(ctrl).toBeDefined();
 		});
 
@@ -46,27 +57,30 @@ define(['app', 'angularAMD'], function (app, angularAMD) {
 			expect(scope.currentState).toBe(scope.states.DEFAULT);
 		});
 
-		it('validate success', function (done) {
+		it('load state', function () {
 			scope.submit({});
 			expect(scope.currentState).toBe(scope.states.LOADING);
-			deferred.resolve();
-			setTimeout(function(){
+		});
+
+		it('success state', function (done) {
+			scope.submit({});
+
+			httpDeferred.promise.finally(function(){
 				expect(scope.currentState).toBe(scope.states.SUCCESS);
 				done();
-			}, 0);
+			});
+			httpDeferred.resolve();
 		});
 
-		it('validate error', function (done) {
+		it('error state', function (done) {
 			scope.submit({});
-			expect(scope.currentState).toBe(scope.states.LOADING);
-			deferred.reject();
-			setTimeout(function(){
+
+			httpDeferred.promise.finally(function(){
 				expect(scope.currentState).toBe(scope.states.ERROR);
 				done();
-			}, 0);
+			});
+			httpDeferred.reject();
 		});
-
-
 
 	});
 });

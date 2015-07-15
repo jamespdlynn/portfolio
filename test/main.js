@@ -1,10 +1,13 @@
-/*global window*/
+/**
+ * RequireJS Config for Karma Tests
+ * @author James Lynn
+ */
 (function(){
 	'use strict';
 
 	/*
-	 Create list of file to run in test.  Making sure that app_test.js is
-	 always the first to run
+	 Retrieve list of files test files from karma.
+	 Make sure that app_test.js is always the first to run
 	 */
 	var firstFile, firstFileREGEXP = /app\.js$/i,
 		testFiles = [], testFilesREGEXP = /(spec|test)\.js$/i;
@@ -14,7 +17,6 @@
 			if (firstFileREGEXP.test(file)) {
 				firstFile = file;
 			}
-			console.log(file)
 			testFiles.push(file);
 		}
 	});
@@ -58,5 +60,10 @@
 
 		callback: window.__karma__.start
 	});
+
+	//Create dummy Audio object for PhantomJS Browser
+	window.Audio = window.Audio || function(){
+		this.play = this.pause = this.addEventListener = this.removeEventListener = function(){};
+	};
 
 }());
