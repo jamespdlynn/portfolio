@@ -23,7 +23,7 @@ define(['angularAMD','service/preloader','service/userAgent'], function (angular
 		var animations = {
 
 			show: {
-				duration: 900,
+				duration: 1200,
 				audio: $preloader.fetch('bloop')
 			},
 
@@ -33,7 +33,7 @@ define(['angularAMD','service/preloader','service/userAgent'], function (angular
 			},
 
 			hover: {
-				duration: 150,
+				duration: 160,
 				audio: $preloader.fetch('click')
 			}
 		};
@@ -96,7 +96,11 @@ define(['angularAMD','service/preloader','service/userAgent'], function (angular
 						//Originally I was using event callbacks to determine when animations finished
 						//but, while less dynamic, I found using hardcoded durations to be more reliable
 						this._animation = type;
-						this._promise = $timeout(null,animations[type].duration || 0);
+						this._promise = $timeout(function(){
+							$timeout(function(){
+								scope.nav.reset();
+							});
+						},animations[type].duration || 0);
 
 						return this._promise;
 					},
@@ -131,7 +135,8 @@ define(['angularAMD','service/preloader','service/userAgent'], function (angular
 					 * Play sound on hover
 					 */
 					onHover : function(){
-						if (!this.isHidden){
+						console.log(this._animation);
+						if (!this.isHidden && !this._animation){
 							this.animate('hover');
 						}
 					},
