@@ -30,6 +30,7 @@ define(['angularAMD','service/preloader','service/userAgent'], function (angular
 				 * @type {animation}
 				 */
 				var Animations = {
+
 					blink: {duration: 600},
 
 					wave: {duration: 2000},
@@ -39,7 +40,9 @@ define(['angularAMD','service/preloader','service/userAgent'], function (angular
 					walk: {
 						audio: $preloader.fetch('walk'),
 						duration: 2000
-					}
+					},
+
+					exorcist : {duration : 2400}
 				};
 
 				var promise = null;
@@ -165,8 +168,15 @@ define(['angularAMD','service/preloader','service/userAgent'], function (angular
 
 				animateRandom();
 
-				window.avatar = $scope;
+				//Add global function so you can animate from the console
+				window.animate = function(type){
+					$scope.animate(type);
+					$scope.$digest();
+				};
 
+				console.log('Look at you using the developer console, you techno wizard!\n'+
+							'Want to see something scary?\n' +
+							'Type "animate(\'exorcist\');"');
 			}
 
 		};

@@ -24,6 +24,18 @@
   }
 
 
+  &.dance{
+    .animation(dance 0.8s steps(8) 2);
+  }
+
+  &.wave{
+    .animation(wave 1s steps(8) alternate 2);
+  }
+
+  &.exorcist{
+    .animation(exorcist 0.8s steps(8) 3);
+  }
+
   &.walk{
     cursor: default;
 
@@ -42,24 +54,15 @@
     }
   }
 
-  &.dance{
-    .animation(dance 0.8s steps(8) 2);
-  }
-
-  &.wave{
-    .animation(wave 1s steps(8) alternate 2);
-  }
-
-
-
   //Animation keyframes
   .keyframe(blink, {background-position: 0px 0px}, {background-position:-594px 0px});
-  .keyframe(turn, {background-position:-198px -378px}, {background-position:-594px -378px});
-  .keyframe(turnReverse, {background-position:-396px -378px}, {background-position:0 -378px});
+  .keyframe(turn, {background-position:-594px 0px}, {background-position:-990px 0px});
+  .keyframe(turnReverse, {background-position:-792px 0px}, {background-position:-396px 0px});
 
-  .keyframe(walk, {background-position: 0px -756px},{background-position:-1584px -756px});
   .keyframe(dance, {background-position:0px -1134px}, {background-position:-1584px -1134px});
   .keyframe(wave, {background-position: 0px -1512px}, {background-position:-1584px -1512px});
+  .keyframe(exorcist, {background-position: 0px -378px},{background-position:-1584px -378px});
+  .keyframe(walk, {background-position: 0px -756px},{background-position:-1584px -756px});
 
 
   //Phone media styles
