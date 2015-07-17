@@ -64,24 +64,26 @@ define(['angularAMD', 'config/preload','service/userAgent','directive/file'],fun
 							//Load audio asset
 							case 'audio':
 								media = new Audio();
-								media.preload = 'none';
+								media.preload = 'none'; //let us preload manually
 								media.src = asset.src;
 
-								// IOS does not let us preload HTML audio objects (LAME)
-								// Use a regular http get call instead so the browser at least caches the data source
-								if ($userAgent.isIOS() || $userAgent.isPhantomJS()){
+								//For most browsers go a head and do the preload
+								if (!$userAgent.isIOS() && !$userAgent.isPhantomJS()){
+									media.addEventListener('loadeddata',  deferred.resolve, false);
+									media.addEventListener('error', deferred.reject, false);
+									media.load();
+								}
+								// IOS does not let us preload HTML audio objects without a touch event (LAME)
+								else{
+									// Use a regular http get call instead so the browser at least caches the data source
 									$http.get(asset.src).then(deferred.resolve,deferred.reject);
 
+									//Wait for a touch event to fire to preload the audio file
 									var loadAudio = function(){
 										media.load();
 										window.removeEventListener('touchstart', loadAudio);
 									};
 									window.addEventListener('touchstart', loadAudio);
-								}
-								else{
-									media.addEventListener('loadeddata',  deferred.resolve, false);
-									media.addEventListener('error', deferred.reject, false);
-									media.load();
 								}
 
 								break;
@@ -152,6 +154,11 @@ define(['angularAMD', 'config/preload','service/userAgent','directive/file'],fun
 				return assets[id];
 			},
 
+			/**
+			 * Helper play method that only plays the given audio file if given the correct ready state
+			 * @param id {string} Id of the preloaded audio asset to play
+			 * @param force {boolean=false} Set flag to true to play the audio no matter its current state
+			 */
 			play : function(id, force){
 				var audio = assets[id];
 				if (!audio || !audio instanceof Audio || audio.hasError) {
