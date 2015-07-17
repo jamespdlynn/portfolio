@@ -67,11 +67,16 @@ define(['angularAMD', 'config/preload','service/userAgent','directive/file'],fun
 								media.preload = 'none';
 								media.src = asset.src;
 
-
 								// IOS does not let us preload HTML audio objects (LAME)
 								// Use a regular http get call instead so the browser at least caches the data source
 								if ($userAgent.isIOS() || $userAgent.isPhantomJS()){
 									$http.get(asset.src).then(deferred.resolve,deferred.reject);
+
+									var loadAudio = function(){
+										media.load();
+										window.removeEventListener('touchstart', loadAudio);
+									};
+									window.addEventListener('touchstart', loadAudio);
 								}
 								else{
 									media.addEventListener('loadeddata',  deferred.resolve, false);
@@ -147,31 +152,22 @@ define(['angularAMD', 'config/preload','service/userAgent','directive/file'],fun
 				return assets[id];
 			},
 
-			play : function(id){
-
-				var deferred = $q.defer();
-
-				var media = assets[id];
-				if (!media || !media instanceof Audio || media.hasError) {
+			play : function(id, force){
+				var audio = assets[id];
+				if (!audio || !audio instanceof Audio || audio.hasError) {
 					console.error('Cannot play audio: ' + id);
-					deferred.reject();
-				}
-				else {
-					if (media.readyState === 4) {
-						deferred.resolve(media);
-					}
-					else {
-						media.addEventListener('canplaythrough', deferred.resolve.bind(deferred, media), false);
-						media.addEventListener('error', deferred.reject, false);
-					}
-
-					media.play();
+					return;
 				}
 
-				return deferred.promise;
+				if (audio.readyState === 4 || force){
+					audio.play();
+				}
 			}
 
 		};
+
 	});
+
+
 
 });

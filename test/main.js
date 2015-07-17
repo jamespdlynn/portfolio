@@ -63,7 +63,7 @@
 
 	//Create dummy Audio object for PhantomJS Browser
 	window.Audio = window.Audio || function(){
-		this.play = this.pause = this.addEventListener = this.removeEventListener = function(){};
+		this.play = this.pause = this.load = this.addEventListener = this.removeEventListener = function(){};
 		this.readyState = 4;
 	};
 

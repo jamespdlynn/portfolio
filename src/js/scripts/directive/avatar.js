@@ -70,7 +70,7 @@ define(['angularAMD','service/preloader','service/userAgent'], function (angular
 						if ($scope.animation) {
 							var audio = Animations[$scope.animation].audio;
 							//Bug resetting audio on IOS devices
-							if (audio && !audio.ended && !$userAgent.isIOS()) {
+							if (audio && audio.currentTime) {
 								audio.pause();
 								audio.currentTime = 0;
 							}

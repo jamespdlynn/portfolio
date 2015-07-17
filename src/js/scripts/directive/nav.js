@@ -15,7 +15,7 @@ define(['angularAMD','service/preloader','service/userAgent'], function (angular
 
 			scope : true, //Disassociated scope
 
-			controller : function($scope, $timeout, $preloader, $q, $states, $userAgent) {
+			controller : function($scope, $timeout, $preloader, $states, $userAgent) {
 
 				/** @const @readonly {Number} Show/hide transition duration in milliseconds*/
 				var TRANSITION_DURATION = 300;
@@ -34,14 +34,9 @@ define(['angularAMD','service/preloader','service/userAgent'], function (angular
 					 * @returns {Promise}
 					 */
 					hide: function () {
-						var deferred = $q.defer();
-
-						$preloader.play('swoosh').finally(function(){
-							$scope.isHidden = true;
-							$timeout(deferred.resolve, TRANSITION_DURATION);
-						});
-
-						return deferred.promise;
+						$scope.isHidden = true;
+						$preloader.play('swoosh');
+						return $timeout(function(){}, TRANSITION_DURATION);
 					},
 
 					/**
@@ -49,14 +44,9 @@ define(['angularAMD','service/preloader','service/userAgent'], function (angular
 					 * @returns {Promise}
 					 */
 					show: function () {
-						var deferred = $q.defer();
-
-						$preloader.play('bloop').finally(function(){
-							$scope.isHidden = false;
-							$timeout(deferred.resolve, TRANSITION_DURATION);
-						});
-
-						return deferred.promise;
+						$scope.isHidden = false;
+						$preloader.play('bloop');
+						return $timeout(function(){}, TRANSITION_DURATION);
 					},
 
 					/**
@@ -69,7 +59,8 @@ define(['angularAMD','service/preloader','service/userAgent'], function (angular
 
 					onHover: function () {
 						if (!$scope.isHidden && !$userAgent.isMobile()){
-							$preloader.play('click');
+							$preloader.fetch('click').play();
+
 						}
 					},
 

@@ -51,14 +51,12 @@ define(['app', 'angularAMD', 'controller/main'], function (app, angularAMD) {
 			expect(childScope.isHidden).toBe(true);
 		});
 
-		it('isHidden toggles on event', function (done) {
+		it('isHidden toggles on event', function () {
+			childScope.emit(childScope.Events.NAV_TOGGLE);
+			expect(childScope.isHidden).toBe(false);
 
 			childScope.emit(childScope.Events.NAV_TOGGLE);
-			setTimeout(function(){
-				expect(childScope.isHidden).toBe(false);
-				done();
-			}, 50);
-
+			expect(childScope.isHidden).toBe(true);
 		});
 
 		it('toggle avatar event fires on click', function (done) {
