@@ -48,7 +48,7 @@ define(['angularAMD'], function (angularAMD) {
 						object.attr('data', data);
 
 						if ($userAgent.isIOS()){
-						    object.css({'height':'5000px','background':'#fff'});
+						    object.css({'background':'#fff'});
 						}
 
 						//Create a download link to append to the object element, which will only display if the user's browser doesn't have the associated object plugin
