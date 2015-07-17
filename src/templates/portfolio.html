@@ -1,9 +1,9 @@
 <portfolio id="portfolio" class="content">
 
-    <div class="header" mouse-wheel="nav.onScroll($delta, $event.timeStamp)">
+    <div class="header" mouse-wheel="onScroll($delta, $event.timeStamp)">
 
         <slick class="slider"
-               current-index="nav.index"
+               current-index="index"
                speed="500"
                slides-to-show="5"
                center-padding="0"
@@ -15,7 +15,7 @@
                arrows="false"
                on-after-change="audio.play('click')">
 
-            <file src="item.id+'Nav'" ng-repeat="item in nav.items"></file>
+            <file src="item.id+'Nav'" ng-repeat="item in items"></file>
 
         </slick>
 

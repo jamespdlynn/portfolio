@@ -12,14 +12,14 @@ define(['angularAMD', 'angularSlick', 'directive/mouseWheel', 'directive/file'],
 
 		var subStates = $states.find({id:'portfolio'}).states;
 
-		$scope.nav = {
+		angular.extend($scope,{
 
 			//Get the list of substates for the nav to display from the $states constant
 			items : subStates.filter(function(item){
 				return item.navEnabled;
 			}),
 
-			index : 0, //current slick nav index
+			index :0, //current slick nav index
 
 			lastScroll : 0, //Timestamp of last mouse wheel scroll event
 
@@ -31,23 +31,29 @@ define(['angularAMD', 'angularSlick', 'directive/mouseWheel', 'directive/file'],
 			onScroll : function(delta, timeStamp){
 				//Make sure scroll events don't fire faster than the animation time otherwise weird stuff will happen
 				if (timeStamp  - this.lastScroll > 500){
-					$scope.nav.index += delta;
-					$scope.nav.lastScroll = timeStamp;
+					$scope.index += delta;
+					$scope.lastScroll = timeStamp;
 				}
 			}
-		};
+		});
+
+		var getNavIndex = function(){
+	       var item = $scope.items.find({name:$state.current.name});
+	       $scope.index = item ? $scope.items.indexOf(item) : 0;
+        };
+
+		getNavIndex();
 
 		//When the nav index changes (through bidirectional binding or otherwise) tell the U.I router to navigate to the associated state
-		$scope.$watch('nav.index',function(value) {
-			value = Math.abs(value%$scope.nav.items.length);
-			$state.go('^.'+$scope.nav.items[value].id);
+		$scope.$watch('index',function(value) {
+			value = Math.abs(value%$scope.items.length);
+			$state.go('^.'+$scope.items[value].id);
 		});
 
 		// When the U.I router fires a change event, manually update the nav index to that of the new state
-		$scope.$on('$stateChangeSuccess', function(){
-			var item = $scope.nav.items.find({name:$state.current.name});
-			$scope.nav.index = $scope.nav.items.indexOf(item);
-		});
+		$scope.$on('$stateChangeSuccess', getNavIndex);
+
+
 
 	});
 

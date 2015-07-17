@@ -7,148 +7,171 @@
 define(['angularAMD','service/preloader','service/userAgent'], function (angularAMD) {
 	'use strict';
 
-	angularAMD.directive('avatar', function ($timeout, $q, $preloader,$userAgent) {
+	angularAMD.directive('avatar', function () {
 
-		/**
-		 * CSS animation properties
-		 * @typedef {Object} animation
-		 * @property {number} duration - Length of animation
-		 * @property {audio} Audio - The associated audio file
-		 */
-
-		/**
-		 * @readonly
-		 * @type {animation}
-		 */
-		var animations = {
-			blink: {
-				duration: 600
-			},
-
-			wave: {
-				duration: 2000
-			},
-
-			dance: {
-				duration: 1600
-			},
-
-			walk: {
-				audio: $preloader.fetch('walk'),
-				duration: 2000
-			}
-		};
 
 		return {
 			restrict: 'E',
 
-			link: function (scope, element) {
+			//Disassociated scope
+			scope : true,
 
-				//Override the scopes avatar object with additional functionality
-				angular.extend(scope.avatar, {
+			controller : function($scope, $rootScope, $timeout, $preloader, $userAgent) {
 
-					initialized : true,
+				/**
+				 * CSS animation properties
+				 * @typedef {Object} animation
+				 * @property {number} duration - Length of animation
+				 * @property {audio} Audio - The associated audio file
+				 */
 
-					/** @type string **/
-					_animation : null,
+				/**
+				 * @readonly
+				 * @type {animation}
+				 */
+				var Animations = {
+					blink: {duration: 600},
 
-					/** @type object**/
-					_promise : null,
+					wave: {duration: 2000},
+
+					dance: {duration: 1600},
+
+					walk: {
+						audio: $preloader.fetch('walk'),
+						duration: 2000
+					}
+				};
+
+				var promise = null;
+
+				//Every five second execute a random animation
+				var animateRandom = function () {
+					promise = $timeout(function () {
+						//70% chance to blink, 15% chance to wave, 15% chance to dance
+						var num = Math.random();
+						$scope.animate((num >= 0.3 ? 'blink' : (num >= 0.15 ? 'wave' : 'dance')));
+					}, 5000);
+
+					return $scope;
+				};
+
+
+				angular.extend($scope, {
+
+					animation: '',
+
+					isLeft: !$scope.isHome(),
 
 					/**
-					 * Resets the element's current animation clears any associated timers
-					 * @returns {scope.avatar}
+					 * Resets any current animation and associated audio
+					 * @returns $scope
 					 */
 					reset: function () {
-
-						if (this._animation){
-							element.removeClass(this._animation);
-
-							//Pause and reset the audio file if necessary (except in IOS as this was causing a bug)
-							var audio = animations[this._animation].audio;
+						if ($scope.animation) {
+							var audio = Animations[$scope.animation].audio;
+							//Bug resetting audio on IOS devices
 							if (audio && !audio.ended && !$userAgent.isIOS()) {
 								audio.pause();
 								audio.currentTime = 0;
 							}
 						}
 
-						$timeout.cancel(this._promise);
+						$timeout.cancel(promise);
+						$scope.animation = '';
 
-						this._animation = null;
-						this._promise = null;
-
-						return this;
+						return $scope;
 					},
 
 					/**
-					 * Performs associated animation
-					 * @param {string} type
-					 * @returns {*} Promise object
+					 * Sets an animation class on the avatar
+					 * @param type {string} One of the predefined animation types
+					 * @returns {Promise} Object that resolves on animation completion
 					 */
 					animate: function (type) {
-						//Make sure valid type
-						if (!animations.hasOwnProperty(type)){
-							console.error('Invalid animation: ' + type);
+
+						if (!Animations.hasOwnProperty(type)){
+							console.error('Invalid animation: '+type);
 							return null;
 						}
 
-						//Reset current animation
-						this.reset();
+						$scope.reset();
+						$scope.animation = type;
 
-						this._animation = type;
-						element.addClass(type);
-
-						if (animations[type].audio){
-							animations[type].audio.play();
+						if (Animations[type].audio){
+							Animations[type].audio.play();
 						}
 
-						//Originally I was using event callbacks to determine when animations finished
-						//but, while less dynamic, I found using hardcoded durations to be more reliable
-						this._promise = $timeout(function () {
+						//When animation completes reset scope
+						promise = $timeout(function () {
 							$timeout(function(){
-								scope.avatar.animateRandom();
+								$scope.reset();
+								animateRandom();
 							});
-						}, animations[type].duration || 0);
+						}, Animations[type].duration);
 
-						return this._promise;
-					},
-
-					isWalking: function () {
-						return element.hasClass('walk');
+						return promise;
 					},
 
 					/**
-					 * Toggles avatar between left and right
-					 * @returns {*} Promise object
+					 * Animates a walk
+					 * @returns {Promise}
 					 */
 					toggle: function () {
-						element.toggleClass('left');
-						this.isLeft = !this.isLeft;
-						return this.animate('walk');
+						$scope.isLeft = !$scope.isLeft;
+						return $scope.animate('walk');
 					},
 
-					/**
-					 * Every five seconds make the avatar perform a randomly chosen animation
-					 * @returns {scope.avatar}
-					 */
-					animateRandom: function () {
-						this.reset();
-						this._promise = $timeout(function(){
-							var num = Math.random();
-							//70% chance to blink, 15% chance to wave, 15% chance to dance
-							scope.avatar.animate((num >= 0.3 ? 'blink' : (num >= 0.15 ? 'wave' : 'dance')));
-						}, 5000);
 
-						return this;
+					isWalking : function(){
+						return $scope.animation === 'walk';
+					},
+
+					onClick: function () {
+						if ($scope.isWalking()) {
+							return;
+						}
+
+						if ($scope.isLeft) {
+							//animate back to center
+							$scope.toggle().then(function () {
+								$scope.emit($scope.Events.NAV_TOGGLE); //on completion nav show
+							});
+							$scope.goHome(); //trigger state change immediately
+						}
+						else {
+							$scope.emit($scope.Events.NAV_TOGGLE);
+						}
 					}
 
 				});
 
 
-				//Start the random animation timer
-				window.avatar = scope.avatar.animateRandom();
+				$scope.on($scope.Events.AVATAR_TOGGLE, function(event, state){
+					$scope.toggle().then(function(){
+						$scope.goToState(state); //On walk animation completion trigger state change
+					});
+				});
+
+
+				$scope.on($scope.Events.STATE_CHANGE, function(){
+					//If state change does not match avatars current transition state (as in the case of manipulating the state directly through the browser)
+					//Override any current animations and manually position the avatar
+					if ($scope.isHome() === $scope.isLeft){
+						$scope.reset();
+						$scope.isLeft = !$scope.isHome();
+						animateRandom();
+					}
+				});
+
+				animateRandom();
+
+				window.avatar = $scope;
+
 			}
+
 		};
+
+
 	});
 });
 

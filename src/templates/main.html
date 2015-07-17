@@ -1,9 +1,9 @@
-<nav id="nav" ng-class="{hidden:nav.isHidden}">
+<nav id="nav" ng-class="{hidden:isHidden}">
 
     <div class="nav-item"
-         ng-repeat="item in nav.items"
-         ng-click="nav.onClick(item)"
-         ng-mouseenter="nav.onHover(item)">
+         ng-repeat="item in items"
+         ng-click="onClick(item)"
+         ng-mouseenter="onHover(item)">
 
         <div class="bubble" ng-class="{main:$first}" ng-repeat="i in [1,2,3]">
             <div class="label" ng-if="$first">{{item.label}}</div>
@@ -12,6 +12,6 @@
 
 </nav>
 
-<avatar id="avatar" ng-class="{left:avatar.isLeft}" ng-click="avatar.onClick()"></avatar>
+<avatar id="avatar" ng-class="{left:isLeft}" class={{animation}} ng-click="onClick()"></avatar>
 
-<div id="arrow" ng-show="avatar.isLeft" ng-click="avatar.onClick()"></div>
+<div id="arrow" ng-show="isLeft" ng-click="onClick()"></div>

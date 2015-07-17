@@ -3,16 +3,16 @@
     <a file src="'oracle'" href="http://node1.clarusagency.com/roi-calculator/" target="_blank" class="img"></a>
 
     <p>
-        <strong>Oracle's ROI Calculator</strong> is an online marketing tool used to demonstrate the potential savings of their automation platform.
+        <strong>Oracle's ROI Calculator</strong> is an online marketing tool used to demonstrate the potential savings of Oracle's automation platform.
     </p>
     <p>
-        The app is one of multiple single page applications hosted on an in-house NodeJS RackSpace server, each of which are IFramed into Oracle's pages as needed.
+        The app is one of multiple single page applications hosted on an in-house NodeJS RackSpace server, each of which are IFramed onto Oracle's hosted web pages at their own behest.
         I implemented this app's design by using as few flat image files as possible, instead opting for modern CSS3 techniques to draw the unique component shapes and shadows.
         This allowed for not only a quicker page load, but also a more responsive display that works well at both desktop and tablet resolutions.
     </p>
     <p>
         In order to convert the dynamic page output into a downloadable PDF, I had a NodeJS endpoint use the client sent POST data to render and save a temporary static HTML page on the server. A separate <a href="http://phantomjs.org/" target="_blank">PhantomJS</a> process
-        is then kicked off to capture this HTML as in PDF format; the result of which returned in binary as the response to the initial POST request through a mixture inter process watchers and callbacks.
+        is then kicked off to capture this HTML in PDF format. Te result of this capture is returned in binary as the response to the initial POST request using a mixture inter process watchers and callbacks.
     </p>
     <p class="footer">
         <a href="http://node1.clarusagency.com/roi-calculator/" class="btn btn-primary btn-lg" target="_blank">View Website</a>

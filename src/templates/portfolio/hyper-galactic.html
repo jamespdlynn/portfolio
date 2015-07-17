@@ -5,18 +5,17 @@
     <p>
         <strong>Hyper Galactic</strong> is a real-time 2D space shooter MMO that supports hundreds of simultaneous users and is playable directly in modern browsers.
         The game originally began as a tech demo for a <a href="https://www.npmjs.com/package/microjs" target="_blank">binary protocol buffer</a> javascript library I wrote, but
-        proved interesting enough that I over time evolved it into a standalone entity.
+        proved interesting enough that I gradually evolved it into a standalone entity.
     </p>
     <p>
         The game's HTML 5 client communicates with the Node.js server through low level binary web sockets. A major benefit to using Node.js here, aside from
-        its inherent advantages for real time applications, is by utilizing RequireJS modules one can share javascript code between the client and server. This allows for certain logic,
+        its inherent advantages for bidirectional data transfer, is by utilizing AMD modules I can share reuse the same javascript code on the client and server. This allows for certain logic,
         such as the physics engine, to be leveraged by both ends, removing the need for duplicate code or overly chatty positioning communication.
+    </p>
+    <p>
         Apart from the <a href="http://www.createjs.com/" target="_blank">createjs suite</a>, which I leveraged to help with some of the more common HTML5 gaming elements, the entire game was
         built from a relatively low level with few third party libraries. This allowed me both more fine-grained control and to better understand some core concepts of real time gaming,
         such as dead reckoning and zonal collision detection.
-    </p>
-    <p>
-        I recently added a user database coupled with Facebook and Google authentication to allow for persistent leaderboard, and perhaps set the stage for integrating some RPG elements in the future.
     </p>
     <p class="footer">
         <a href="http://hypergalactic.net" class="btn btn-primary btn-lg" target="_blank">View Website</a>

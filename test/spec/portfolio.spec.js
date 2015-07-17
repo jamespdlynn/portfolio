@@ -38,16 +38,16 @@ define(['app', 'angularAMD'], function (app, angularAMD) {
 		});
 
 		it('default scope values', function () {
-			expect(scope.nav.items).toBeDefined();
-			expect(scope.nav.items.length).toBeGreaterThan(0);
-			expect(scope.nav.index).toBe(0);
+			expect(scope.items).toBeDefined();
+			expect(scope.items.length).toBeGreaterThan(0);
+			expect(scope.index).toBe(0);
 		});
 
 		it('nav index change', function () {
-			scope.nav.items.forEach(function(item, index){
+			scope.items.forEach(function(item, index){
 				state.current = item;
 				scope.$broadcast('$stateChangeSuccess');
-				expect(scope.nav.index).toBe(index);
+				expect(scope.index).toBe(index);
 			});
 		});
 

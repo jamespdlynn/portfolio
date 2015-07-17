@@ -7,82 +7,40 @@
 define(['angularAMD', 'directive/avatar', 'directive/nav'], function (angularAMD) {
 	'use strict';
 
-	angularAMD.controller('MainController', function($scope, $state, $states, $preloader){
+	angularAMD.controller('MainController', function($scope, $state){
 
-		/*
-		   Because the a lot of the DOM animations need to be sequenced
-		   the avatar and nav directives will actually override their section of the scope
-		   with functions and associated callbacks for the controller to call.
-		   This is kind of ugly and unangular but it works and it allows me to clump the overhead logic all in one file.
-		*/
+		//Below are inheritable functions that can be used by any of this controller's child directives
 
-		$scope.avatar = {
-
-			initialized : false, //set to true once directive overrides scopes functionality
-
-			isLeft : !!($state.current.templateUrl || $state.current.template), //Left if current state has a template, center otherwise
-
-			onClick : function(){
-				if (!this.isWalking()){
-
-					if (this.isLeft){
-						//animate back to center
-						this.toggle().then(function(){
-							$scope.nav.show();
-						});
-						$state.go('home'); //trigger state change immediately
-					}
-					else{
-						$scope.nav.toggle();
-					}
-
-				}
-			}
+		$scope.isHome = function(){
+			return !$state.current.name || $state.current.name === 'home';
 		};
 
-		$scope.nav = {
-
-			initialized : false, //set to true once directive overrides scopes functionality
-
-			isHidden : true, //Nav starts as hidden
-
-			//Get the list of states for the nav to display from the $states constant
-			items :  $states.filter(function(value){
-				return value.navEnabled;
-			}),
-
-			/** @param {state} state */
-			onClick : function(state){
-				if (!this.isHidden){
-					//Trigger animation change
-					this.hide().then(function(){
-						return $scope.avatar.toggle();
-					})
-					//Wait until animation is finished to change state
-					.then(function(){
-						//Have to alter the state by directly manipulating the browser location since changing to an abstract state throws a ui router error
-						window.location = '/#'+state.url;
-					});
-
-					//Get ahead start on preloading this state's assets
-					$preloader.load(state.id);
-				}
-			}
+		$scope.goHome = function(){
+			$state.go('home');
 		};
 
-		//Listen for a state change from the router to manually change the avatar's current position
-		$scope.$on('$stateChangeSuccess', function(){
-			var isLeft = !!($state.current.templateUrl || $state.current.template);
+		$scope.goToState = function(state){
+			//Have to manually modify the windows url in order to transition to abstract states
+			state = state || {};
+			state.url = state.url || '';
+			window.location = '/#'+state.url;
+		};
 
-			//Had to do some a bit hacky DOM manipulation here to make sure avatar animation resets
-			if ($scope.avatar.initialized && isLeft !== $scope.avatar.isLeft){
-				$scope.avatar.animateRandom();
-			}
+		//These helper functions allow events to be broadcast and received on this hierarchical level of the scope chain
+		$scope.on = $scope.$on.bind($scope);
 
-			$scope.avatar.isLeft = isLeft;
-			$scope.nav.isHidden = true;
-		});
+		$scope.emit = $scope.$emit.bind($scope);
 
+		/**
+		 * Hardcoded event types
+		 * @enum {string}
+		 * @readonly
+		 */
+		$scope.Events = {
+			STATE_CHANGE : '$stateChangeSuccess',
+			AVATAR_TOGGLE : '$avatarToggle',
+			NAV_TOGGLE : '$navToggle'
+		};
 
 	});
 });

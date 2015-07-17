@@ -4,7 +4,7 @@
  * @module service/preloader
  * @author James Lynn
  */
-define(['angularAMD', 'config/preload', 'directive/file'],function(angularAMD,preload){
+define(['angularAMD', 'config/preload','service/userAgent','directive/file'],function(angularAMD,preload){
 	'use strict';
 
 	angularAMD.service('$preloader',function($q, $http, $userAgent){

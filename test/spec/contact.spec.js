@@ -1,4 +1,4 @@
-/*global define, describe, it, expect, beforeEach, beforeAll, afterEach*/
+/*global define, describe, it, expect, beforeEach, beforeAll, afterEach, spyOn*/
 /**
  * Contact Controller Tests
  * @author James Lynn
@@ -26,21 +26,18 @@ define(['app', 'angularAMD'], function (app, angularAMD) {
 				});
 
 				//Unfortunately AngularAMD does not play well with Angular Mocks so I don't get access to mock injections like the $httpBackend
-				//Instead I'm overriding the $http services post method, so I can manually resolve or reject its associated promise
+				//Instead I'm overriding the $http services post return value, so I can manually resolve or reject its associated promise
 				httpDeferred = $q.defer();
-				$http.post = function(){
-					var promise = httpDeferred.promise;
-					promise.success = function(fn){
-						promise.then(fn);
-						return promise;
-					};
-					promise.error = function(fn){
-						promise.then(null, fn);
-						return promise;
-					};
+				var promise = httpDeferred.promise;
+				promise.success = function(fn){
+					promise.then(fn);
 					return promise;
 				};
-
+				promise.error = function(fn){
+					promise.then(null, fn);
+					return promise;
+				};
+				spyOn($http, 'post').and.returnValue(promise);
 			});
 		});
 

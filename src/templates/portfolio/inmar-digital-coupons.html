@@ -9,11 +9,11 @@
         <p>
             The API middleware was developed to mitigate the slowness and hassle of retrieving coupon data from Inmar's legacy DNP servers.
             The middleware is built using NodeJS and the restify module. A nightly process on the server downloads retailer specific Digital Coupon data en bulk, and parses
-            it into a local NoSQL Mongo database. API GET requests then query directly against this data cache, while POST requests (a.k.a coupon clip calls) function simply as pass throughs to the DPN.
+            it into a local NoSQL Mongo database. API GET requests from the client then query directly against this data cache, while POST requests (a.k.a coupon clip calls) function simply as pass throughs to the DPN.
         </p>
         <p>
-           The client application is built using the Backbone Marionette MVC framework along with the RequireJS and Bootstrap libraries. It consists of a homepage used to view and clip coupons,
-            a "wallet" used to view and check off your clipped coupons, and a "savings" page that details your spending habits. All communication between the client and server is asynchrnous.
+           The client application is built using the Backbone Marionette MVC framework coupled with RequireJS and Bootstrap. It consists of a homepage used to search for and clip coupons,
+            a "wallet" used to view and check off the coupons you've clipped, and a "savings" page that details your spending habits. All communication between the client and server is asynchronous.
         </p>
     <p class="footer">
         <a href="http://www.lowesfoods.com/specialoffers/digital-coupons/" class="btn btn-primary btn-lg" target="_blank">View Website</a>
