@@ -59,8 +59,7 @@ define(['angularAMD','service/preloader','service/userAgent'], function (angular
 
 					onHover: function () {
 						if (!$scope.isHidden && !$userAgent.isMobile()){
-							$preloader.fetch('click').play();
-
+							$preloader.play('click');
 						}
 					},
 
