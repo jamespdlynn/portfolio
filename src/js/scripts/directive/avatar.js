@@ -16,7 +16,7 @@ define(['angularAMD','service/preloader','service/userAgent'], function (angular
 			//Disassociated scope
 			scope : true,
 
-			controller : function($scope, $rootScope, $timeout, $preloader, $userAgent) {
+			controller : function($scope, $rootScope, $timeout, $preloader) {
 
 				/**
 				 * CSS animation properties

@@ -7,7 +7,7 @@
 define(['angularAMD'], function (angularAMD) {
 	'use strict';
 
-	angularAMD.directive('file', function($preloader) {
+	angularAMD.directive('file', function($preloader, $userAgent) {
 
 		return {
 
@@ -47,9 +47,9 @@ define(['angularAMD'], function (angularAMD) {
 						object = angular.element(document.createElement('object'));
 						object.attr('data', data);
 
-						/*if ($userAgent.isIOS()){
-						 object.css({'height':'auto','background':'#fff'});
-						 }*/
+						if ($userAgent.isIOS()){
+						    object.css({'height':'5000px','background':'#fff'});
+						}
 
 						//Create a download link to append to the object element, which will only display if the user's browser doesn't have the associated object plugin
 						link = angular.element(document.createElement('a'));
