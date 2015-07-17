@@ -64,9 +64,10 @@
 	//Create dummy Audio object for PhantomJS Browser
 	window.Audio = window.Audio || function(){
 		this.play = this.pause = this.addEventListener = this.removeEventListener = function(){};
+		this.readyState = 4;
 	};
 
-	//
+	/* jshint ignore:start */
 	Function.prototype.bind = Function.prototype.bind || function(oThis) {
 		if (typeof this !== 'function') {
 			// closest thing possible to the ECMAScript 5
@@ -89,5 +90,6 @@
 
 		return fBound;
 	};
+	/* jshint ignore:end */
 
 }());
