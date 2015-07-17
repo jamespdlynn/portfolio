@@ -45,7 +45,12 @@ define(['angularAMD'], function (angularAMD) {
 
 						//Create an html object element used to embed this data
 						object = angular.element(document.createElement('object'));
-						object.attr('data', data);
+
+						//Embedding files is jacked on IOS so just use the download link instead
+						if (!$userAgent.isIOS()){
+							object.attr('data', data);
+						}
+
 
 						//Create a download link to append to the object element, which will only display if the user's browser doesn't have the associated object plugin
 						link = angular.element(document.createElement('a'));
@@ -54,11 +59,6 @@ define(['angularAMD'], function (angularAMD) {
 						link.text('Download');
 
 						object.append(link);
-
-						//Embedding files is jacked on IOS so just use the download link instead
-						if ($userAgent.isIOS()){
-							object = link;
-						}
 
 						element.empty().append(object);
 					}
