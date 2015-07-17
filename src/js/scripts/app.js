@@ -71,19 +71,9 @@ define(['angularAMD','config/states', 'service/preloader','controller/main','ang
 
 	app.run(function($rootScope, $preloader){
 
-		//Attach some helper functions to the root scope to allow templates to manipulate preloaded audio files
-		$rootScope.audio = {
-			play : function(id){
-				$preloader.fetch(id).play();
-			},
-			pause : function(id){
-				$preloader.fetch(id).play();
-			}
-		};
-
+		//Wait for main assets to load and the initial state to initialize before allowing user interaction with the app
 		$rootScope.initialized = false;
 
-		//Wait for main assets to load and the initial state to initialize before allowing user interaction with the app
 		var promise = $preloader.load('main');
 		$rootScope.$on('$stateChangeSuccess', function(){
 			promise.finally(function(){

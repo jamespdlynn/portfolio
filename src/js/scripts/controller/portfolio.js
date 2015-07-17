@@ -5,14 +5,16 @@
  * @author James Lynn
  */
 //Dynamically bootstrap the angular slick module used for this state's navigation
-define(['angularAMD', 'angularSlick', 'directive/mouseWheel', 'directive/file'], function (angularAMD) {
+define(['angularAMD', 'angularSlick', 'service/preloader', 'directive/mouseWheel', 'directive/file'], function (angularAMD) {
 	'use strict';
 
-	angularAMD.controller('PortfolioController', function($scope, $state, $states) {
+	angularAMD.controller('PortfolioController', function($scope, $state, $states, $preloader) {
 
 		var subStates = $states.find({id:'portfolio'}).states;
 
 		angular.extend($scope,{
+
+		  initialized : false,
 
 			//Get the list of substates for the nav to display from the $states constant
 			items : subStates.filter(function(item){
@@ -34,15 +36,25 @@ define(['angularAMD', 'angularSlick', 'directive/mouseWheel', 'directive/file'],
 					$scope.index += delta;
 					$scope.lastScroll = timeStamp;
 				}
+			},
+
+			onChange : function(){
+				if ($scope.initialized){
+					$preloader.play('click');
+				}
+				$scope.initialized = true;
 			}
 		});
 
 		var getNavIndex = function(){
 	       var item = $scope.items.find({name:$state.current.name});
 	       $scope.index = item ? $scope.items.indexOf(item) : 0;
-        };
+    };
 
 		getNavIndex();
+
+		// When the U.I router fires a change event, manually update the nav index to that of the new state
+    $scope.$on('$stateChangeSuccess', getNavIndex);
 
 		//When the nav index changes (through bidirectional binding or otherwise) tell the U.I router to navigate to the associated state
 		$scope.$watch('index',function(value) {
@@ -50,8 +62,7 @@ define(['angularAMD', 'angularSlick', 'directive/mouseWheel', 'directive/file'],
 			$state.go('^.'+$scope.items[value].id);
 		});
 
-		// When the U.I router fires a change event, manually update the nav index to that of the new state
-		$scope.$on('$stateChangeSuccess', getNavIndex);
+
 
 
 

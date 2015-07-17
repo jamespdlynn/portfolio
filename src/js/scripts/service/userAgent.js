@@ -13,7 +13,6 @@ define(['angularAMD'],function(angularAMD){
 
 		return {
 
-
 			isFirefox : function(){
 				return ua.match(/Firefox/g);
 			},
@@ -30,16 +29,28 @@ define(['angularAMD'],function(angularAMD){
 				return ua.match(/NET4|Trident|MSIE/g);
 			},
 
+			isPhantomJS : function(){
+				return ua.match(/PhantomJS/g);
+			},
+
 			isAndroid : function(){
 				return ua.match(/Android/g);
+			},
+
+			isBlackberry: function(){
+				return ua.match(/BlackBerry/i);
+			},
+
+			isWindowsPhone : function(){
+				return ua.match(/Windows Phone/i);
 			},
 
 			isIOS : function(){
 				return ua.match(/iPad|iPhone|iPod/g);
 			},
 
-			isPhantomJS : function(){
-				return ua.match(/PhantomJS/g);
+			isMobile : function(){
+				return this.isAndroid() || this.isBlackberry() || this.isWindowsPhone() || this.isIOS();
 			}
 
 		};

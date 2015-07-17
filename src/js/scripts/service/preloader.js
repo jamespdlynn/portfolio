@@ -63,14 +63,20 @@ define(['angularAMD', 'config/preload','service/userAgent','directive/file'],fun
 
 							//Load audio asset
 							case 'audio':
-								media = new Audio(asset.src);
-								media.addEventListener('loadeddata',  deferred.resolve, false);
-								media.addEventListener('error', deferred.reject, false);
+								media = new Audio();
+								media.preload = 'none';
+								media.src = asset.src;
+
 
 								// IOS does not let us preload HTML audio objects (LAME)
 								// Use a regular http get call instead so the browser at least caches the data source
 								if ($userAgent.isIOS() || $userAgent.isPhantomJS()){
 									$http.get(asset.src).then(deferred.resolve,deferred.reject);
+								}
+								else{
+									media.addEventListener('loadeddata',  deferred.resolve, false);
+									media.addEventListener('error', deferred.reject, false);
+									media.load();
 								}
 
 								break;
@@ -87,6 +93,11 @@ define(['angularAMD', 'config/preload','service/userAgent','directive/file'],fun
 						//If cache is set to true store off the actual JS Module, DOM object, or server return value
 						//Otherwise just store the configuration object
 						assets[asset.id] = asset.cache ? media : asset;
+
+						deferred.promise.then(null, function(){
+							console.error('Error loading asset "'+asset.id+'"');
+							assets[asset.id].hasError = true;
+						});
 
 						//Save the asset load callback to the array
 						promiseArray.push(deferred.promise);
@@ -134,6 +145,30 @@ define(['angularAMD', 'config/preload','service/userAgent','directive/file'],fun
 			 */
 			fetch : function(id){
 				return assets[id];
+			},
+
+			play : function(id){
+
+				var deferred = $q.defer();
+
+				var media = assets[id];
+				if (!media || !media instanceof Audio || media.hasError) {
+					console.error('Cannot play audio: ' + id);
+					deferred.reject();
+				}
+				else {
+					if (media.readyState === 4) {
+						deferred.resolve(media);
+					}
+					else {
+						media.addEventListener('canplaythrough', deferred.resolve.bind(deferred, media), false);
+						media.addEventListener('error', deferred.reject, false);
+					}
+
+					media.play();
+				}
+
+				return deferred.promise;
 			}
 
 		};
