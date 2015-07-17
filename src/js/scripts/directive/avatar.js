@@ -42,7 +42,11 @@ define(['angularAMD','service/preloader','service/userAgent'], function (angular
 						duration: 2000
 					},
 
-					exorcist : {duration : 2400}
+					exorcist : {
+						audio : $preloader.fetch('scream'),
+						duration : 2400
+					}
+
 				};
 
 				var promise = null;
