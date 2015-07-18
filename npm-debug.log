@@ -1,25 +1,29 @@
 0 info it worked if it ends with ok
 1 verbose cli [ 'C:\\Program Files\\nodejs\\\\node.exe',
 1 verbose cli   'C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
-1 verbose cli   'install',
-1 verbose cli   '--save-dev',
-1 verbose cli   'grunt-contrib-less' ]
+1 verbose cli   'start' ]
 2 info using npm@1.4.28
 3 info using node@v0.10.33
 4 verbose node symlink C:\Program Files\nodejs\\node.exe
-5 error Failed to parse json
-5 error Unexpected token /
-6 error File: D:\Working\portfolio\package.json
-7 error Failed to parse package.json data.
-7 error package.json must be actual JSON, not just JavaScript.
-7 error
-7 error This is not a bug in npm.
-7 error Tell the package author to fix their package.json file. JSON.parse
-8 error System Windows_NT 6.2.9200
-9 error command "C:\\Program Files\\nodejs\\\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "install" "--save-dev" "grunt-contrib-less"
-10 error cwd D:\Working\portfolio
-11 error node -v v0.10.33
-12 error npm -v 1.4.28
-13 error file D:\Working\portfolio\package.json
-14 error code EJSONPARSE
-15 verbose exit [ 1, true ]
+5 verbose run-script [ 'prestart', 'start', 'poststart' ]
+6 info prestart portfolio@1.0.0
+7 info start portfolio@1.0.0
+8 verbose unsafe-perm in lifecycle true
+9 info portfolio@1.0.0 Failed to exec start script
+10 error portfolio@1.0.0 start: `node server.js`
+10 error Exit status 8
+11 error Failed at the portfolio@1.0.0 start script.
+11 error This is most likely a problem with the portfolio package,
+11 error not with npm itself.
+11 error Tell the author that this fails on your system:
+11 error     node server.js
+11 error You can get their info via:
+11 error     npm owner ls portfolio
+11 error There is likely additional logging output above.
+12 error System Windows_NT 6.2.9200
+13 error command "C:\\Program Files\\nodejs\\\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "start"
+14 error cwd D:\Working\portfolio
+15 error node -v v0.10.33
+16 error npm -v 1.4.28
+17 error code ELIFECYCLE
+18 verbose exit [ 1, true ]

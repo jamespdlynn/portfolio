@@ -178,27 +178,12 @@ define(['angularAMD','service/preloader','service/userAgent'], function (angular
 					$scope.$digest();
 				};
 
-			},
-
-			link : function(scope, element){
-
-				//Easter Egg!
-				element.on('touchstart', function(){
-					//Easter egg
-					var timeout = setTimeout(function(){
-						window.animate('exorcist');
-					}, 6000);
-
-					element.on('touchend touchcancel', function(){
-						clearTimeout(timeout);
-					});
-				});
-
 				console.log(
 					'Look at you using the developer console, you techno wizard!\n'+
 					'Want to see something scary?\n' +
 					'Type "animate(\'exorcist\');"'
 				);
+
 			}
 
 		};
