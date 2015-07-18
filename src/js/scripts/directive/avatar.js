@@ -181,14 +181,15 @@ define(['angularAMD','service/preloader','service/userAgent'], function (angular
 			},
 
 			link : function(scope, element){
+
 				//Easter Egg!
-				element.on('mousedown', function(){
+				element.on('touchstart', function(){
 					//Easter egg
 					var timeout = setTimeout(function(){
 						window.animate('exorcist');
-					}, 7500);
+					}, 6000);
 
-					element.on('mouseup mouseout', function(){
+					element.on('touchend touchcancel', function(){
 						clearTimeout(timeout);
 					});
 				});
