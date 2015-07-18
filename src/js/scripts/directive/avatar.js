@@ -178,12 +178,31 @@ define(['angularAMD','service/preloader','service/userAgent'], function (angular
 					$scope.$digest();
 				};
 
-				console.log('Look at you using the developer console, you techno wizard!\n'+
-							'Want to see something scary?\n' +
-							'Type "animate(\'exorcist\');"');
+			},
+
+			link : function(scope, element){
+				//Easter Egg!
+				element.on('mousedown', function(){
+					//Easter egg
+					var timeout = setTimeout(function(){
+						window.animate('exorcist');
+					}, 7500);
+
+					element.on('mouseup mouseout', function(){
+						clearTimeout(timeout);
+					});
+				});
+
+				console.log(
+					'Look at you using the developer console, you techno wizard!\n'+
+					'Want to see something scary?\n' +
+					'Type "animate(\'exorcist\');"'
+				);
 			}
 
 		};
+
+
 
 
 	});
