@@ -10,6 +10,20 @@ html, body{
   overflow: hidden;
 }
 
+#source{
+  position: fixed;
+  left : 15px;
+  top : 15px;
+  z-index: 5;
+  text-decoration: none;
+  font-weight: bold;
+  font-family: "Droid Sans Mono", Menlo, Monaco, monospace Arial sans-serif;
+
+  @media (max-width: @screen-phone) {
+    display: none;
+  }
+}
+
 #loader{
   position: fixed;
   left: 0;  right: 0;  bottom: 0;  top: 20%;

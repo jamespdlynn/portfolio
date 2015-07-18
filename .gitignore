@@ -4,3 +4,4 @@ node_modules/*
 style.css
 dist/*
 build
+*.log

@@ -32,12 +32,30 @@
 <body>
 
 <div id="background">
-    <div class="cloud" ng-repeat="i in [1,2,3, 4,5]" ng-if="initialized"></div>
+
+    <div class="cloud"
+         ng-repeat="i in [1,2,3, 4,5]"
+         ng-if="initialized">
+      </div>
+
 </div>
 
-<main id="main" ng-controller="MainController" ng-include="'templates/main.html'" ng-if="initialized"></main>
+<main id="main"
+      ng-controller="MainController"
+      ng-include="'templates/main.html'" ng-if="initialized">
+</main>
 
-<ui-view id="view" ng-if="initialized"></ui-view>
+<ui-view id="view"
+         ng-if="initialized">
+ </ui-view>
+
+<a id="source"
+   href="https://github.com/jamespdlynn/portfolio"
+   target="_blank"
+   class="btn btn-sm btn-primary"
+   ng-if="initialized">
+    Source Code
+</a>
 
 <div id="loader" ng-if="!initialized"></div>
 
