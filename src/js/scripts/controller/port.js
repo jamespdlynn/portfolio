@@ -14,8 +14,6 @@ define(['angularAMD', 'angularSlick', 'service/preloader', 'directive/mouseWheel
 
 		angular.extend($scope, {
 
-			initialized: false,
-
 			//Get the list of substates for the nav to display from the $states constant
 			items: subStates.filter(function (item) {
 				return item.navEnabled;
@@ -39,10 +37,7 @@ define(['angularAMD', 'angularSlick', 'service/preloader', 'directive/mouseWheel
 			},
 
 			onChange: function () {
-				if ($scope.initialized) {
-					$preloader.play('click');
-				}
-				$scope.initialized = true;
+				$preloader.play('click');
 			}
 		});
 
