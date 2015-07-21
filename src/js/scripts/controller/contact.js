@@ -33,7 +33,7 @@ define(['angularAMD'], function (angularAMD) {
 
 				success(function () {
 					$scope.currentState = states.SUCCESS;
-					$preloader.play('mail', true);
+					$preloader.play('mail');
 				}).
 
 				error(function () {

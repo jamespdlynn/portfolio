@@ -91,7 +91,7 @@ define(['angularAMD', 'config/preload', 'service/userAgent', 'directive/file'], 
 							//For any other asset just use an http get call and save the returned data in whatever format it comes back in
 							default :
 								$http.get(asset.src).then(function (res) {
-									media = res;
+									media = res.data;
 									deferred.resolve();
 								}, deferred.reject);
 								break;
@@ -154,20 +154,17 @@ define(['angularAMD', 'config/preload', 'service/userAgent', 'directive/file'], 
 			},
 
 			/**
-			 * Helper play method that only plays the given audio file if given the correct ready state
+			 * Helper play method that only plays the given audio file
 			 * @param id {string} Id of the preloaded audio asset to play
-			 * @param force {boolean=false} Set flag to true to play the audio no matter its current state
 			 */
-			play: function (id, force) {
+			play: function (id) {
 				var audio = assets[id];
 				if (!audio || !audio instanceof Audio || audio.hasError) {
 					console.error('Cannot play audio: ' + id);
 					return;
 				}
 
-				if (audio.readyState === 4 || force) {
-					audio.play();
-				}
+				audio.play();
 			}
 
 		};
