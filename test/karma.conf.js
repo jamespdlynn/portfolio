@@ -19,19 +19,17 @@ module.exports = function (config) {
 			{pattern: 'src/js/lib/**/*.js', included: false},
 			{pattern: 'src/js/scripts/**/*.js', included: false},
 			{pattern: 'src/templates/**/*.html', included: false},
-			{pattern: 'src/assets/**/*', included:false},
+			{pattern: 'src/assets/**/*', included: false},
 			{pattern: 'test/spec/**/*.js', included: false},
 			{pattern: 'test/main.js', included: true}
 		],
 
 		// list of files to exclude
-		exclude: [
-		],
+		exclude: [],
 
 		// preprocess matching files before serving them to the browser
 		// available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
-		preprocessors: {
-		},
+		preprocessors: {},
 
 		// test results reporter to use
 		// possible values: 'dots', 'progress'

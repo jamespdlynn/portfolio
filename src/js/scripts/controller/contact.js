@@ -8,14 +8,14 @@ define(['angularAMD'], function (angularAMD) {
 	'use strict';
 
 	/**@readdonly *@enum {number} */
-	var states =  {
-		DEFAULT : 0,
-		LOADING : 1,
-		SUCCESS : 2,
-		ERROR : 3
+	var states = {
+		DEFAULT: 0,
+		LOADING: 1,
+		SUCCESS: 2,
+		ERROR: 3
 	};
 
-	angularAMD.controller('ContactController', function($scope, $http, $preloader) {
+	angularAMD.controller('ContactController', function ($scope, $http, $preloader) {
 
 		//Initialize scope variables
 		$scope.states = states;
@@ -25,18 +25,18 @@ define(['angularAMD'], function (angularAMD) {
 		 * On form submit
 		 * @param data Form json data
 		 */
-		$scope.submit = function(data){
+		$scope.submit = function (data) {
 
 			$scope.currentState = states.LOADING;
 
 			$http.post('/mail', data).
 
-				success(function(){
+				success(function () {
 					$scope.currentState = states.SUCCESS;
-					$preloader.play('mail',true);
+					$preloader.play('mail', true);
 				}).
 
-				error(function(){
+				error(function () {
 					$scope.currentState = states.ERROR;
 				});
 		};

@@ -4,19 +4,18 @@
  * @module directive/avatar
  * @author James Lynn
  */
-define(['angularAMD','service/preloader','service/userAgent'], function (angularAMD) {
+define(['angularAMD', 'service/preloader', 'service/userAgent'], function (angularAMD) {
 	'use strict';
 
 	angularAMD.directive('avatar', function () {
-
 
 		return {
 			restrict: 'E',
 
 			//Disassociated scope
-			scope : true,
+			scope: true,
 
-			controller : function($scope, $rootScope, $timeout, $preloader) {
+			controller: function ($scope, $rootScope, $timeout, $preloader) {
 
 				/**
 				 * CSS animation properties
@@ -42,9 +41,9 @@ define(['angularAMD','service/preloader','service/userAgent'], function (angular
 						duration: 2000
 					},
 
-					exorcist : {
-						audio : $preloader.fetch('scream'),
-						duration : 2400
+					exorcist: {
+						audio: $preloader.fetch('scream'),
+						duration: 2400
 					}
 
 				};
@@ -61,7 +60,6 @@ define(['angularAMD','service/preloader','service/userAgent'], function (angular
 
 					return $scope;
 				};
-
 
 				angular.extend($scope, {
 
@@ -96,21 +94,21 @@ define(['angularAMD','service/preloader','service/userAgent'], function (angular
 					 */
 					animate: function (type) {
 
-						if (!Animations.hasOwnProperty(type)){
-							console.error('Invalid animation: '+type);
+						if (!Animations.hasOwnProperty(type)) {
+							console.error('Invalid animation: ' + type);
 							return null;
 						}
 
 						$scope.reset();
 						$scope.animation = type;
 
-						if (Animations[type].audio){
+						if (Animations[type].audio) {
 							Animations[type].audio.play();
 						}
 
 						//When animation completes reset scope
 						promise = $timeout(function () {
-							$timeout(function(){
+							$timeout(function () {
 								$scope.reset();
 								animateRandom();
 							});
@@ -128,8 +126,7 @@ define(['angularAMD','service/preloader','service/userAgent'], function (angular
 						return $scope.animate('walk');
 					},
 
-
-					isWalking : function(){
+					isWalking: function () {
 						return $scope.animation === 'walk';
 					},
 
@@ -152,18 +149,16 @@ define(['angularAMD','service/preloader','service/userAgent'], function (angular
 
 				});
 
-
-				$scope.on($scope.Events.AVATAR_TOGGLE, function(event, state){
-					$scope.toggle().then(function(){
+				$scope.on($scope.Events.AVATAR_TOGGLE, function (event, state) {
+					$scope.toggle().then(function () {
 						$scope.goToState(state); //On walk animation completion trigger state change
 					});
 				});
 
-
-				$scope.on($scope.Events.STATE_CHANGE, function(){
+				$scope.on($scope.Events.STATE_CHANGE, function () {
 					//If state change does not match avatars current transition state (as in the case of manipulating the state directly through the browser)
 					//Override any current animations and manually position the avatar
-					if ($scope.isHome() === $scope.isLeft){
+					if ($scope.isHome() === $scope.isLeft) {
 						$scope.reset();
 						$scope.isLeft = !$scope.isHome();
 						animateRandom();
@@ -173,13 +168,13 @@ define(['angularAMD','service/preloader','service/userAgent'], function (angular
 				animateRandom();
 
 				//Add global function so you can animate from the console
-				window.animate = function(type){
+				window.animate = function (type) {
 					$scope.animate(type);
 					$scope.$digest();
 				};
 
 				console.log(
-					'Look at you using the developer console, you techno wizard!\n'+
+					'Look at you using the developer console, you techno wizard!\n' +
 					'Want to see something scary?\n' +
 					'Type "animate(\'exorcist\');"'
 				);
@@ -187,9 +182,6 @@ define(['angularAMD','service/preloader','service/userAgent'], function (angular
 			}
 
 		};
-
-
-
 
 	});
 });

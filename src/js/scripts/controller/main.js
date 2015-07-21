@@ -7,23 +7,23 @@
 define(['angularAMD', 'directive/avatar', 'directive/nav'], function (angularAMD) {
 	'use strict';
 
-	angularAMD.controller('MainController', function($scope, $state){
+	angularAMD.controller('MainController', function ($scope, $state) {
 
 		//Below are inheritable functions that can be used by any of this controller's child directives
 
-		$scope.isHome = function(){
+		$scope.isHome = function () {
 			return !$state.current.name || $state.current.name === 'home';
 		};
 
-		$scope.goHome = function(){
+		$scope.goHome = function () {
 			$state.go('home');
 		};
 
-		$scope.goToState = function(state){
+		$scope.goToState = function (state) {
 			//Have to manually modify the windows url in order to transition to abstract states
 			state = state || {};
 			state.url = state.url || '';
-			window.location = '/#'+state.url;
+			window.location = '/#' + state.url;
 		};
 
 		//These helper functions allow events to be broadcast and received on this hierarchical level of the scope chain
@@ -37,9 +37,9 @@ define(['angularAMD', 'directive/avatar', 'directive/nav'], function (angularAMD
 		 * @readonly
 		 */
 		$scope.Events = {
-			STATE_CHANGE : '$stateChangeSuccess',
-			AVATAR_TOGGLE : '$avatarToggle',
-			NAV_TOGGLE : '$navToggle'
+			STATE_CHANGE: '$stateChangeSuccess',
+			AVATAR_TOGGLE: '$avatarToggle',
+			NAV_TOGGLE: '$navToggle'
 		};
 
 	});

@@ -4,7 +4,7 @@
  * @module config/states
  * @author James Lynn
  */
-define(function(require, exports, module){
+define(function (require, exports, module) {
 	'use strict';
 
 	var path = module.config().path;
@@ -26,82 +26,82 @@ define(function(require, exports, module){
 	/**@return state[] */
 	return [
 		{
-			id : 'home',
-			url : '/',
-			label : 'Home',
-			isDefault : true,
-			navEnabled : false
+			id: 'home',
+			url: '/',
+			label: 'Home',
+			isDefault: true,
+			navEnabled: false
 		},
 
 		{
-			id : 'about',
-			label : 'About Me',
-			templateUrl : path+'/about.html'
+			id: 'about',
+			label: 'About Me',
+			templateUrl: path + '/about.html'
 		},
 
 		{
-			id : 'portfolio',
-			label : 'Portfolio',
-			controller : 'PortfolioController',
-			templateUrl : path+'/portfolio.html',
-			abstract : true,
-			states : [
+			id: 'portfolio',
+			label: 'Portfolio',
+			controller: 'PortfolioController',
+			templateUrl: path + '/portfolio.html',
+			abstract: true,
+			states: [
 				{
-					id : 'hyper',
-					url : '/hyper-galactic',
-					label : 'Hyper Galactic',
-					templateUrl : path+'/portfolio/hyper-galactic.html'
+					id: 'hyper',
+					url: '/hyper-galactic',
+					label: 'Hyper Galactic',
+					templateUrl: path + '/portfolio/hyper-galactic.html'
 				},
 
 				{
-					id : 'chess',
-					url : '/chess-chaps',
-					label : 'Chess Chaps',
-					templateUrl : path+'/portfolio/chess-chaps.html'
+					id: 'chess',
+					url: '/chess-chaps',
+					label: 'Chess Chaps',
+					templateUrl: path + '/portfolio/chess-chaps.html'
 				},
 
 				{
-					id : 'league',
-					url : '/league-champs',
-					label : 'League Champs',
-					templateUrl : path+'/portfolio/league-champs.html'
+					id: 'league',
+					url: '/league-champs',
+					label: 'League Champs',
+					templateUrl: path + '/portfolio/league-champs.html'
 				},
 
 				{
-					id : 'inmar',
-					url : '/inmar-digital-coupons',
-					label : 'Inmar Digital Coupons',
-					templateUrl : path+'/portfolio/inmar-digital-coupons.html'
+					id: 'inmar',
+					url: '/inmar-digital-coupons',
+					label: 'Inmar Digital Coupons',
+					templateUrl: path + '/portfolio/inmar-digital-coupons.html'
 				},
 
 				{
-					id : 'emerson',
-					url : '/emeson-io',
-					label : 'Emerson IO Calculator',
-					templateUrl : path+'/portfolio/emerson-io.html'
+					id: 'emerson',
+					url: '/emeson-io',
+					label: 'Emerson IO Calculator',
+					templateUrl: path + '/portfolio/emerson-io.html'
 				},
 
 				{
-					id : 'oracle',
-					url : '/oracle-roi-calculator',
-					label : 'Oracle ROI Calculator',
-					templateUrl : path+'/portfolio/oracle-roi-calculator.html'
+					id: 'oracle',
+					url: '/oracle-roi-calculator',
+					label: 'Oracle ROI Calculator',
+					templateUrl: path + '/portfolio/oracle-roi-calculator.html'
 				}
 
 			]
 		},
 
 		{
-			id : 'resume',
-			label : 'Resume',
-			templateUrl : path+'/resume.html'
+			id: 'resume',
+			label: 'Resume',
+			templateUrl: path + '/resume.html'
 		},
 
 		{
-			id : 'contact',
-			label : 'Contact',
-			controller : 'ContactController',
-			templateUrl : path+'/contact.html'
+			id: 'contact',
+			label: 'Contact',
+			controller: 'ContactController',
+			templateUrl: path + '/contact.html'
 		}
 
 	];

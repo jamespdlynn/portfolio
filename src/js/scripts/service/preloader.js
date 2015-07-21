@@ -4,54 +4,54 @@
  * @module service/preloader
  * @author James Lynn
  */
-define(['angularAMD', 'config/preload','service/userAgent','directive/file'],function(angularAMD,preload){
+define(['angularAMD', 'config/preload', 'service/userAgent', 'directive/file'], function (angularAMD, preload) {
 	'use strict';
 
-	angularAMD.service('$preloader',function($q, $http, $userAgent){
+	angularAMD.service('$preloader', function ($q, $http, $userAgent) {
 
 		var promises = {}, assets = {};
 
 		return {
 
-			assets : assets,
+			assets: assets,
 
 			/**
 			 * Load a set of assets from the server
 			 * @param group {string} batch identifier attached to all the assets to be loaded
 			 * @returns {*} promise
 			 */
-			load : function(group){
+			load: function (group) {
 
 				var promiseArray = [];
 
 				//If passed an array, recursively call this function of each of the values and return the chained promise
-				if (Array.isArray(group)){
+				if (Array.isArray(group)) {
 					var self = this;
-					group.forEach(function(value){
+					group.forEach(function (value) {
 						promiseArray.push(self.load(value));
 					});
 					return $q.all(promiseArray);
 				}
 
 				//If this group has already been loaded return the pre-exiting promise
-				if (promises[group]){
+				if (promises[group]) {
 					return promises[group];
 				}
 
 				//Loop through configuration file search for objects with the given group identifier
-				preload.forEach(function(asset){
-					if (asset.group === group){
+				preload.forEach(function (asset) {
+					if (asset.group === group) {
 						var media = null, deferred = $q.defer();
 
-						switch (asset.type){
+						switch (asset.type) {
 
 							//Load RequireJS Javascript Module
 							case 'module' :
-								require([asset.src], function(res){
+								require([asset.src], function (res) {
 									media = res;
 									deferred.resolve();
-								},deferred.reject);
-							break;
+								}, deferred.reject);
+								break;
 
 							//Load image asset
 							case 'image':
@@ -68,18 +68,18 @@ define(['angularAMD', 'config/preload','service/userAgent','directive/file'],fun
 								media.src = asset.src;
 
 								//For most browsers go a head and do the preload
-								if (!$userAgent.isIOS() && !$userAgent.isPhantomJS()){
-									media.addEventListener('loadeddata',  deferred.resolve, false);
+								if (!$userAgent.isIOS() && !$userAgent.isPhantomJS()) {
+									media.addEventListener('loadeddata', deferred.resolve, false);
 									media.addEventListener('error', deferred.reject, false);
 									media.load();
 								}
 								// IOS does not let us preload HTML audio objects without a touch event (LAME)
-								else{
+								else {
 									// Use a regular http get call instead so the browser at least caches the data source
-									$http.get(asset.src).then(deferred.resolve,deferred.reject);
+									$http.get(asset.src).then(deferred.resolve, deferred.reject);
 
 									//Wait for a touch event to fire to preload the audio file
-									var loadAudio = function(){
+									var loadAudio = function () {
 										media.load();
 										window.removeEventListener('touchstart', loadAudio);
 									};
@@ -90,10 +90,10 @@ define(['angularAMD', 'config/preload','service/userAgent','directive/file'],fun
 
 							//For any other asset just use an http get call and save the returned data in whatever format it comes back in
 							default :
-								$http.get(asset.src).then(function(res){
+								$http.get(asset.src).then(function (res) {
 									media = res;
 									deferred.resolve();
-								},deferred.reject);
+								}, deferred.reject);
 								break;
 						}
 
@@ -101,8 +101,8 @@ define(['angularAMD', 'config/preload','service/userAgent','directive/file'],fun
 						//Otherwise just store the configuration object
 						assets[asset.id] = asset.cache ? media : asset;
 
-						deferred.promise.then(null, function(){
-							console.error('Error loading asset "'+asset.id+'"');
+						deferred.promise.then(null, function () {
+							console.error('Error loading asset "' + asset.id + '"');
 							assets[asset.id].hasError = true;
 						});
 
@@ -119,7 +119,7 @@ define(['angularAMD', 'config/preload','service/userAgent','directive/file'],fun
 			 * Removes a set of assets from cache
 			 * @param [group] {string} batch identifier attached to all the assets to be unloaded, if none specified all are unloaded
 			 */
-			unload : function(group) {
+			unload: function (group) {
 
 				//If not passed set group to the array of all active promise values
 				if (!group) {
@@ -129,7 +129,7 @@ define(['angularAMD', 'config/preload','service/userAgent','directive/file'],fun
 				//If array recursively call this function on all its values
 				if (Array.isArray(group)) {
 					var self = this;
-					group.forEach(function(value){
+					group.forEach(function (value) {
 						self.unload(value);
 					});
 				}
@@ -144,13 +144,12 @@ define(['angularAMD', 'config/preload','service/userAgent','directive/file'],fun
 				}
 			},
 
-
 			/**
 			 * Fetch an asset from cache
 			 * @param id {string} unique asset identifier
 			 * @returns {Image|Audio|asset|*}
 			 */
-			fetch : function(id){
+			fetch: function (id) {
 				return assets[id];
 			},
 
@@ -159,14 +158,14 @@ define(['angularAMD', 'config/preload','service/userAgent','directive/file'],fun
 			 * @param id {string} Id of the preloaded audio asset to play
 			 * @param force {boolean=false} Set flag to true to play the audio no matter its current state
 			 */
-			play : function(id, force){
+			play: function (id, force) {
 				var audio = assets[id];
 				if (!audio || !audio instanceof Audio || audio.hasError) {
 					console.error('Cannot play audio: ' + id);
 					return;
 				}
 
-				if (audio.readyState === 4 || force){
+				if (audio.readyState === 4 || force) {
 					audio.play();
 				}
 			}
@@ -174,7 +173,5 @@ define(['angularAMD', 'config/preload','service/userAgent','directive/file'],fun
 		};
 
 	});
-
-
 
 });

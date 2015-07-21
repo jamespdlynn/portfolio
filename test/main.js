@@ -2,7 +2,7 @@
  * RequireJS Config for Karma Tests
  * @author James Lynn
  */
-(function(){
+(function () {
 	'use strict';
 
 	/*
@@ -29,30 +29,30 @@
 		baseUrl: '/base/src/js/scripts',
 
 		paths: {
-			jquery : ['../lib/jquery'],
+			jquery: ['../lib/jquery'],
 			angular: ['../lib/angular'],
-			angularAnimate : ['../lib/angular-animate'],
-			angularUIRouter : ['../lib/angular-ui-router'],
-			angularSlick : ['../lib/angular-slick'],
+			angularAnimate: ['../lib/angular-animate'],
+			angularUIRouter: ['../lib/angular-ui-router'],
+			angularSlick: ['../lib/angular-slick'],
 			angularAMD: ['../lib/angularAMD'],
 			ngload: ['../lib/ngload'],
-			slick : ['../lib/slick']
+			slick: ['../lib/slick']
 		},
 
 		shim: {
-			angularUIRouter : ['angular'],
-			angularAnimate : ['angular'],
-			angularSlick : ['angular','slick'],
+			angularUIRouter: ['angular'],
+			angularAnimate: ['angular'],
+			angularSlick: ['angular', 'slick'],
 			angularAMD: ['angular'],
 			ngload: ['angularAMD']
 		},
 
-		config : {
-			'config/preload' : {
-				path :  '/base/src/assets'
+		config: {
+			'config/preload': {
+				path: '/base/src/assets'
 			},
-			'config/states' : {
-				path : '/base/src/templates'
+			'config/states': {
+				path: '/base/src/templates'
 			}
 		},
 
@@ -62,23 +62,25 @@
 	});
 
 	//Create dummy Audio object for PhantomJS Browser
-	window.Audio = window.Audio || function(){
-		this.play = this.pause = this.load = this.addEventListener = this.removeEventListener = function(){};
+	window.Audio = window.Audio || function () {
+		this.play = this.pause = this.load = this.addEventListener = this.removeEventListener = function () {
+		};
 		this.readyState = 4;
 	};
 
 	/* jshint ignore:start */
-	Function.prototype.bind = Function.prototype.bind || function(oThis) {
+	Function.prototype.bind = Function.prototype.bind || function (oThis) {
 		if (typeof this !== 'function') {
 			// closest thing possible to the ECMAScript 5
 			// internal IsCallable function
 			throw new TypeError('Function.prototype.bind - what is trying to be bound is not callable');
 		}
 
-		var aArgs   = Array.prototype.slice.call(arguments, 1),
+		var aArgs = Array.prototype.slice.call(arguments, 1),
 			fToBind = this,
-			fNOP    = function() {},
-			fBound  = function() {
+			fNOP = function () {
+			},
+			fBound = function () {
 				return fToBind.apply(this instanceof fNOP
 						? this
 						: oThis,

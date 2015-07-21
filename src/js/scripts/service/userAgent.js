@@ -4,52 +4,52 @@
  * @module service/userAgent
  * @author James Lynn
  */
-define(['angularAMD'],function(angularAMD){
+define(['angularAMD'], function (angularAMD) {
 	'use strict';
 
-	angularAMD.service('$userAgent',function(){
+	angularAMD.service('$userAgent', function () {
 
 		var ua = navigator.userAgent;
 
 		return {
 
-			isFirefox : function(){
+			isFirefox: function () {
 				return ua.match(/Firefox/g);
 			},
 
-			isChrome : function(){
+			isChrome: function () {
 				return ua.match(/Chrome/g);
 			},
 
-			isSafari: function(){
+			isSafari: function () {
 				return ua.match(/Safari/g);
 			},
 
-			isIE : function(){
+			isIE: function () {
 				return ua.match(/NET4|Trident|MSIE/g);
 			},
 
-			isPhantomJS : function(){
+			isPhantomJS: function () {
 				return ua.match(/PhantomJS/g);
 			},
 
-			isAndroid : function(){
+			isAndroid: function () {
 				return ua.match(/Android/g);
 			},
 
-			isBlackberry: function(){
+			isBlackberry: function () {
 				return ua.match(/BlackBerry/i);
 			},
 
-			isWindowsPhone : function(){
+			isWindowsPhone: function () {
 				return ua.match(/Windows Phone/i);
 			},
 
-			isIOS : function(){
+			isIOS: function () {
 				return ua.match(/iPad|iPhone|iPod/g);
 			},
 
-			isMobile : function(){
+			isMobile: function () {
 				return this.isAndroid() || this.isBlackberry() || this.isWindowsPhone() || this.isIOS();
 			}
 

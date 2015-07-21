@@ -4,7 +4,7 @@
  * @module directive/file
  * @author James Lynn
  */
-define(['angularAMD','service/preloader','service/userAgent'], function (angularAMD) {
+define(['angularAMD', 'service/preloader', 'service/userAgent'], function (angularAMD) {
 	'use strict';
 
 	angularAMD.directive('nav', function () {
@@ -13,9 +13,9 @@ define(['angularAMD','service/preloader','service/userAgent'], function (angular
 
 			restrict: 'E',
 
-			scope : true, //Disassociated scope
+			scope: true, //Disassociated scope
 
-			controller : function($scope, $timeout, $preloader, $states, $userAgent) {
+			controller: function ($scope, $timeout, $preloader, $states, $userAgent) {
 
 				/** @const @readonly {Number} Show/hide transition duration in milliseconds*/
 				var TRANSITION_DURATION = 300;
@@ -25,7 +25,7 @@ define(['angularAMD','service/preloader','service/userAgent'], function (angular
 					isHidden: true,
 
 					//States displayed in the nav
-					items :  $states.filter(function(value){
+					items: $states.filter(function (value) {
 						return value.navEnabled;
 					}),
 
@@ -36,7 +36,8 @@ define(['angularAMD','service/preloader','service/userAgent'], function (angular
 					hide: function () {
 						$scope.isHidden = true;
 						$preloader.play('swoosh');
-						return $timeout(function(){}, TRANSITION_DURATION);
+						return $timeout(function () {
+						}, TRANSITION_DURATION);
 					},
 
 					/**
@@ -46,7 +47,8 @@ define(['angularAMD','service/preloader','service/userAgent'], function (angular
 					show: function () {
 						$scope.isHidden = false;
 						$preloader.play('bloop');
-						return $timeout(function(){}, TRANSITION_DURATION);
+						return $timeout(function () {
+						}, TRANSITION_DURATION);
 					},
 
 					/**
@@ -58,7 +60,7 @@ define(['angularAMD','service/preloader','service/userAgent'], function (angular
 					},
 
 					onHover: function () {
-						if (!$scope.isHidden && !$userAgent.isMobile()){
+						if (!$scope.isHidden && !$userAgent.isMobile()) {
 							$preloader.play('click');
 						}
 					},
@@ -80,12 +82,12 @@ define(['angularAMD','service/preloader','service/userAgent'], function (angular
 
 				});
 
-				$scope.on($scope.Events.NAV_TOGGLE, function(){
+				$scope.on($scope.Events.NAV_TOGGLE, function () {
 					$scope.toggle();
 				});
 
 				//Always hide nav on state change
-				$scope.on($scope.Events.STATE_CHANGE, function(){
+				$scope.on($scope.Events.STATE_CHANGE, function () {
 					$scope.isHidden = true;
 				});
 			}

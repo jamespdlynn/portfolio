@@ -11,16 +11,16 @@ define(['app', 'angularAMD', 'controller/main'], function (app, angularAMD) {
 
 		var scope, childScope, state;
 
-		beforeAll(function(done){
-			angularAMD.inject(function($preloader){
+		beforeAll(function (done) {
+			angularAMD.inject(function ($preloader) {
 				$preloader.load('main').then(done);
 			});
 		});
 
-		beforeEach(function (){
-			angularAMD.inject(function($rootScope, $controller, $compile, $state){
+		beforeEach(function () {
+			angularAMD.inject(function ($rootScope, $controller, $compile, $state) {
 				scope = $rootScope.$new();
-				$controller('MainController', {$scope : scope});
+				$controller('MainController', {$scope: scope});
 
 				var element = angular.element('<avatar></avatar>');
 				$compile(element)(scope);
@@ -31,7 +31,7 @@ define(['app', 'angularAMD', 'controller/main'], function (app, angularAMD) {
 			});
 		});
 
-		afterEach(function(){
+		afterEach(function () {
 			scope.$destroy();
 			childScope.$destroy();
 		});
@@ -95,9 +95,6 @@ define(['app', 'angularAMD', 'controller/main'], function (app, angularAMD) {
 
 		});
 
-
-
 	});
-
 
 });

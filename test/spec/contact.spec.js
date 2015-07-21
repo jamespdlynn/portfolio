@@ -12,28 +12,28 @@ define(['app', 'angularAMD'], function (app, angularAMD) {
 		var scope, ctrl, httpDeferred;
 
 		//Load controller module through the preloader
-		beforeAll(function(done){
-			angularAMD.inject(function($preloader){
+		beforeAll(function (done) {
+			angularAMD.inject(function ($preloader) {
 				$preloader.load('contact').then(done);
 			});
 		});
 
-		beforeEach(function (){
-			angularAMD.inject(function($rootScope, $controller, $http, $q){
+		beforeEach(function () {
+			angularAMD.inject(function ($rootScope, $controller, $http, $q) {
 				scope = $rootScope.$new();
 				ctrl = $controller('ContactController', {
-					$scope : scope
+					$scope: scope
 				});
 
 				//Unfortunately AngularAMD does not play well with Angular Mocks so I don't get access to mock injections like the $httpBackend
 				//Instead I'm overriding the $http services post return value, so I can manually resolve or reject its associated promise
 				httpDeferred = $q.defer();
 				var promise = httpDeferred.promise;
-				promise.success = function(fn){
+				promise.success = function (fn) {
 					promise.then(fn);
 					return promise;
 				};
-				promise.error = function(fn){
+				promise.error = function (fn) {
 					promise.then(null, fn);
 					return promise;
 				};
@@ -41,7 +41,7 @@ define(['app', 'angularAMD'], function (app, angularAMD) {
 			});
 		});
 
-		afterEach(function(){
+		afterEach(function () {
 			scope.$destroy();
 		});
 
@@ -62,7 +62,7 @@ define(['app', 'angularAMD'], function (app, angularAMD) {
 		it('success state', function (done) {
 			scope.submit({});
 
-			httpDeferred.promise.finally(function(){
+			httpDeferred.promise.finally(function () {
 				expect(scope.currentState).toBe(scope.states.SUCCESS);
 				done();
 			});
@@ -72,7 +72,7 @@ define(['app', 'angularAMD'], function (app, angularAMD) {
 		it('error state', function (done) {
 			scope.submit({});
 
-			httpDeferred.promise.finally(function(){
+			httpDeferred.promise.finally(function () {
 				expect(scope.currentState).toBe(scope.states.ERROR);
 				done();
 			});

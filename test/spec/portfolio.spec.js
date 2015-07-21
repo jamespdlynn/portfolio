@@ -1,5 +1,5 @@
 /*global define, describe, it, expect, beforeEach, beforeAll, afterEach*/
- /**
+/**
  * Portfolio Controller Tests
  * @author James Lynn
  */
@@ -12,24 +12,24 @@ define(['app', 'angularAMD'], function (app, angularAMD) {
 		var scope, ctrl, state;
 
 		//Load controller module using the preloader
-		beforeAll(function(done){
-			angularAMD.inject(function($preloader){
+		beforeAll(function (done) {
+			angularAMD.inject(function ($preloader) {
 				$preloader.load('portfolio').then(done);
 			});
 		});
 
-		beforeEach(function (){
-			angularAMD.inject(function($rootScope, $controller, $state){
+		beforeEach(function () {
+			angularAMD.inject(function ($rootScope, $controller, $state) {
 				scope = $rootScope.$new();
 				ctrl = $controller('PortfolioController', {
-					$scope : scope
+					$scope: scope
 				});
 				state = $state;
 				state.current = state.get('portfolio');
 			});
 		});
 
-		afterEach(function(){
+		afterEach(function () {
 			scope.$destroy();
 		});
 
@@ -44,7 +44,7 @@ define(['app', 'angularAMD'], function (app, angularAMD) {
 		});
 
 		it('nav index change', function () {
-			scope.items.forEach(function(item, index){
+			scope.items.forEach(function (item, index) {
 				state.current = item;
 				scope.$broadcast('$stateChangeSuccess');
 				expect(scope.index).toBe(index);
