@@ -1,5 +1,5 @@
 //Default view container styles
-#view{
+#view {
 
   position: absolute;
   left: 20%;
@@ -10,7 +10,7 @@
   overflow-x: hidden;
   .transition(0.5s linear opacity);
 
-  .content{
+  .content {
 
     float: left;
     width: 100%;
@@ -24,37 +24,35 @@
     line-height: 28px;
     padding: 15px 15px 15px 0;
 
-    p{
-      &:first-of-type{
+    p {
+      &:first-of-type {
         margin-top: 0;
       }
 
-      &:last-of-type{
+      &:last-of-type {
         margin-bottom: 0;
       }
 
     }
 
-    .img{
+    .img {
       float: right;
       margin-left: 15px;
       .rounded(4px);
       max-width: 55%;
 
-
-      img{
+      img {
         width: 100%;
         height: auto;
         .rounded(4px);
       }
     }
 
-
-    .btn{
+    .btn {
       text-decoration: none;
       font-weight: bold;
 
-      &:disabled{
+      &:disabled {
         opacity: 0.5;
       }
     }
@@ -62,16 +60,16 @@
   }
 
   //User angular animation classes to fade view in and out when it is added/removed from DOM
-  &.ng-enter{
+  &.ng-enter {
     opacity: 0;
-    &.ng-enter-active{
+    &.ng-enter-active {
       opacity: 1;
     }
   }
 
-  &.ng-leave{
+  &.ng-leave {
     opacity: 1;
-    &.ng-leave-active{
+    &.ng-leave-active {
       opacity: 0;
     }
   }
@@ -83,26 +81,25 @@
     right: 0;
     bottom: 0;
 
-    .content{
+    .content {
       padding: 15px;
       font-size: 16px;
       line-height: 19px;
 
-      .btn{
+      .btn {
         font-size: 16px;
         padding: 8px 12px;
       }
 
-      p{
+      p {
         margin: 10px 0;
       }
 
-      .img{
+      .img {
         margin-left: 10px;
       }
     }
   }
-
 
   @import "portfolio";
   @import "resume";

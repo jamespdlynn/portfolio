@@ -1,30 +1,29 @@
-#resume{
-  padding:0;
+#resume {
+  padding: 0;
 
   //Have the embed file object take up the entire screen height
-  #file > *{
+  #file > * {
     display: inline-block;
     vertical-align: bottom;
     width: 100%;
     height: 100vh;
     max-width: 860px;
 
-    > a{
+    > a {
       position: absolute;
       bottom: 20px;
     }
   }
 
   //Position the link button horizontally and vertically center on small devices
-  @media (max-width: @screen-phone){
+  @media (max-width: @screen-phone) {
 
-    #file > *  > a {
-          left: 50%;
-          bottom: 50%;
-          margin-left: -51px;
-          margin-top: 20px;
-      }
+    #file > * > a {
+      left: 50%;
+      bottom: 50%;
+      margin-left: -51px;
+      margin-top: 20px;
+    }
   }
-
 
 }

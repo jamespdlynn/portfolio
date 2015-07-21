@@ -1,21 +1,21 @@
 @import "slick";
 
-#portfolio{
+#portfolio {
 
   overflow: hidden;
   padding: 0;
 
   //Slick slider navigation controls
-  .header{
+  .header {
     width: 100%;
     position: relative;
     padding: 20px 0;
     .box-sizing(border-box);
 
-    .slider{
+    .slider {
       display: none;
 
-      &.slick-slider{
+      &.slick-slider {
         display: block;
         width: 100%;
         height: 100%;
@@ -24,23 +24,23 @@
         .user-select(none);
 
         //Override some of the slick slider styles to shrink and fade out non centered items
-        .slick-slide{
+        .slick-slide {
           margin: 2px;
           .opacity(0.4);
 
           .scale(0.85);
           .transition(all 0.5s linear);
 
-          &.slick-center{
+          &.slick-center {
             .scale(1);
             .opacity(1);
           }
 
-          img{
+          img {
             width: 100%;
             height: auto;
             .rounded(6px);
-            .box-shadow(0 0 1px 1px rgba(0,0,0,0.3));
+            .box-shadow(0 0 1px 1px rgba(0, 0, 0, 0.3));
 
           }
 
@@ -49,19 +49,18 @@
     }
 
     @media (max-width: @screen-phone) {
-        padding: 15px 0;
+      padding: 15px 0;
     }
 
   }
 
-
-   //Set a default minimum height for the sub view container to prevent the nav from jumping up and down
-   //This height is dependent on the screen size
-  .view{
+  //Set a default minimum height for the sub view container to prevent the nav from jumping up and down
+  //This height is dependent on the screen size
+  .view {
     min-height: 600px;
     padding: 0 15px;
 
-    .footer{
+    .footer {
       text-align: right;
       margin-bottom: 15px;
     }
@@ -74,10 +73,6 @@
       min-height: 90vh;
     }
 
-
   }
 
-
-  
-  
 }

@@ -4,16 +4,24 @@
     <a file src="'league'" href="http://leaguechamps.net" target="_blank" class="img"></a>
 
     <p>
-        <strong>League Champs</strong> is a simple web app of my own design, that offers players of Riot's "League of Legends" MOBA an up to date and detailed statistical analysis of every one of the game's playable characters.
+        <strong>League Champs</strong> is a simple web app of my own design, that offers players of Riot's "League of
+        Legends" MOBA an up to date and detailed statistical analysis of every one of the game's playable characters.
     </p>
+
     <p>
-        Every week a timed process on my server triggers hundreds of thousands of HTTP requests to Riot's public RESTful API, at their predefined rate limit, in order to aggregate data for all
-        ranked matches occuring during that week. That data is then parsed by champion and saved to a remote NoSQL Mongo database.
+        Every week a timed process on my server triggers hundreds of thousands of HTTP requests to Riot's public RESTful
+        API, at their predefined rate limit, in order to aggregate data for all
+        ranked matches occuring during that week. That data is then parsed by champion and saved to a remote NoSQL Mongo
+        database.
     </p>
+
     <p>
-        Upon initialization, the client side javascript asynchronously queries this data through a simple RESTful endpoint on my server. The returned data is then parsed, filtered and visualized client side.
-        A dynamic sizing algorithm, responsive media queries, and efficient animation libraries allow this app to be accessed properly on devices of all sizes and orientations.
+        Upon initialization, the client side javascript asynchronously queries this data through a simple RESTful
+        endpoint on my server. The returned data is then parsed, filtered and visualized client side.
+        A dynamic sizing algorithm, responsive media queries, and efficient animation libraries allow this app to be
+        accessed properly on devices of all sizes and orientations.
     </p>
+
     <p class="footer">
         <a href="http://leaguechamps.net" class="btn btn-primary btn-lg" target="_blank">View Website</a>
     </p>

@@ -1,15 +1,21 @@
 <contact id="contact" class="content">
 
     <form name="form" novalidate>
-        <input type="text" ng-model="data.name" class="form-control" placeholder="Name*"  ng-disabled="currentState != states.DEFAULT"  title="Name (Required)" required/>
+        <input type="text" ng-model="data.name" class="form-control" placeholder="Name*"
+               ng-disabled="currentState != states.DEFAULT" title="Name (Required)" required/>
 
-        <input type="text" ng-model="data.company" class="form-control" placeholder="Company" ng-disabled="currentState != states.DEFAULT"  title="Company" />
+        <input type="text" ng-model="data.company" class="form-control" placeholder="Company"
+               ng-disabled="currentState != states.DEFAULT" title="Company"/>
 
-        <input type="email" ng-model="data.email" class="form-control" placeholder="Email*" ng-disabled="currentState != states.DEFAULT"  title="Email (Required)" required/>
+        <input type="email" ng-model="data.email" class="form-control" placeholder="Email*"
+               ng-disabled="currentState != states.DEFAULT" title="Email (Required)" required/>
 
-        <input type="tel" ng-model="data.phone" class="form-control" placeholder="Phone" ng-disabled="currentState != states.DEFAULT"  title="Phone"/>
+        <input type="tel" ng-model="data.phone" class="form-control" placeholder="Phone"
+               ng-disabled="currentState != states.DEFAULT" title="Phone"/>
 
-        <textarea ng-model="data.message" class="form-control" rows="5" placeholder="Message*" title="Message (Required)" maxlength="1000" ng-disabled="currentState != states.DEFAULT"  required></textarea>
+        <textarea ng-model="data.message" class="form-control" rows="5" placeholder="Message*"
+                  title="Message (Required)" maxlength="1000" ng-disabled="currentState != states.DEFAULT"
+                  required></textarea>
 
         <div class="footer">
 

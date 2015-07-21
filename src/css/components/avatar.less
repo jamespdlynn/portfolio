@@ -14,29 +14,28 @@
   .background('sprites.png', transparent, left top);
   .user-select(none);
 
-  &.left{
+  &.left {
     left: 10%;
   }
 
   //Animations
-  &.blink{
+  &.blink {
     .animation(blink 0.3s steps(3) 2 alternate);
   }
 
-
-  &.dance{
+  &.dance {
     .animation(dance 0.8s steps(8) 2);
   }
 
-  &.wave{
+  &.wave {
     .animation(wave 1s steps(8) alternate 2);
   }
 
-  &.exorcist{
+  &.exorcist {
     .animation(exorcist 0.8s steps(8) 3);
   }
 
-  &.walk{
+  &.walk {
     cursor: default;
 
     //Walking consists of three animations executed in succession
@@ -49,21 +48,20 @@
     .transition-delay(0.2s);
 
     //Flip the background backwards when walking left
-    &.left{
+    &.left {
       .scale(-1, 1);
     }
   }
 
   //Animation keyframes
-  .keyframe(blink, {background-position: 0px 0px}, {background-position:-594px 0px});
-  .keyframe(turn, {background-position:-594px 0px}, {background-position:-990px 0px});
-  .keyframe(turnReverse, {background-position:-792px 0px}, {background-position:-396px 0px});
+  .keyframe(blink, { background-position: 0px 0px }, { background-position: -594px 0px });
+  .keyframe(turn, { background-position: -594px 0px }, { background-position: -990px 0px });
+  .keyframe(turnReverse, { background-position: -792px 0px }, { background-position: -396px 0px });
 
-  .keyframe(dance, {background-position:0px -1134px}, {background-position:-1584px -1134px});
-  .keyframe(wave, {background-position: 0px -1512px}, {background-position:-1584px -1512px});
-  .keyframe(exorcist, {background-position: 0px -378px},{background-position:-1584px -378px});
-  .keyframe(walk, {background-position: 0px -756px},{background-position:-1584px -756px});
-
+  .keyframe(dance, { background-position: 0px -1134px }, { background-position: -1584px -1134px });
+  .keyframe(wave, { background-position: 0px -1512px }, { background-position: -1584px -1512px });
+  .keyframe(exorcist, { background-position: 0px -378px }, { background-position: -1584px -378px });
+  .keyframe(walk, { background-position: 0px -756px }, { background-position: -1584px -756px });
 
   //Phone media styles
   @media (max-width: @screen-phone) {
@@ -73,38 +71,37 @@
 
 
 
-    #arrow{
+    #arrow {
       //For the phone shift the avatar off the screen on the left state
       //and have an opaque arrow display instead to allow the user to navigate back
-        position: relative;
-        right: -40px;
-        top: 320px;
-        .user-select(none);
-        border-top: 18px solid transparent;
-        border-bottom: 18px solid transparent;
-        opacity: 0.5;
-        border-right: 24px solid #000;
-        z-index: 10;
-        display: none;
+      position: relative;
+      right: -40px;
+      top: 320px;
+      .user-select(none);
+      border-top: 18px solid transparent;
+      border-bottom: 18px solid transparent;
+      opacity: 0.5;
+      border-right: 24px solid #000;
+      z-index: 10;
+      display: none;
     }
 
-    &.left{
+    &.left {
       overflow: visible;
       left: -99px;
 
-      #arrow{
+      #arrow {
         display: block;
       }
 
-      &.walk{
+      &.walk {
         .transform(scale(-0.9, 0.9));
 
-        #arrow{
+        #arrow {
           display: none;
         }
       }
     }
   }
-
 
 }

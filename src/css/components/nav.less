@@ -4,7 +4,7 @@
   .nav-item {
 
     z-index: 4;
-    position:absolute;
+    position: absolute;
     left: 50%;
     cursor: pointer;
     text-decoration: none;
@@ -21,10 +21,9 @@
       background-color: #fff;
       border: solid 2px #000;
 
-
       &.main {
         width: 115px;
-        .background('bubble.png',transparent,0 0);
+        .background('bubble.png', transparent, 0 0);
         .box-sizing(border-box);
         .transition-delay(0.6s); //Each bubble has a slight transition delay which creates a cascading animation
         border: none;
@@ -56,15 +55,15 @@
 
     //Manually rotate and position each of the four navigation items
     &:nth-child(1) {
-     .rotate(-60deg);
+      .rotate(-60deg);
       margin-left: -190px;
       bottom: 250px;
 
       .bubble.main {
         left: 6px;
 
-        .label{
-         .rotate(60deg);
+        .label {
+          .rotate(60deg);
         }
       }
 
@@ -75,15 +74,15 @@
     }
 
     &:nth-child(2) {
-     .rotate(-20deg);
+      .rotate(-20deg);
       margin-left: -120px;
       bottom: 365px;
 
       .bubble.main {
         left: 3px;
 
-        .label{
-         .rotate(20deg);
+        .label {
+          .rotate(20deg);
         }
       }
 
@@ -91,19 +90,18 @@
         right: 3px;
       }
 
-
     }
 
     &:nth-child(3) {
-     .rotate(20deg);
+      .rotate(20deg);
       margin-left: 5px;
       bottom: 365px;
 
       .bubble:nth-child(1) {
         right: 3px;
 
-        .label{
-         .rotate(-20deg);
+        .label {
+          .rotate(-20deg);
         }
 
       }
@@ -115,16 +113,15 @@
     }
 
     &:nth-child(4) {
-     .rotate(60deg);
+      .rotate(60deg);
       margin-left: 70px;
       bottom: 250px;
-
 
       .bubble:nth-child(1) {
         right: 6px;
 
-        .label{
-         .rotate(-60deg);
+        .label {
+          .rotate(-60deg);
         }
       }
 
@@ -133,14 +130,14 @@
       }
     }
 
-    &:hover{
+    &:hover {
       outline: none;
       border: none;
 
-      .bubble{
+      .bubble {
         background-color: #c5e7fa;
 
-        &.main{
+        &.main {
           background-color: transparent;
           background-position: -115px 0;
 
@@ -150,17 +147,13 @@
 
   }
 
+  &.hidden {
 
-
-  &.hidden{
-
-
-    .nav-item{
+    .nav-item {
       pointer: default;
       pointer-events: none;
 
-
-      .bubble{
+      .bubble {
         .scale(0);
         .transition-delay(0s) !important;
         .user-select(none);
@@ -169,16 +162,15 @@
   }
 
   @media (max-width: @screen-phone) {
-    .nav-item{
-      .bubble{
+    .nav-item {
+      .bubble {
         margin: 0px auto;
         .scale(0.8);
 
-        &.main{
+        &.main {
           margin: -12px auto;
         }
       }
-
 
       &:nth-child(1) {
         margin-left: -163px;
@@ -201,7 +193,7 @@
       }
     }
 
-    &.hidden .nav-item .bubble{
+    &.hidden .nav-item .bubble {
       .scale(0);
     }
   }

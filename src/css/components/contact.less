@@ -1,9 +1,9 @@
-#contact{
+#contact {
 
-  form{
+  form {
     max-width: 840px;
 
-    input, textarea{
+    input, textarea {
       padding: 10px;
       margin-bottom: 20px;
       width: 100%;
@@ -15,28 +15,28 @@
       .box-sizing(border-box);
 
       //Red box shadow on touched and invalid input
-      &.ng-invalid.ng-touched{
+      &.ng-invalid.ng-touched {
         .box-shadow(inset 0 0 1px 1px #c6000e);
       }
 
       //Blue box shadow on focused input
-      &:focus, &.ng-invalid.ng-touched:focus{
+      &:focus, &.ng-invalid.ng-touched:focus {
         .box-shadow(inset 0 0 1px 2px #4C9ED8);
       }
     }
 
-    .footer{
+    .footer {
       width: 100%;
       height: 46px;
       .box-sizing(border-box);
       overflow: hidden;
 
-      .loader{
+      .loader {
         .size(100%, 100%);
         .background('ajax-loader.gif', transparent, center left);
       }
 
-      .result{
+      .result {
         width: 100%;
         position: relative;
         font-weight: bold;
@@ -46,18 +46,18 @@
         padding-left: 36px;
         .box-sizing(border-box);
 
-        .icon{
+        .icon {
           position: absolute;
           left: 0;
           top: 7px;
           .size(32px, 32px);
           .background('check.png');
 
-          &.success{
+          &.success {
             background-position: 0 0;
           }
 
-          &.error{
+          &.error {
             background-position: -32px 0;
           }
         }
@@ -68,25 +68,24 @@
 
   //Align footer to the right on small devices, to allow room for avatar's back arrow
   @media (max-width: @screen-phone) {
-    form .footer{
+    form .footer {
       text-align: right;
 
-
-      .btn{
+      .btn {
         margin-top: 4px;
       }
 
-      .loader{
+      .loader {
         background-position: right center;
       }
 
-      .result{
+      .result {
         text-align: left;
         line-height: 23px;
 
         padding-left: 24px;
 
-        .icon{
+        .icon {
           left: auto;
           right: 0;
           bottom: 0;

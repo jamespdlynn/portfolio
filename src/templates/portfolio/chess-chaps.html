@@ -1,24 +1,38 @@
 <section class="view">
 
-        <a file src="'chess'" href="http://aristobotgames.com/chess-redirect.jsp" target="_blank" class="img"></a>
+    <a file src="'chess'" href="http://aristobotgames.com/chess-redirect.jsp" target="_blank" class="img"></a>
 
-        <p>
-            <strong>Chess Chaps</strong> is a highly rated mobile game of my own design. It allows you to play casual or competitive chess games with other human opponents over mobile networks.
-            The game is cross platform and optimized for touch devices of most sizes. It is currently available for purchase on the <a href="https://itunes.apple.com/us/app/id555899088" target="_blank">Apple</a>,
-            <a href="https://play.google.com/store/apps/details?id=air.com.aristobot.chess" target="_blank">Google</a>, and  <a href="http://www.amazon.com/Aristobot-LLC-Chess-Chaps/dp/B0094KMY1K" target="_blank">Amazon</a>
-            app stores.
-        </p>
-        <p>
-            The game itself is built using the Flex 4 with AIR mobile framework, and cross compiled down to native code for Android and IOS devices (a few components such as push notifications are written natively in Objective C and Java however).
-            The client communicates to my AWS Java EE cloud server through an authenticated RESTful API. User and game data is stored and retrieved from a transactional MySQL database, while session information is cached in memory at the OS level.
-            Asynchronous and computationally intensive tasks are off loaded to an EJB Queue to allow for minimal response time between the client and server.
-        </p>
-        <p>
-            The server was architected in such a way to work with with any turn based multiplayer game, and thus is oblivous to the rules of chess which it leaves to the client. Instead it is responsible for logic that can be used for many different games,
-            such as match making, messaging, ELO rankings and statistic tracking.
-        </p>
+    <p>
+        <strong>Chess Chaps</strong> is a highly rated mobile game of my own design. It allows you to play casual or
+        competitive chess games with other human opponents over mobile networks.
+        The game is cross platform and optimized for touch devices of most sizes. It is currently available for purchase
+        on the <a href="https://itunes.apple.com/us/app/id555899088" target="_blank">Apple</a>,
+        <a href="https://play.google.com/store/apps/details?id=air.com.aristobot.chess" target="_blank">Google</a>, and
+        <a href="http://www.amazon.com/Aristobot-LLC-Chess-Chaps/dp/B0094KMY1K" target="_blank">Amazon</a>
+        app stores.
+    </p>
+
+    <p>
+        The game itself is built using the Flex 4 with AIR mobile framework, and cross compiled down to native code for
+        Android and IOS devices (a few components such as push notifications are written natively in Objective C and
+        Java however).
+        The client communicates to my AWS Java EE cloud server through an authenticated RESTful API. User and game data
+        is stored and retrieved from a transactional MySQL database, while session information is cached in memory at
+        the OS level.
+        Asynchronous and computationally intensive tasks are off loaded to an EJB Queue to allow for minimal response
+        time between the client and server.
+    </p>
+
+    <p>
+        The server was architected in such a way to work with with any turn based multiplayer game, and thus is oblivous
+        to the rules of chess which it leaves to the client. Instead it is responsible for logic that can be used for
+        many different games,
+        such as match making, messaging, ELO rankings and statistic tracking.
+    </p>
+
     <p class="footer">
-        <a href="http://aristobotgames.com/chess-redirect.jsp" class="btn btn-primary btn-lg" target="_blank">View Website</a>
+        <a href="http://aristobotgames.com/chess-redirect.jsp" class="btn btn-primary btn-lg" target="_blank">View
+            Website</a>
     </p>
 </section>
 

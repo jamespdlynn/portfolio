@@ -1,24 +1,23 @@
 //Useful globally accessible mixin functions
 
-@imgPath:'/assets/img';
+@imgPath: '/assets/img';
 
-.background-image(@filename, @color:transparent, @position: center center, @repeat: no-repeat, @size : auto){
+.background-image(@filename, @color:transparent, @position: center center, @repeat: no-repeat, @size : auto) {
   background-image: url('@{imgPath}/@{filename}')
 }
 
-.background(@filename, @color:transparent, @position: center center, @repeat: no-repeat, @size : auto){
+.background(@filename, @color:transparent, @position: center center, @repeat: no-repeat, @size : auto) {
   background: @color @repeat @position;
   .background-image(@filename);
   background-size: @size;
 }
 
-.image-fill(@filename, @size:48px){
+.image-fill(@filename, @size:48px) {
   width: @size;
   height: @size;
   .background-image(@filename);
   background-size: @size;
 }
-
 
 .bordered(@top-color: #EEE, @right-color: #EEE, @bottom-color: #EEE, @left-color: #EEE) {
   border-top: solid 1px @top-color;
@@ -39,7 +38,7 @@
   border-radius: @radius;
 }
 
-.circle(@radius: 2px){
+.circle(@radius: 2px) {
   .size(@radius, @radius);
   .rounded(@radius);
 }
@@ -69,8 +68,6 @@
   filter: ~"alpha(opacity=@{opperc})";
 }
 
-
-
 .transform(...) {
   -webkit-transform: @arguments;
   -moz-transform: @arguments;
@@ -79,11 +76,11 @@
   transform: @arguments;
 }
 
-.rotate(@deg:5deg){
+.rotate(@deg:5deg) {
   .transform(rotate(@deg));
 }
 
-.scale(@ratio:1.5){
+.scale(@ratio:1.5) {
   .transform(scale(@ratio));
 }
 
@@ -101,21 +98,21 @@
   transition-duration: @duration;
 }
 
-.transition-delay(@delay: 0.2s){
+.transition-delay(@delay: 0.2s) {
   -moz-transition-delay: @delay;
   -webkit-transition-delay: @delay;
   -o-transition-delay: @delay;
   transition-delay: @delay;
 }
 
-.animation(...){
+.animation(...) {
   -webkit-animation: @arguments;
   -moz-animation: @arguments;
   -o-animation: @arguments;
   animation: @arguments;
 }
 
-.animation-iteration-count(...){
+.animation-iteration-count(...) {
   -webkit-animation-iteration-count: @arguments;
   -moz-animation-iteration-count: @arguments;
   -o-animation-iteration-count: @arguments;
@@ -129,13 +126,12 @@
   animation-duration: @arguments;
 }
 
-.animation-delay(...){
+.animation-delay(...) {
   -moz-animation-delay: @arguments;
   -webkit-animation-delay: @arguments;
   -o-animation-delay: @arguments;
   animation-delay: @arguments;
 }
-
 
 .inner-shadow(@horizontal:0, @vertical:1px, @blur:2px, @alpha: 0.4) {
   -webkit-box-shadow: inset @horizontal @vertical @blur rgba(0, 0, 0, @alpha);
@@ -168,30 +164,62 @@
   .transform(translate(@x, @y));
 }
 
-.grab{
+.grab {
   cursor: grab;
   cursor: -webkit-grab;
   cursor: -moz-grab;
 
-  &:active{
-      cursor: grabbing;
-      cursor: -webkit-grabbing;
-      cursor: -moz-grabbing;
+  &:active {
+    cursor: grabbing;
+    cursor: -webkit-grabbing;
+    cursor: -moz-grabbing;
   }
 }
 
 .keyframe(@name,@to) {
-  @-webkit-keyframes @name { to{@to();} }
-  @-moz-keyframes @name { to{@to();} }
-  @-o-keyframes @name { to{@to();} }
-  @keyframes @name { to{@to();} }
+  @-webkit-keyframes @name {
+    to {@to();
+    }
+  }
+  @-moz-keyframes @name {
+    to {@to();
+    }
+  }
+  @-o-keyframes @name {
+    to {@to();
+    }
+  }
+  @keyframes @name {
+    to {@to();
+    }
+  }
 }
 
-.keyframe(@name,@from,@to){
-  @-webkit-keyframes @name { from{ @from();} to{@to();} }
-  @-moz-keyframes @name { from{ @from();} to{@to();} }
-  @-o-keyframes @name { from{ @from();} to{@to();} }
-  @keyframes @name { from{ @from();} to{@to();} }
+.keyframe(@name,@from,@to) {
+  @-webkit-keyframes @name {
+    from { @from();
+    }
+    to {@to();
+    }
+  }
+  @-moz-keyframes @name {
+    from { @from();
+    }
+    to {@to();
+    }
+  }
+  @-o-keyframes @name {
+    from { @from();
+    }
+    to {@to();
+    }
+  }
+  @keyframes @name {
+    from { @from();
+    }
+    to {@to();
+    }
+  }
 }
 
 
