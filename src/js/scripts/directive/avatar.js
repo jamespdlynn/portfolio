@@ -174,9 +174,9 @@ define(['angularAMD', 'service/preloader', 'service/userAgent'], function (angul
 				};
 
 				console.log(
-					'Look at you using the developer console, you techno wizard!\n' +
-					'Want to see something scary?\n' +
-					'Type "animate(\'exorcist\');"'
+					'Look at you using the developer console, you techno wizard!\n\n' +
+					'Want to see something scary?\n\n' +
+					'Type "animate(\'exorcist\');"\n\n'
 				);
 
 			}
