@@ -64,7 +64,6 @@ define(['angularAMD', 'config/preload', 'service/userAgent', 'directive/file'], 
 							//Load audio asset
 							case 'audio':
 								media = new Audio();
-								media.preload = 'none'; //let us preload manually
 								media.src = asset.src;
 
 								//For most browsers go a head and do the preload
