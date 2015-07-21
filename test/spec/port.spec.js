@@ -6,8 +6,8 @@
 define(['app', 'angularAMD'], function (app, angularAMD) {
 	'use strict';
 
-	describe('portfolio.js', function () {
-		console.log('### Running portfolio.spec.js: ');
+	describe('port.js', function () {
+		console.log('### Running port.spec.js: ');
 
 		var scope, ctrl, state;
 

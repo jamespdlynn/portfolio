@@ -86,7 +86,7 @@ define(function (require, exports, module) {
 		{
 			id: 'PortfolioController',
 			type: 'module',
-			src: 'controller/portfolio',
+			src: 'controller/port',
 			group: 'portfolio'
 		},
 
