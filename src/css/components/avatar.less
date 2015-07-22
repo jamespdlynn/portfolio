@@ -63,45 +63,42 @@
   .keyframe(exorcist, { background-position: 0px -378px }, { background-position: -1584px -378px });
   .keyframe(walk, { background-position: 0px -756px }, { background-position: -1584px -756px });
 
+
+  //For the phone shift the avatar off the screen on the left state
+  //and have an opaque arrow display instead to allow the user to navigate back
+  #arrow {
+    position: relative;
+    right: -40px;
+    top: 320px;
+    .user-select(none);
+    border-top: 18px solid transparent;
+    border-bottom: 18px solid transparent;
+    opacity: 0.5;
+    border-right: 24px solid #000;
+    z-index: 10;
+    display: none;
+  }
+
   //Phone media styles
   @media (max-width: @screen-phone) {
-
-    bottom: -20px;
-    .scale(0.9);
-
-
-
-    #arrow {
-      //For the phone shift the avatar off the screen on the left state
-      //and have an opaque arrow display instead to allow the user to navigate back
-      position: relative;
-      right: -40px;
-      top: 320px;
-      .user-select(none);
-      border-top: 18px solid transparent;
-      border-bottom: 18px solid transparent;
-      opacity: 0.5;
-      border-right: 24px solid #000;
-      z-index: 10;
-      display: none;
-    }
-
     &.left {
       overflow: visible;
-      left: -99px;
+      left: -99px; //move off screen
+    }
 
-      #arrow {
-        display: block;
-      }
-
-      &.walk {
-        .transform(scale(-0.9, 0.9));
-
-        #arrow {
-          display: none;
-        }
-      }
+    &.left:not(.walk) #arrow {
+      display: block;
     }
   }
+
+  //Shrink styles
+  .shrink({
+    .scale(0.9);
+    bottom: -20px;
+
+    &.left.walk {
+      .transform(scale(-0.9, 0.9));
+    }
+  });
 
 }

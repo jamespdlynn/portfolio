@@ -15,7 +15,7 @@
     //The first bubble element is uses a background image, the second two are merely circles
     .bubble {
       position: relative;
-      margin: 6px auto;
+      margin: 5px auto;
       opacity: 1;
       transition: transform ease-out 0.3s;
       background-color: #fff;
@@ -114,7 +114,7 @@
 
     &:nth-child(4) {
       .rotate(60deg);
-      margin-left: 70px;
+      margin-left: 74px;
       bottom: 250px;
 
       .bubble:nth-child(1) {
@@ -161,11 +161,12 @@
     }
   }
 
-  @media (max-width: @screen-phone) {
+  //shrink styles
+  .shrink({
     .nav-item {
       .bubble {
-        margin: 0px auto;
-        .scale(0.8);
+        margin: 3px auto;
+        .scale(0.85);
 
         &.main {
           margin: -12px auto;
@@ -173,22 +174,22 @@
       }
 
       &:nth-child(1) {
-        margin-left: -163px;
+        margin-left: -159px;
         bottom: 245px;
       }
 
       &:nth-child(2) {
-        margin-left: -105px;
+        margin-left: -102px;
         bottom: 325px;
       }
 
       &:nth-child(3) {
-        margin-left: -5px;
+        margin-left: -8px;
         bottom: 325px;
       }
 
       &:nth-child(4) {
-        margin-left: 48px;
+        margin-left: 44px;
         bottom: 245px;
       }
     }
@@ -196,6 +197,6 @@
     &.hidden .nav-item .bubble {
       .scale(0);
     }
-  }
+  })
 
 }
