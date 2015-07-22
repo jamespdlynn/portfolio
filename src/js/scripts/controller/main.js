@@ -21,9 +21,7 @@ define(['angularAMD', 'directive/avatar', 'directive/nav'], function (angularAMD
 
 		$scope.goToState = function (state) {
 			//Have to manually modify the windows url in order to transition to abstract states
-			state = state || {};
-			state.url = state.url || '';
-			window.location = '/#' + state.url;
+			window.location = $state.href(state.name);
 		};
 
 		//These helper functions allow events to be broadcast and received on this hierarchical level of the scope chain

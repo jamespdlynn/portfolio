@@ -13,7 +13,10 @@ define(['angularAMD', 'config/states', 'service/preloader', 'controller/main', '
 	//Save state configuration data to angular constant that can pulled in as a dependency
 	app.constant('$states', states);
 
-	app.config(function ($stateProvider, $urlRouterProvider, $states) {
+	app.config(function ($stateProvider, $urlRouterProvider, $locationProvider, $states) {
+
+		//! prefix needed for google crawler
+		$locationProvider.hashPrefix('!');
 
 		//Recursive function defining an array of states within the UI router
 		var createStates = function (states, path) {
@@ -51,7 +54,7 @@ define(['angularAMD', 'config/states', 'service/preloader', 'controller/main', '
 				});
 
 				if (state.isDefault) {
-					$urlRouterProvider.otherwise('/');
+					$urlRouterProvider.otherwise(state.url);
 				}
 
 				if (state.states) {
