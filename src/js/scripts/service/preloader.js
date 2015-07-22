@@ -40,75 +40,83 @@ define(['angularAMD', 'config/preload', 'service/userAgent', 'directive/file'], 
 
 				//Loop through configuration file search for objects with the given group identifier
 				preload.forEach(function (asset) {
-					if (asset.group === group) {
-						var media = null, deferred = $q.defer();
-
-						switch (asset.type) {
-
-							//Load RequireJS Javascript Module
-							case 'module' :
-								require([asset.src], function (res) {
-									media = res;
-									deferred.resolve();
-								}, deferred.reject);
-								break;
-
-							//Load image asset
-							case 'image':
-								media = new Image();
-								media.onload = deferred.resolve;
-								media.onerror = deferred.reject;
-								media.src = asset.src;
-								break;
-
-							//Load audio asset
-							case 'audio':
-								media = new Audio();
-								media.src = asset.src;
-
-								//For most browsers go a head and do the preload
-								if (!$userAgent.isIOS() && !$userAgent.isPhantomJS()) {
-									media.addEventListener('loadeddata', deferred.resolve, false);
-									media.addEventListener('error', deferred.reject, false);
-									media.load();
-								}
-								// IOS does not let us preload HTML audio objects without a touch event (LAME)
-								else {
-									// Use a regular http get call instead so the browser at least caches the data source
-									$http.get(asset.src).then(deferred.resolve, deferred.reject);
-
-									//Wait for a touch event to fire to preload the audio file
-									var loadAudio = function () {
-										media.load();
-										window.removeEventListener('touchstart', loadAudio);
-									};
-									window.addEventListener('touchstart', loadAudio);
-								}
-
-								break;
-
-							//For any other asset just use an http get call and save the returned data in whatever format it comes back in
-							default :
-								$http.get(asset.src).then(function (res) {
-									media = res.data;
-									deferred.resolve();
-								}, deferred.reject);
-								break;
-						}
-
-						//If cache is set to true store off the actual JS Module, DOM object, or server return value
-						//Otherwise just store the configuration object
-						assets[asset.id] = asset.cache ? media : asset;
-
-						deferred.promise.then(null, function () {
-							console.error('Error loading asset "' + asset.id + '"');
-							assets[asset.id].hasError = true;
-						});
-
-						//Save the asset load callback to the array
-						promiseArray.push(deferred.promise);
+					if (asset.group !== group) {
+						return;
 					}
+
+					var deferred = $q.defer();
+					var media = null;
+
+					switch (asset.type) {
+
+						//Load RequireJS Javascript Module
+						case 'module' :
+							require([asset.src], function (res) {
+								media = res;
+								deferred.resolve();
+							}, deferred.reject);
+							break;
+
+						//Load image asset
+						case 'image':
+							media = new Image();
+							media.onload = deferred.resolve;
+							media.onerror = deferred.reject;
+							media.src = asset.src;
+
+							if ($userAgent.isTest()){
+								$http.get(asset.src).then(deferred.resolve, deferred.reject);
+							}
+							break;
+
+						//Load audio asset
+						case 'audio':
+							if ($userAgent.isTest()) {
+								$http.get(asset.src).then(deferred.resolve, deferred.reject);
+								break;
+							}
+
+							media = new Audio(asset.src);
+
+							//For most browsers go a head and do the preload
+							if (!$userAgent.isIOS()) {
+								media.addEventListener('loadeddata', deferred.resolve, false);
+								media.addEventListener('error', deferred.reject, false);
+								media.load();
+							}
+							// IOS does not let us preload HTML audio objects without a touch event (LAME)
+							else {
+								// Use a regular http get call instead so the browser at least caches the data source
+								$http.get(asset.src).then(deferred.resolve, deferred.reject);
+								//Wait for a touch event to fire to preload the audio file
+								window.addEventListener('touchstart', function(){
+									if (media.readyState < 2) media.load();
+								});
+							}
+							break;
+
+						//For any other asset just use an http get call and save the returned data in whatever format it comes back in
+						default :
+							$http.get(asset.src).then(function (res) {
+								media = res.data;
+								deferred.resolve();
+							}, deferred.reject);
+							break;
+					}
+
+					//If cache is set to true store off the actual JS Module, DOM object, or server return value
+					//Otherwise just store the configuration object
+					assets[asset.id] = asset.cache ? media : asset;
+
+					deferred.promise.then(null, function () {
+						console.warn('error loading asset "' + asset.id + '"');
+						assets[asset.id].hasError = true;
+					});
+
+					//Save the asset load callback to the array
+					promiseArray.push(deferred.promise);
 				});
+
 
 				//Combine all the load promises for the group into a single promise, then save it off and return it
 				return (promises[group] = $q.all(promiseArray));
@@ -159,7 +167,7 @@ define(['angularAMD', 'config/preload', 'service/userAgent', 'directive/file'], 
 			play: function (id) {
 				var audio = assets[id];
 				if (!audio || !audio instanceof Audio || audio.hasError) {
-					console.error('Cannot play audio: ' + id);
+					console.warn('cannot play audio: ' + id);
 					return;
 				}
 

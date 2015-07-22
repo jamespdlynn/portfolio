@@ -29,9 +29,7 @@ define(['angularAMD'], function (angularAMD) {
 				return ua.match(/NET4|Trident|MSIE/g);
 			},
 
-			isPhantomJS: function () {
-				return ua.match(/PhantomJS/g);
-			},
+
 
 			isAndroid: function () {
 				return ua.match(/Android/g);
@@ -51,7 +49,11 @@ define(['angularAMD'], function (angularAMD) {
 
 			isMobile: function () {
 				return this.isAndroid() || this.isBlackberry() || this.isWindowsPhone() || this.isIOS();
-			}
+			},
+
+			isTest: function () {
+				return ua.match(/PhantomJS|Zombie/g);
+			},
 
 		};
 	});

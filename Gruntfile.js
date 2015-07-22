@@ -10,13 +10,8 @@ module.exports = function (grunt) {
 	// Grunt Config
 	grunt.initConfig({
 
-		clean: {
-			build: ['build'],
-			deploy : ['dist']
-		},
-
 		jshint: {
-			test: {
+			target: {
 				options: {
 					jshintrc: '.jshintrc'
 				},
@@ -30,9 +25,14 @@ module.exports = function (grunt) {
 		},
 
 		karma : {
-			test : {
+			target : {
 				configFile : 'test/karma.conf.js'
 			}
+		},
+
+		clean: {
+			build: ['build'],
+			dist : ['dist']
 		},
 
 		copy: {
@@ -45,7 +45,7 @@ module.exports = function (grunt) {
 				}
 			]},
 
-			deploy : {files: [
+			dist : {files: [
 				{
 					cwd: 'build/assets',
 					expand: true,
@@ -62,12 +62,12 @@ module.exports = function (grunt) {
 		},
 
 		less: {
-			deploy : {
+			target : {
 				options: {
-					compress : true,
-					modifyVars: {
-						//imgPath: config.cdnUrl
-					}
+					compress : true
+					/*modifyVars: {
+						imgPath: config.cdnUrl
+					}*/
 				},
 				files : {'dist/css/style.css' : 'build/css/style.less'}
 			}
@@ -75,7 +75,7 @@ module.exports = function (grunt) {
 		},
 
 		htmlmin: {
-			deploy: {
+			target: {
 				options: {
 					removeComments: true,
 					collapseWhitespace: true,
@@ -102,7 +102,7 @@ module.exports = function (grunt) {
 				singleQuotes : true
 			},
 
-			deploy : {
+			target : {
 				files: [{
 					expand : true,
 					cwd: 'build/js/scripts',
@@ -110,12 +110,10 @@ module.exports = function (grunt) {
 					src: '**/*.js'
 				}]
 			}
-
 		},
 
 		uglify: {
-
-			deploy: {
+			target: {
 				files: [{
 					expand: true,
 					cwd: 'build/js/scripts',
@@ -127,13 +125,22 @@ module.exports = function (grunt) {
 		},
 
 		imagemin : {
-			deploy : {
+			target : {
 				files: [{
 					expand: true,
 					cwd: 'build/assets/img/',
 					src: ['**/*.{png,jpg,gif}'],
 					dest: 'build/assets/img/'
 				}]
+			}
+		},
+
+		execute : {
+			target : {
+				options: {
+					args: ['build', 'dist']
+				},
+				src: ['sitemap.js']
 			}
 		}
 
@@ -147,7 +154,7 @@ module.exports = function (grunt) {
 
 		'test', //Run tests
 
-		'clean', //Delete both build and deploy directories
+		'clean', //Delete both build and dist directories
 
 		'copy:build', //Copy source files to temporary build directory
 
@@ -161,7 +168,9 @@ module.exports = function (grunt) {
 
 		'imagemin', //Compress image assets
 
-		'copy:deploy', //Copy remaining files to deploy directory
+		'copy:dist', //Copy remaining files to dist directory
+
+		'execute', //Create sitemap xml for crawlers
 
 		'clean:build' //Delete temporary build directory
 
