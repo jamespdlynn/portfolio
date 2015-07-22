@@ -24,15 +24,6 @@ require.config({
 		ngload: ['angularAMD']
 	},
 
-	config: {
-		'config/preload': {
-			path: '/assets'
-		},
-		'config/states': {
-			path: '/templates'
-		}
-	},
-
 	deps: ['app'] //Load in app.js to kick off the angular application
 });
 
