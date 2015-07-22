@@ -56,7 +56,7 @@ module.exports = function (grunt) {
 					cwd: 'build/js/lib',
 					expand: true,
 					dest: 'dist/js/lib',
-					src: '*.min.js|require.js'
+					src: ['*.min.js','require.js']
 				}
 			]}
 		},
