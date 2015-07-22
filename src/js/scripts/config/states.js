@@ -7,7 +7,7 @@
 define(function (require, exports, module) {
 	'use strict';
 
-	var path = module.config().path;
+	var templatePath = module.config().path || '/templates';
 
 	/**
 	 * @typedef {Object} state
@@ -36,56 +36,50 @@ define(function (require, exports, module) {
 		{
 			id: 'about',
 			label: 'About Me',
-			templateUrl: path + '/about.html'
+			templateUrl: templatePath + '/about.html'
 		},
 
 		{
 			id: 'portfolio',
 			label: 'Portfolio',
 			controller: 'PortfolioController',
-			templateUrl: path + '/portfolio.html',
+			templateUrl: templatePath + '/portfolio.html',
 			abstract: true,
 			states: [
 				{
 					id: 'hyper',
-					url: '/hyper-galactic',
 					label: 'Hyper Galactic',
-					templateUrl: path + '/portfolio/hyper-galactic.html'
+					templateUrl: templatePath + '/portfolio/hyper.html'
 				},
 
 				{
 					id: 'chess',
-					url: '/chess-chaps',
 					label: 'Chess Chaps',
-					templateUrl: path + '/portfolio/chess-chaps.html'
+					templateUrl: templatePath + '/portfolio/chess.html'
 				},
 
 				{
 					id: 'league',
-					url: '/league-champs',
 					label: 'League Champs',
-					templateUrl: path + '/portfolio/league-champs.html'
+					templateUrl: templatePath + '/portfolio/league.html'
 				},
 
 				{
 					id: 'inmar',
-					url: '/inmar-digital-coupons',
 					label: 'Inmar Digital Coupons',
-					templateUrl: path + '/portfolio/inmar-digital-coupons.html'
+					templateUrl: templatePath + '/portfolio/inmar.html'
 				},
 
 				{
 					id: 'emerson',
-					url: '/emeson-io',
 					label: 'Emerson IO Calculator',
-					templateUrl: path + '/portfolio/emerson-io.html'
+					templateUrl: templatePath + '/portfolio/emerson.html'
 				},
 
 				{
 					id: 'oracle',
-					url: '/oracle-roi-calculator',
 					label: 'Oracle ROI Calculator',
-					templateUrl: path + '/portfolio/oracle-roi-calculator.html'
+					templateUrl: templatePath + '/portfolio/oracle.html'
 				}
 
 			]
@@ -94,14 +88,14 @@ define(function (require, exports, module) {
 		{
 			id: 'resume',
 			label: 'Resume',
-			templateUrl: path + '/resume.html'
+			templateUrl: templatePath + '/resume.html'
 		},
 
 		{
 			id: 'contact',
 			label: 'Contact',
 			controller: 'ContactController',
-			templateUrl: path + '/contact.html'
+			templateUrl: templatePath + '/contact.html'
 		}
 
 	];

@@ -7,7 +7,7 @@
 define(function (require, exports, module) {
 	'use strict';
 
-	var path = module.config().path;
+	var assetsPath = module.config().path || '/assets';
 
 	/**
 	 * @typedef {Object} asset
@@ -24,21 +24,21 @@ define(function (require, exports, module) {
 		{
 			id: 'sprites',
 			type: 'image',
-			src: path + '/img/sprites.png',
+			src: assetsPath + '/img/sprites.png',
 			group: 'main'
 		},
 
 		{
 			id: 'bubble',
 			type: 'image',
-			src: path + '/img/bubble.png',
+			src: assetsPath + '/img/bubble.png',
 			group: 'main'
 		},
 
 		{
 			id: 'click',
 			type: 'audio',
-			src: path + '/audio/click.mp3',
+			src: assetsPath + '/audio/click.mp3',
 			group: 'main',
 			cache: true
 		},
@@ -46,7 +46,7 @@ define(function (require, exports, module) {
 		{
 			id: 'bloop',
 			type: 'audio',
-			src: path + '/audio/bloop.mp3',
+			src: assetsPath + '/audio/bloop.mp3',
 			group: 'main',
 			cache: true
 		},
@@ -54,7 +54,7 @@ define(function (require, exports, module) {
 		{
 			id: 'swoosh',
 			type: 'audio',
-			src: path + '/audio/swoosh.mp3',
+			src: assetsPath + '/audio/swoosh.mp3',
 			group: 'main',
 			cache: true
 		},
@@ -62,7 +62,7 @@ define(function (require, exports, module) {
 		{
 			id: 'walk',
 			type: 'audio',
-			src: path + '/audio/walk.mp3',
+			src: assetsPath + '/audio/walk.mp3',
 			group: 'main',
 			cache: true
 		},
@@ -70,7 +70,7 @@ define(function (require, exports, module) {
 		{
 			id: 'scream',
 			type: 'audio',
-			src: path + '/audio/scream.mp3',
+			src: assetsPath + '/audio/scream.mp3',
 			group: 'main',
 			cache: true
 		},
@@ -78,7 +78,7 @@ define(function (require, exports, module) {
 		{
 			id: 'portrait',
 			type: 'image',
-			src: path + '/img/portrait.png',
+			src: assetsPath + '/img/portrait.png',
 			group: 'about',
 			cache: true
 		},
@@ -93,7 +93,7 @@ define(function (require, exports, module) {
 		{
 			id: 'hyper',
 			type: 'image',
-			src: path + '/img/portfolio/hyper.png',
+			src: assetsPath + '/img/portfolio/hyper.png',
 			group: 'portfolio',
 			cache: true
 		},
@@ -101,7 +101,7 @@ define(function (require, exports, module) {
 		{
 			id: 'hyperNav',
 			type: 'image',
-			src: path + '/img/portfolio/hyper-nav.png',
+			src: assetsPath + '/img/portfolio/hyper-nav.png',
 			group: 'portfolio',
 			cache: true
 		},
@@ -109,7 +109,7 @@ define(function (require, exports, module) {
 		{
 			id: 'league',
 			type: 'image',
-			src: path + '/img/portfolio/league.png',
+			src: assetsPath + '/img/portfolio/league.png',
 			group: 'portfolio',
 			cache: true
 		},
@@ -117,7 +117,7 @@ define(function (require, exports, module) {
 		{
 			id: 'leagueNav',
 			type: 'image',
-			src: path + '/img/portfolio/league-nav.png',
+			src: assetsPath + '/img/portfolio/league-nav.png',
 			group: 'portfolio',
 			cache: true
 		},
@@ -125,7 +125,7 @@ define(function (require, exports, module) {
 		{
 			id: 'chess',
 			type: 'image',
-			src: path + '/img/portfolio/chess.png',
+			src: assetsPath + '/img/portfolio/chess.png',
 			group: 'portfolio',
 			cache: true
 		},
@@ -133,7 +133,7 @@ define(function (require, exports, module) {
 		{
 			id: 'chessNav',
 			type: 'image',
-			src: path + '/img/portfolio/chess-nav.png',
+			src: assetsPath + '/img/portfolio/chess-nav.png',
 			group: 'portfolio',
 			cache: true
 		},
@@ -141,7 +141,7 @@ define(function (require, exports, module) {
 		{
 			id: 'oracle',
 			type: 'image',
-			src: path + '/img/portfolio/oracle.png',
+			src: assetsPath + '/img/portfolio/oracle.png',
 			group: 'portfolio',
 			cache: true
 		},
@@ -149,7 +149,7 @@ define(function (require, exports, module) {
 		{
 			id: 'oracleNav',
 			type: 'image',
-			src: path + '/img/portfolio/oracle-nav.png',
+			src: assetsPath + '/img/portfolio/oracle-nav.png',
 			group: 'portfolio',
 			cache: true
 		},
@@ -157,7 +157,7 @@ define(function (require, exports, module) {
 		{
 			id: 'emerson',
 			type: 'image',
-			src: path + '/img/portfolio/emerson.png',
+			src: assetsPath + '/img/portfolio/emerson.png',
 			group: 'portfolio',
 			cache: true
 		},
@@ -165,7 +165,7 @@ define(function (require, exports, module) {
 		{
 			id: 'emersonNav',
 			type: 'image',
-			src: path + '/img/portfolio/emerson-nav.png',
+			src: assetsPath + '/img/portfolio/emerson-nav.png',
 			group: 'portfolio',
 			cache: true
 		},
@@ -173,7 +173,7 @@ define(function (require, exports, module) {
 		{
 			id: 'inmar',
 			type: 'image',
-			src: path + '/img/portfolio/inmar.png',
+			src: assetsPath + '/img/portfolio/inmar.png',
 			group: 'portfolio',
 			cache: true
 		},
@@ -181,7 +181,7 @@ define(function (require, exports, module) {
 		{
 			id: 'inmarNav',
 			type: 'image',
-			src: path + '/img/portfolio/inmar-nav.png',
+			src: assetsPath + '/img/portfolio/inmar-nav.png',
 			group: 'portfolio',
 			cache: true
 		},
@@ -189,7 +189,7 @@ define(function (require, exports, module) {
 		{
 			id: 'resume',
 			type: 'pdf',
-			src: path + '/docs/resume.pdf',
+			src: assetsPath + '/docs/resume.pdf',
 			group: 'resume'
 		},
 
@@ -203,14 +203,14 @@ define(function (require, exports, module) {
 		{
 			id: 'check',
 			type: 'image',
-			src: path + '/img/check.png',
+			src: assetsPath + '/img/check.png',
 			group: 'contact'
 		},
 
 		{
 			id: 'mail',
 			type: 'audio',
-			src: path + '/audio/mail.mp3',
+			src: assetsPath + '/audio/mail.mp3',
 			group: 'contact',
 			cache: true
 		}
