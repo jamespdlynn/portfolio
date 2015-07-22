@@ -1,0 +1,6 @@
+{
+  "host" : "localhost",
+  "port" : "25",
+  "sender" : "contact@destructor.com",
+  "recipient" : "jamespdlynn@gmail.com"
+}
