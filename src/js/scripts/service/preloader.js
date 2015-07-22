@@ -11,7 +11,7 @@ define(['angularAMD', 'config/preload', 'service/userAgent', 'directive/file'], 
 
 		var promises = {}, assets = {};
 
-		return {
+		var $preloader = {
 
 			assets: assets,
 
@@ -64,6 +64,7 @@ define(['angularAMD', 'config/preload', 'service/userAgent', 'directive/file'], 
 							media.onerror = deferred.reject;
 							media.src = asset.src;
 
+							//onload is not supported in some test browsers so use http get to resolve call instead
 							if ($userAgent.isTest()){
 								$http.get(asset.src).then(deferred.resolve, deferred.reject);
 							}
@@ -71,6 +72,7 @@ define(['angularAMD', 'config/preload', 'service/userAgent', 'directive/file'], 
 
 						//Load audio asset
 						case 'audio':
+							//Audio tags are not supported in test browsers, so don't bother with them
 							if ($userAgent.isTest()) {
 								$http.get(asset.src).then(deferred.resolve, deferred.reject);
 								break;
@@ -78,22 +80,17 @@ define(['angularAMD', 'config/preload', 'service/userAgent', 'directive/file'], 
 
 							media = new Audio(asset.src);
 
-							//For most browsers go a head and do the preload
-							if (!$userAgent.isIOS()) {
+							if (!isAudioLocked()){
 								media.addEventListener('loadeddata', deferred.resolve, false);
 								media.addEventListener('error', deferred.reject, false);
 								media.load();
 							}
-							// IOS does not let us preload HTML audio objects without a touch event (LAME)
-							else {
-								// Use a regular http get call instead so the browser at least caches the data source
+							else{
 								$http.get(asset.src).then(deferred.resolve, deferred.reject);
-								//Wait for a touch event to fire to preload the audio file
-								window.addEventListener('touchstart', function(){
-									if (media.readyState < 2) media.load();
-								});
 							}
-							break;
+
+
+						break;
 
 						//For any other asset just use an http get call and save the returned data in whatever format it comes back in
 						default :
@@ -116,7 +113,6 @@ define(['angularAMD', 'config/preload', 'service/userAgent', 'directive/file'], 
 					//Save the asset load callback to the array
 					promiseArray.push(deferred.promise);
 				});
-
 
 				//Combine all the load promises for the group into a single promise, then save it off and return it
 				return (promises[group] = $q.all(promiseArray));
@@ -161,21 +157,56 @@ define(['angularAMD', 'config/preload', 'service/userAgent', 'directive/file'], 
 			},
 
 			/**
-			 * Helper play method that only plays the given audio file
-			 * @param id {string} Id of the preloaded audio asset to play
+			 * Helper play method that only plays the given audio file if it is ready
+			 * @param id {string} id of the preloaded audio asset to play
+			 * @param [force=false] {boolean} play audio even if not ready
 			 */
-			play: function (id) {
+			play: function (id, force) {
 				var audio = assets[id];
 				if (!audio || !audio instanceof Audio || audio.hasError) {
 					console.warn('cannot play audio: ' + id);
 					return;
 				}
 
-				audio.play();
+				if (audio.readyState === 4 || force){
+					audio.play();
+				}
 			}
 
 		};
 
+		//IOS doesn't let us preload audio without a touch event (LAME) so we have use some custom logic
+
+		var audioUnlocked = false;
+
+		function isAudioLocked(){
+			return $userAgent.isIOS() && !audioUnlocked;
+		}
+
+		function unlockAudio(){
+			window.removeEventListener('touchstart', unlockAudio);
+
+			var keys = Object.keys(assets);
+			keys.forEach(function(key){
+				if (assets[key] instanceof Audio){
+					assets[key].load();
+				}
+			});
+			audioUnlocked = true;
+		}
+
+
+		//listen for touch event before fires and then preload any existing audio assets
+		if (isAudioLocked()){
+			window.addEventListener('touchstart', unlockAudio);
+		}
+
+		return $preloader;
+
 	});
+
+
+
+
 
 });
