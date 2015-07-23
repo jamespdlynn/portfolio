@@ -57,6 +57,10 @@ module.exports = function (grunt) {
 					expand: true,
 					dest: 'dist/js/lib',
 					src: ['*.min.js','require.js']
+				},
+				{
+					src: 'build/favicon.ico',
+					dest: 'dist/favicon.ico'
 				}
 			]}
 		},
