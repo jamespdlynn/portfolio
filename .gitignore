@@ -1,7 +1,7 @@
-.idea/*
+.idea
 *.iml
-node_modules/*
-style.css
-dist/*
-build
+/node_modules
+/src/css/style.css
+/dist
+/build
 *.log
