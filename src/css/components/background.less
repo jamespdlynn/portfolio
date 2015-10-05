@@ -4,7 +4,7 @@
   top: 0;
   right: 0;
   bottom: 0;
-  #gradient > .vertical(#4c9ed8, #c9e7ff); //blue gradient
+  #gradient > .vertical(#4c9ed8, #c4e2f9); //blue gradient
   overflow: hidden;
 
   //Draw and animate clouds with only css techniques
@@ -74,7 +74,8 @@
   //For small devices, use a less drastic gradient and shrink and hide some of the clouds
   @media (max-width: @screen-phone) {
 
-    #gradient > .vertical(#7fc3de, #c9e7ff);
+    #gradient > .vertical(#7fc3de, #c4e2f9);
+
 
     .cloud {
 
@@ -105,3 +106,4 @@
   .keyframe(move, { left: -350px });
 
 }
+
