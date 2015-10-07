@@ -3,7 +3,7 @@
 #portfolio {
 
   overflow: hidden;
-  padding: 0 0 30px;
+  padding: 0 0 25px;
 
   //Slick slider navigation controls
   .header {
@@ -63,20 +63,21 @@
     .footer {
       width: 100%;
       text-align: right;
-
-      @media (min-width: @screen-lg-min) {
-        position:absolute;
-        bottom:30px;
-        right: 15px;
-      }
-
     }
-
 
     @media (max-width: @screen-lg) {
       min-height: 90vh;
     }
 
+  }
+
+  @media (min-width: @screen-lg-min) {
+   padding-bottom: 60px;
+   .footer {
+      position:absolute;
+      bottom:40px;
+      right: 15px;
+    }
   }
 
 }
