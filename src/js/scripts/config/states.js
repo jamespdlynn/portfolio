@@ -71,6 +71,12 @@ define(function (require, exports, module) {
 				},
 
 				{
+					id: 'emerson',
+					label: 'Emerson IO Calculator',
+					templateUrl: templatePath + '/portfolio/emerson.html'
+				},
+
+				{
 					id: 'oracle',
 					label: 'Oracle ROI Calculator',
 					templateUrl: templatePath + '/portfolio/oracle.html'
