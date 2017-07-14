@@ -155,6 +155,22 @@ define(function (require, exports, module) {
 		},
 
 		{
+			id: 'emerson',
+			type: 'image',
+			src: assetsPath + '/img/portfolio/emerson.png',
+			group: 'portfolio',
+			cache: true
+		},
+
+		{
+			id: 'emersonNav',
+			type: 'image',
+			src: assetsPath + '/img/portfolio/emerson-nav.png',
+			group: 'portfolio',
+			cache: true
+		},
+
+		{
 			id: 'inmar',
 			type: 'image',
 			src: assetsPath + '/img/portfolio/inmar.png',
