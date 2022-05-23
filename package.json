@@ -25,7 +25,6 @@
     "emailjs": "^0.3.16",
     "express": "^4.12.4",
     "less-middleware": "^2.0.1"
-
   },
   "devDependencies": {
     "grunt": "^0.4.5",
@@ -49,6 +48,6 @@
     "minimist": "^1.1.1",
     "requirejs": "^2.1.19",
     "xmlbuilder": "^2.6.4",
-     "phantomjs": "^1.9.18"
+    "phantomjs": "^1.9.18"
   }
 }
