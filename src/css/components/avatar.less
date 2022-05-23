@@ -10,7 +10,7 @@
   height: 378px;
   cursor: pointer;
   z-index: 3;
-  overflow: hidden;
+  overflow: visible;
   .background('sprites.png', transparent, left top);
   .user-select(none);
 
@@ -63,7 +63,6 @@
   .keyframe(exorcist, { background-position: 0px -378px }, { background-position: -1584px -378px });
   .keyframe(walk, { background-position: 0px -756px }, { background-position: -1584px -756px });
 
-
   //For the phone shift the avatar off the screen on the left state
   //and have an opaque arrow display instead to allow the user to navigate back
   #arrow {
@@ -79,26 +78,36 @@
     display: none;
   }
 
+  #home-btn {
+    position: relative;
+    right: -180px;
+    top: 324px;
+    width: 60px;
+    font-size: 20px;
+    z-index: 10;
+    display: none;
+
+    .scale(0.9);
+  }
+
+  &.left:not(.walk) #home-btn {
+    display: block;
+  }
+
   //Phone media styles
   @media (max-width: @screen-phone) {
     &.left {
-      overflow: visible;
       left: -99px; //move off screen
     }
 
-    &.left:not(.walk) #arrow {
-      display: block;
+    #home-btn {
+      right: -210px;
     }
   }
 
   //Shrink styles
-  .shrink({
-    .scale(0.9);
-    bottom: -20px;
-
-    &.left.walk {
-      .transform(scale(-0.9, 0.9));
-    }
-  });
+  .shrink({ .scale(0.9); bottom: -20px; &.left.walk {
+    .transform(scale(-0.9, 0.9));
+  } });
 
 }

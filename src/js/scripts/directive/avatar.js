@@ -5,184 +5,192 @@
  * @author James Lynn
  */
 define(['angularAMD', 'service/preloader', 'service/userAgent'], function (angularAMD) {
-	'use strict';
+  'use strict';
 
-	angularAMD.directive('avatar', function () {
+  angularAMD.directive('avatar', function () {
 
-		return {
-			restrict: 'E',
+    return {
+      restrict: 'E',
 
-			//Disassociated scope
-			scope: true,
+      //Disassociated scope
+      scope: true,
 
-			controller: function ($scope, $rootScope, $timeout, $preloader) {
+      controller: function ($scope, $rootScope, $timeout, $preloader) {
 
-				/**
-				 * CSS animation properties
-				 * @typedef {Object} animation
-				 * @property {number} duration - Length of animation
-				 * @property {audio} Audio - The associated audio file
-				 */
+        /**
+         * CSS animation properties
+         * @typedef {Object} animation
+         * @property {number} duration - Length of animation
+         * @property {audio} Audio - The associated audio file
+         */
 
-				/**
-				 * @readonly
-				 * @type {animation}
-				 */
-				var Animations = {
+        /**
+         * @readonly
+         * @type {animation}
+         */
+        var Animations = {
 
-					blink: {duration: 600},
+          blink: {duration: 600},
 
-					wave: {duration: 2000},
+          wave: {duration: 2000},
 
-					dance: {duration: 1600},
+          dance: {duration: 1600},
 
-					walk: {
-						audio: $preloader.fetch('walk'),
-						duration: 2000
-					},
+          walk: {
+            audio: $preloader.fetch('walk'),
+            duration: 2000
+          },
 
-					exorcist: {
-						audio: $preloader.fetch('scream'),
-						duration: 2400
-					}
+          exorcist: {
+            audio: $preloader.fetch('scream'),
+            duration: 2400
+          }
 
-				};
+        };
 
-				var promise = null;
+        var promise = null;
 
-				//Every five second execute a random animation
-				var animateRandom = function () {
-					promise = $timeout(function () {
-						//70% chance to blink, 15% chance to wave, 15% chance to dance
-						var num = Math.random();
-						$scope.animate((num >= 0.3 ? 'blink' : (num >= 0.15 ? 'wave' : 'dance')));
-					}, 5000);
+        //Every five second execute a random animation
+        var animateRandom = function () {
+          promise = $timeout(function () {
+            //70% chance to blink, 25% chance to wave, 5% chance to dance
+            var num = Math.random();
+            $scope.animate((num >= 0.3 ? 'blink' : (num >= 0.05 ? 'wave' : 'dance')));
+          }, 2500);
 
-					return $scope;
-				};
+          return $scope;
+        };
 
-				angular.extend($scope, {
 
-					animation: '',
+        setTimeout(function () {
+          if ($scope.isHome()) {
+            $scope.emit($scope.Events.NAV_TOGGLE);
+          }
+        }, 100);
 
-					isLeft: !$scope.isHome(),
 
-					/**
-					 * Resets any current animation and associated audio
-					 * @returns $scope
-					 */
-					reset: function () {
-						if ($scope.animation) {
-							var audio = Animations[$scope.animation].audio;
-							//Bug resetting audio on IOS devices
-							if (audio && audio.currentTime) {
-								audio.pause();
-								audio.currentTime = 0;
-							}
-						}
+        angular.extend($scope, {
 
-						$timeout.cancel(promise);
-						$scope.animation = '';
+          animation: '',
 
-						return $scope;
-					},
+          isLeft: !$scope.isHome(),
 
-					/**
-					 * Sets an animation class on the avatar
-					 * @param type {string} One of the predefined animation types
-					 * @returns {Promise} Object that resolves on animation completion
-					 */
-					animate: function (type) {
+          /**
+           * Resets any current animation and associated audio
+           * @returns $scope
+           */
+          reset: function () {
+            if ($scope.animation) {
+              var audio = Animations[$scope.animation].audio;
+              //Bug resetting audio on IOS devices
+              if (audio && audio.currentTime) {
+                audio.pause();
+                audio.currentTime = 0;
+              }
+            }
 
-						if (!Animations.hasOwnProperty(type)) {
-							console.error('Invalid animation: ' + type);
-							return null;
-						}
+            $timeout.cancel(promise);
+            $scope.animation = '';
 
-						$scope.reset();
-						$scope.animation = type;
+            return $scope;
+          },
 
-						if (Animations[type].audio) {
-							Animations[type].audio.play();
-						}
+          /**
+           * Sets an animation class on the avatar
+           * @param type {string} One of the predefined animation types
+           * @returns {Promise} Object that resolves on animation completion
+           */
+          animate: function (type) {
 
-						//When animation completes reset scope
-						promise = $timeout(function () {
-							$timeout(function () {
-								$scope.reset();
-								animateRandom();
-							});
-						}, Animations[type].duration);
+            if (!Animations.hasOwnProperty(type)) {
+              console.error('Invalid animation: ' + type);
+              return null;
+            }
 
-						return promise;
-					},
+            $scope.reset();
+            $scope.animation = type;
 
-					/**
-					 * Animates a walk
-					 * @returns {Promise}
-					 */
-					toggle: function () {
-						$scope.isLeft = !$scope.isLeft;
-						return $scope.animate('walk');
-					},
+            if (Animations[type].audio) {
+              Animations[type].audio.play();
+            }
 
-					isWalking: function () {
-						return $scope.animation === 'walk';
-					},
+            //When animation completes reset scope
+            promise = $timeout(function () {
+              $timeout(function () {
+                $scope.reset();
+                animateRandom();
+              });
+            }, Animations[type].duration);
 
-					onClick: function () {
-						if ($scope.isWalking()) {
-							return;
-						}
+            return promise;
+          },
 
-						if ($scope.isLeft) {
-							//animate back to center
-							$scope.toggle().then(function () {
-								$scope.emit($scope.Events.NAV_TOGGLE); //on completion nav show
-							});
-							$scope.goHome(); //trigger state change immediately
-						}
-						else {
-							$scope.emit($scope.Events.NAV_TOGGLE);
-						}
-					}
+          /**
+           * Animates a walk
+           * @returns {Promise}
+           */
+          toggle: function () {
+            $scope.isLeft = !$scope.isLeft;
+            return $scope.animate('walk');
+          },
 
-				});
+          isWalking: function () {
+            return $scope.animation === 'walk';
+          },
 
-				$scope.on($scope.Events.AVATAR_TOGGLE, function (event, state) {
-					$scope.toggle().then(function () {
-						$scope.goToState(state); //On walk animation completion trigger state change
-					});
-				});
+          onClick: function () {
+            if ($scope.isWalking()) {
+              return;
+            }
 
-				$scope.on($scope.Events.STATE_CHANGE, function () {
-					//If state change does not match avatars current transition state (as in the case of manipulating the state directly through the browser)
-					//Override any current animations and manually position the avatar
-					if ($scope.isHome() === $scope.isLeft) {
-						$scope.reset();
-						$scope.isLeft = !$scope.isHome();
-						animateRandom();
-					}
-				});
+            if ($scope.isLeft) {
+              //animate back to center
+              $scope.toggle().then(function () {
+                $scope.emit($scope.Events.NAV_TOGGLE); //on completion nav show
+              });
+              $scope.goHome(); //trigger state change immediately
+            }
+            else {
+              $scope.emit($scope.Events.NAV_TOGGLE);
+            }
+          }
 
-				animateRandom();
+        });
 
-				//Add global function so you can animate from the console
-				window.animate = function (type) {
-					$scope.animate(type);
-					$scope.$digest();
-				};
+        $scope.on($scope.Events.AVATAR_TOGGLE, function (event, state) {
+          $scope.toggle().then(function () {
+            $scope.goToState(state); //On walk animation completion trigger state change
+          });
+        });
 
-				console.log(
-					'Look at you using the developer console, you techno wizard!\n\n' +
-					'Want to see something scary?\n\n' +
-					'Type "animate(\'exorcist\');"\n\n'
-				);
+        $scope.on($scope.Events.STATE_CHANGE, function () {
+          //If state change does not match avatars current transition state (as in the case of manipulating the state directly through the browser)
+          //Override any current animations and manually position the avatar
+          if ($scope.isHome() === $scope.isLeft) {
+            $scope.reset();
+            $scope.isLeft = !$scope.isHome();
+            animateRandom();
+          }
+        });
 
-			}
+        animateRandom();
 
-		};
+        //Add global function so you can animate from the console
+        window.animate = function (type) {
+          $scope.animate(type);
+          $scope.$digest();
+        };
 
-	});
+        console.log(
+          'Look at you using the developer console, you techno wizard!\n\n' +
+          'Want to see something scary?\n\n' +
+          'Type "animate(\'exorcist\');"\n\n'
+        );
+
+      }
+
+    };
+
+  });
 });
 
