@@ -1,31 +1,44 @@
 <section class="view">
 
-    <a file src="'wordJumble'" href="http://hypergalactic.net" target="_blank" class="img"></a>
+    <div file src="'wordJumble'" class="portfolio-img img"></div>
 
     <p>
-        <strong>Emerson I/O on Demand</strong> is an online marketing site/app that advertises the cost benefits of the
-        company's electronic marshalling systems.
+        <strong>Word Jumble</strong> is the first game to integrate the <b>Play Plays</b> meta game and avatars.
+    </p>
+    <p>
+        It is a multiplayer "word-finder" (similar to the popular Hasbro board game: Boggle) where players are given two minutes to find
+        as many as words possible, with longer words and more difficult letters granting them extra points.
     </p>
 
     <p>
-        The app is a true thick client in that nearly all the code, with the exception of a small PHP mailing script,
-        exists client side. It was built with the BackboneJS MVC framework, and uses
-        the associated router component to deep link between "pages".
-
-    <p>
-        For the "Calculate Savings" page, the algorithms used had to (rather painstackingly) be extracted
-        from Excel spreadsheets into javascript (it was deemed Ok to keep this logic client side as the algorithms
-        themselves were not proprietary). The graphs on that page
-        are dynamically drawn with the RaphelJS vector library, which offered enough flexibility to keep with the
-        original designs.
+        Players can choose from multiple game modes:
+    <ul>
+        <li><b>Solo Games:</b> where a player tries to beat their personal high score.</li><br/>
+        <li><b>Versus Games:</b> where a player competes online against friends or matched opponents over the course of three
+            rounds.
+        </li><br/>
+    <li><b>Daily Tournaments:</b> where up to a dozen players compete on the same specialized board for large prizes.</li>
+    </ul>
+    The game also features it's own proprietary player rating and tier system, which is used to both match players of
+    similar abilities to each other as well as function as a progression system for more competitive players.
     </p>
 
     <p>
-        Despite its responsive nature, the entire site is backwards compatible all the way to IE8.
+        The client apps are built using the Unity game engine and C# (which gets transpiled into native IOS and Android
+        code), and communicate to the 512 Games AWS server stack primarily using RESTFul HTTPs API calls.
     </p>
+
+    <p>
+        <strong>Play Pals: Word Jumble</strong> currently holds a <strong>4.8 star</strong> rating in both the Google Play and Apple App Stores, with over five
+        thousand combined installs to date.
+    </p>
+
 
     <p class="footer">
-        <a href="http://ioondemandcalculator.com" class="btn btn-primary btn-lg" target="_blank">View Website</a>
+        <a file src="'appStoreButton'" class="store-btn" href="https://apps.apple.com/us/app/play-pals-word-jumble/id1594090339" target="_blank"></a>
+        <a file src="'playStoreButton'" class="store-btn" href="https://play.google.com/store/apps/details?id=com.fiveonetwo.boggle" target="_blank"></a>
+
+
     </p>
 </section>
 

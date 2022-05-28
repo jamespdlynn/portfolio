@@ -5,6 +5,28 @@
   overflow: hidden;
   padding: 0 0 25px;
 
+  @media (max-width: @screen-phone) {
+    .portfolio-img {
+      width:100%;
+      margin-bottom: 10px;
+    }
+  }
+
+  .footer {
+    height: 200px;
+
+    text-align: right;
+
+    .store-btn{
+      margin-left:20px;
+
+      img {
+        width: 200px;
+        background-size: contain;
+      }
+    }
+  }
+
   //Slick slider navigation controls
   .header {
     width: 100%;
@@ -15,13 +37,13 @@
 
     .slider {
       display: none;
-    overflow-y: visible;
+      overflow-y: visible;
 
       &.slick-slider {
         display: block;
         width: 100%;
         height: 100%;
-            overflow-y: visible;
+        overflow-y: visible;
 
         .box-sizing(border-box);
         .user-select(none);
@@ -67,30 +89,5 @@
 
   }
 
-  //Set a default minimum height for the sub view container to prevent the nav from jumping up and down
-  //This height is dependent on the screen size
-  .view {
-    min-height: 530px;
-    padding: 0 15px;
-
-    .footer {
-      width: 100%;
-      text-align: right;
-    }
-
-    .aws-img {
-      max-width: 512px;
-    }
-
-  }
-
-  @media (min-width: @screen-lg-min) {
-    padding-bottom: 60px;
-    .footer {
-      position: absolute;
-      bottom: 40px;
-      right: 15px;
-    }
-  }
 
 }

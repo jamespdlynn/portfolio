@@ -4,14 +4,22 @@
   position: absolute;
   left: 20%;
   bottom: 0px;
-  top:0px;
+  top: 0px;
 
-  padding-top:15px;
-  padding-bottom: 80px;
+  padding-top: 50px;
+  padding-bottom: 50px;
   overflow-y: auto;
   overflow-x: hidden;
   width: 100%;
   .transition(0.5s linear opacity);
+
+  h1, h2 {
+    margin-top:5px;
+  }
+
+  @media (max-width: @screen-phone) {
+    padding-top: 15px;
+  }
 
   .content {
 
@@ -21,12 +29,16 @@
     position: relative;
     .box-sizing(border-box);
 
+    @media (max-width: @screen-lg) {
+      max-width: 920px;
+    }
+
+
     font-size: 24px;
     line-height: 33px;
     padding: 15px 15px 35px;
 
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: antialiased;
     p {
       &:first-of-type {
         margin-top: 0;
@@ -40,12 +52,14 @@
 
     .img {
       float: right;
-      margin-left: 15px;
+      margin-left: 10px;
       .rounded(4px);
-      max-width: 400px;
+
+      width: 50%;
+      max-width: 512px;
 
       &.portrait {
-        width:55%;
+        max-width: 400px
       }
 
       img {
@@ -88,9 +102,13 @@
     right: 0;
 
     .content {
+
+      h1 {
+        font-size:32px;
+      }
       padding: 15px 15px 25px;
       font-size: 20px;
-      line-height: 23px;
+      line-height: 22.5px;
 
       .btn {
         font-size: 16px;
