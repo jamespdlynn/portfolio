@@ -4,12 +4,12 @@
   height: 100%;
   position: relative;
 
-  .shrink(@styles){
-    @media (max-width: 400px), (max-height: 580px){
+
+  .shrink(@styles) {
+    @media (max-width: 400px), (max-height: 580px) {
       @styles();
     }
   }
-
 
   @import "nav";
   @import "avatar";

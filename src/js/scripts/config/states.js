@@ -41,46 +41,29 @@ define(function (require, exports, module) {
 
 		{
 			id: 'portfolio',
-			label: 'Portfolio',
+			label: '512 Games',
 			controller: 'PortfolioController',
 			templateUrl: templatePath + '/portfolio.html',
 			abstract: true,
 			states: [
 				{
-					id: 'hyper',
-					label: 'Hyper Galactic',
-					templateUrl: templatePath + '/portfolio/hyper.html'
+					id: '512Games',
+					label: '512 Games',
+					templateUrl: templatePath + '/portfolio/512Games.html'
 				},
 
 				{
-					id: 'chess',
-					label: 'Chess Chaps',
-					templateUrl: templatePath + '/portfolio/chess.html'
+					id: 'wordJumble',
+					label: 'Play Pals: Word Jumble',
+					templateUrl: templatePath + '/portfolio/wordJumble.html'
 				},
 
 				{
-					id: 'league',
-					label: 'League Champs',
-					templateUrl: templatePath + '/portfolio/league.html'
-				},
-
-				{
-					id: 'inmar',
-					label: 'Inmar Digital Coupons',
-					templateUrl: templatePath + '/portfolio/inmar.html'
-				},
-
-				{
-					id: 'emerson',
-					label: 'Emerson IO Calculator',
-					templateUrl: templatePath + '/portfolio/emerson.html'
-				},
-
-				{
-					id: 'oracle',
-					label: 'Oracle ROI Calculator',
-					templateUrl: templatePath + '/portfolio/oracle.html'
+					id: 'aws',
+					label: 'AWS Infrastructure',
+					templateUrl: templatePath + '/portfolio/aws.html'
 				}
+
 
 			]
 		},
@@ -89,13 +72,6 @@ define(function (require, exports, module) {
 			id: 'resume',
 			label: 'Resume',
 			templateUrl: templatePath + '/resume.html'
-		},
-
-		{
-			id: 'contact',
-			label: 'Contact',
-			controller: 'ContactController',
-			templateUrl: templatePath + '/contact.html'
 		}
 
 	];

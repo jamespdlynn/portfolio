@@ -1,7 +1,7 @@
 /*global define*/
 /**
  * Controller for the Portfolio State
- * @module controller/portfolio
+ * @module controller/port
  * @author James Lynn
  */
 //Dynamically bootstrap the angular slick module used for this state's navigation

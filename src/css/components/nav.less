@@ -29,7 +29,7 @@
         border: none;
 
         .label {
-          font-size: 24px;
+          font-size: 22px;
           text-align: center;
           width: 100%;
           font-family: 'Bangers', cursive;
@@ -55,15 +55,15 @@
 
     //Manually rotate and position each of the four navigation items
     &:nth-child(1) {
-      .rotate(-60deg);
-      margin-left: -190px;
-      bottom: 250px;
+      .rotate(-50deg);
+      margin-left: -173px;
+      bottom: 290px;
 
       .bubble.main {
         left: 6px;
 
         .label {
-          .rotate(60deg);
+          .rotate(50deg);
         }
       }
 
@@ -74,15 +74,15 @@
     }
 
     &:nth-child(2) {
-      .rotate(-20deg);
-      margin-left: -120px;
-      bottom: 365px;
+      .rotate(-5deg);
+      margin-left: -65px;
+      bottom: 360px;
 
       .bubble.main {
         left: 3px;
 
         .label {
-          .rotate(20deg);
+          .rotate(5deg);
         }
       }
 
@@ -91,37 +91,18 @@
       }
 
     }
+
 
     &:nth-child(3) {
-      .rotate(20deg);
-      margin-left: 5px;
-      bottom: 365px;
-
-      .bubble:nth-child(1) {
-        right: 3px;
-
-        .label {
-          .rotate(-20deg);
-        }
-
-      }
-
-      .bubble:nth-child(2) {
-        left: 3px;
-      }
-
-    }
-
-    &:nth-child(4) {
-      .rotate(60deg);
-      margin-left: 74px;
-      bottom: 250px;
+      .rotate(50deg);
+      margin-left: 60px;
+      bottom: 290px;
 
       .bubble:nth-child(1) {
         right: 6px;
 
         .label {
-          .rotate(-60deg);
+          .rotate(-50deg);
         }
       }
 
@@ -165,33 +146,23 @@
   .shrink({
     .nav-item {
       .bubble {
-        margin: 3px auto;
-        .scale(0.85);
+        .scale(0.95);
 
-        &.main {
-          margin: -12px auto;
-        }
       }
 
       &:nth-child(1) {
-        margin-left: -159px;
         bottom: 245px;
       }
 
       &:nth-child(2) {
-        margin-left: -102px;
         bottom: 325px;
       }
 
       &:nth-child(3) {
-        margin-left: -8px;
-        bottom: 325px;
-      }
-
-      &:nth-child(4) {
-        margin-left: 44px;
         bottom: 245px;
       }
+
+
     }
 
     &.hidden .nav-item .bubble {

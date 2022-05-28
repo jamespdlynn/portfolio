@@ -53,9 +53,9 @@ define(['angularAMD', 'service/preloader', 'service/userAgent'], function (angul
         //Every five second execute a random animation
         var animateRandom = function () {
           promise = $timeout(function () {
-            //70% chance to blink, 25% chance to wave, 5% chance to dance
+            //75% chance to blink, 20% chance to wave, 5% chance to dance
             var num = Math.random();
-            $scope.animate((num >= 0.3 ? 'blink' : (num >= 0.05 ? 'wave' : 'dance')));
+            $scope.animate((num >= 0.25 ? 'blink' : (num >= 0.05 ? 'wave' : 'dance')));
           }, 2500);
 
           return $scope;

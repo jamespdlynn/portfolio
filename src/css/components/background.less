@@ -4,53 +4,53 @@
   top: 0;
   right: 0;
   bottom: 0;
-  #gradient > .vertical(#1068DE, #99e0ff); //blue gradient
+  #gradient > .vertical(#2974de, #7ecbff); //blue gradient
   overflow: hidden;
 
   //Draw and animate clouds with only css techniques
   .cloud {
 
+    opacity: 0.5;
     position: absolute;
     //background: #ffffff;
     left: 100%;
-        .size(512px, 269px);
+    .size(512px, 269px);
 
-      .background('cloud.png', transparent);
+    .background('cloud.png', transparent);
 
-
-   /*.opacity(0.6);
-    .rounded(100px);
-    .box-shadow(0 8px 5px rgba(0, 0, 0, 0.1));*/
+    /*.opacity(0.6);
+     .rounded(100px);
+     .box-shadow(0 8px 5px rgba(0, 0, 0, 0.1));*/
     .animation(move linear 18s infinite);
 
     &:nth-child(1) {
-      .scale(0.5);
+      .scale(0.4);
       .animation-delay(0s);
-      top: 5%;
+      top: 1%;
     }
 
     &:nth-child(2) {
-      .scale(0.6);
+      .scale(0.5);
       .animation-delay(3s);
-      top: 12%;
+      top: 8%;
     }
 
     &:nth-child(3) {
-      .scale(0.45);
+      .scale(0.35);
       .animation-delay(6s);
-      top: 4%;
+      top: 3%;
     }
 
     &:nth-child(4) {
       .animation-delay(9s);
-      .scale(0.5);
-      top: 15%;
+      .scale(0.4);
+      top: 5%;
     }
 
     &:nth-child(5) {
-      .scale(0.55);
+      .scale(0.45);
       .animation-delay(12s);
-      top: 3%;
+      top: 2%;
     }
 
   }
@@ -58,25 +58,24 @@
   //For small devices, use a less drastic gradient and shrink and hide some of the clouds
   @media (max-width: @screen-phone) {
 
-
-
     .cloud {
 
       &:nth-child(1) {
+        .animation-delay(1s);
         .scale(0.3);
-        top: 1%;
+        top: -50px;
       }
 
       &:nth-child(2) {
         .scale(0.25);
         .animation-delay(5s);
-        top: 4%;
+        top: -75px;
       }
 
       &:nth-child(3) {
         .scale(0.275);
         .animation-delay(10s);
-        top: 2%;
+        top: -60px;
       }
 
       &:nth-child(4), &:nth-child(5) {

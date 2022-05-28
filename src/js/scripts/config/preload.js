@@ -91,97 +91,49 @@ define(function (require, exports, module) {
 		},
 
 		{
-			id: 'hyper',
+			id: '512Games',
 			type: 'image',
-			src: assetsPath + '/img/portfolio/hyper.png',
+			src: assetsPath + '/img/portfolio/512games.png',
 			group: 'portfolio',
 			cache: true
 		},
 
 		{
-			id: 'hyperNav',
+			id: '512GamesNav',
 			type: 'image',
-			src: assetsPath + '/img/portfolio/hyper-nav.png',
+			src: assetsPath + '/img/portfolio/512games-nav.png',
 			group: 'portfolio',
 			cache: true
 		},
 
 		{
-			id: 'league',
+			id: 'wordJumble',
 			type: 'image',
-			src: assetsPath + '/img/portfolio/league.png',
+			src: assetsPath + '/img/portfolio/word-jumble.png',
 			group: 'portfolio',
 			cache: true
 		},
 
 		{
-			id: 'leagueNav',
+			id: 'wordJumbleNav',
 			type: 'image',
-			src: assetsPath + '/img/portfolio/league-nav.png',
+			src: assetsPath + '/img/portfolio/word-jumble-nav.png',
 			group: 'portfolio',
 			cache: true
 		},
 
 		{
-			id: 'chess',
+			id: 'aws',
 			type: 'image',
-			src: assetsPath + '/img/portfolio/chess.png',
+			src: assetsPath + '/img/portfolio/aws.png',
 			group: 'portfolio',
 			cache: true
 		},
 
 		{
-			id: 'chessNav',
+			id: 'awsNav',
 			type: 'image',
-			src: assetsPath + '/img/portfolio/chess-nav.png',
-			group: 'portfolio',
-			cache: true
-		},
-
-		{
-			id: 'oracle',
-			type: 'image',
-			src: assetsPath + '/img/portfolio/oracle.png',
-			group: 'portfolio',
-			cache: true
-		},
-
-		{
-			id: 'oracleNav',
-			type: 'image',
-			src: assetsPath + '/img/portfolio/oracle-nav.png',
-			group: 'portfolio',
-			cache: true
-		},
-
-		{
-			id: 'emerson',
-			type: 'image',
-			src: assetsPath + '/img/portfolio/emerson.png',
-			group: 'portfolio',
-			cache: true
-		},
-
-		{
-			id: 'emersonNav',
-			type: 'image',
-			src: assetsPath + '/img/portfolio/emerson-nav.png',
-			group: 'portfolio',
-			cache: true
-		},
-
-		{
-			id: 'inmar',
-			type: 'image',
-			src: assetsPath + '/img/portfolio/inmar.png',
-			group: 'portfolio',
-			cache: true
-		},
-
-		{
-			id: 'inmarNav',
-			type: 'image',
-			src: assetsPath + '/img/portfolio/inmar-nav.png',
+			src: assetsPath + '/img/portfolio/aws-nav.png',
 			group: 'portfolio',
 			cache: true
 		},
