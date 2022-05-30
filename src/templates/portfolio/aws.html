@@ -3,12 +3,42 @@
     <div file src="'aws'" class="img portfolio-img"></div>
 
     <p>
-        Atypical of the industry I design my games to be relatively server authoritative. This means that the server does not simply act as a data relay between clients,
-        but is also responsible for managing nad executing a large portion of each game's business logic. Having this code reside on the server rather than the user's device has a variety of advantages: Much faster deployments, better cheater prevention, and avoidance of platform specific bugs, among others.
+        Atypical of the industry, I design my games to be relatively server authoritative, meaning the server does not simply act as a data relay,
+        but is also responsible for executing a large portion of each game's business logic. To do this effeciently, I manage the entirety of own custom server stack within an <b>AWS Virtual Private Cloud</b>.
     </p>
 
     <p>
-        In order to effectively pull this off, I run a custom server stack within my AWS Virtual Private Cloud.
+        Server authoritative applications have a number of advantages over ones where nearly all the code exists on the client:
+        <ul>
+          <li>As all the server code runs on the same Linux operating systems, there's less likelihood of encountering platform specific bugs.</li>
+          <li>Having validation reside on the server makes it much more difficult for players to cheat or fake purchases.</li>
+          <li>Server code is (generally) easier to write integration tests for.</li>
+          <li>Server code changes can be deployed to production almost instantaneously, while it can take over a week to roll out a new version of a client to all the app stores.</li>
+        </ul>
+    </p>
+
+    <p>I designed my AWS stack with a focus on low-latency and high-throughput, while keeping overall costs to a minimum.</p>
+
+    <p>
+        The server code is written in <strong>NodeJS</strong> and deployed using <strong>Elastic Beanstalk</strong>. All incoming client API requests are load balanced between 2-8 EC2 service instances (instances are auto scaled based on current average latency and CPU utilisation).
+        API Requests, along with being SSL encrypted, require multiple types of custom authentication header token to ensure the security of each user's account and data.
+    </p>
+
+    <p>
+        The primary database is a MongoDB NoSQL cluster managed by <strong>MongoDB Atlas</strong> (though still hosted within the same AWS VPC as the rest of the stack).
+        Two <strong>Elastic Cache Redis</strong> replica instances help reduce primary database load, by functioning as a temporary shared in-memory cache.
+    </p>
+
+    <p>
+        A private <strong>S3 bucket</strong> is used to store a game's remote Unity Asset Bundles (compressed batches of binary assets like textures and audio files). These are automatically propagated to <strong>CloudFront</strong>'s global distribution network nodes, to be downloaded by their associated client devices.
+    </p>
+
+    <p>
+        Every client request, whether handled by Cloudfront or the EC2 instances, has its pertinent information logged to <strong>CloudWatch</strong> for analytics and debugging. Logs are retained for up to 14 days.
+    </p>
+
+    <p>
+
     </p>
 
     <p>

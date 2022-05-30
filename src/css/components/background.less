@@ -10,7 +10,8 @@
   //Draw and animate clouds with only css techniques
   .cloud {
 
-   .opacity(0.6);
+    display: none;
+    .opacity(0.6);
     position: absolute;
     //background: #ffffff;
     left: 100%;
@@ -26,19 +27,22 @@
     &:nth-child(1) {
       .scale(0.4);
       .animation-delay(0s);
-        top: -70px;
+      top: -60px;
+      animation-duration: 17s;
+
     }
 
     &:nth-child(2) {
       .scale(0.5);
       .animation-delay(3s);
-        top: -40px;
+      top: -40px;
     }
 
     &:nth-child(3) {
       .scale(0.35);
       .animation-delay(6s);
-        top: -50px;
+      top: -50px;
+      animation-duration: 17s;
     }
 
     &:nth-child(4) {
@@ -50,7 +54,8 @@
     &:nth-child(5) {
       .scale(0.45);
       .animation-delay(12s);
-        top: -15px;
+      top: -15px;
+      animation-duration: 17s;
     }
 
   }

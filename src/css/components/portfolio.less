@@ -3,27 +3,48 @@
 #portfolio {
 
   overflow: hidden;
-  padding: 0 0 25px;
+
+  padding: 0 0 15px 0;
+
+  .sub-view > * {
+    padding: 0px 15px;
+  }
 
   @media (max-width: @screen-phone) {
+    padding-top: 0;
+
     .portfolio-img {
-      width:100%;
+      width: 100%;
       margin-bottom: 10px;
     }
   }
 
   .footer {
-    height: 200px;
 
     text-align: right;
+    height: 55px;
 
-    .store-btn{
-      margin-left:20px;
+    .store-btn {
+      margin-left: 20px;
 
       img {
         width: 200px;
         background-size: contain;
       }
+
+    }
+
+    @media (max-width: @screen-phone) {
+
+      .store-btn {
+        margin-left: 5px;
+
+        img {
+          width: 132px;
+          background-size: contain;
+        }
+      }
+
     }
   }
 
@@ -31,7 +52,8 @@
   .header {
     width: 100%;
     position: relative;
-    padding: 20px 0;
+
+    padding-bottom: 20px;
     .box-sizing(border-box);
     overflow-y: visible;
 
@@ -65,7 +87,7 @@
           }
 
           @media (max-width: @screen-phone) {
-            .scale(0.9);
+            .scale(0.8);
 
             &.slick-center {
               .scale(1);
@@ -84,10 +106,9 @@
     }
 
     @media (max-width: @screen-phone) {
-      padding: 15px 0;
+      padding: 5px 0 15px;
     }
 
   }
-
 
 }
