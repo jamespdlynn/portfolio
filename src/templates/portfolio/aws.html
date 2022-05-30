@@ -4,11 +4,8 @@
 
     <p>
         Atypical of the industry, I design my games to be relatively server authoritative, meaning the server does not simply act as a data relay,
-        but is also responsible for executing a large portion of each game's business logic. To do this effeciently, I manage the entirety of own custom server stack within an <b>AWS Virtual Private Cloud</b>.
-    </p>
-
-    <p>
-        Server authoritative applications have a number of advantages over ones where nearly all the code exists on the client:
+        but is also responsible for executing a large portion of each game's business logic.
+        This has a number of advantages over a codebase that exists nearly entirely on the client:
         <ul>
           <li>As all the server code runs on the same Linux operating systems, there's less likelihood of encountering platform specific bugs.</li>
           <li>Having validation reside on the server makes it much more difficult for players to cheat or fake purchases.</li>
@@ -17,11 +14,11 @@
         </ul>
     </p>
 
-    <p>I designed my AWS stack with a focus on low-latency and high-throughput, while keeping overall costs to a minimum.</p>
+    <p> I in order to achieve this, I manage the entirety of own custom server stack within an <b>AWS Virtual Private Cloud</b>. I designed my stack with a focus on low-latency and high-throughput, while keeping overall costs to a minimum.</p>
 
     <p>
         The server code is written in <strong>NodeJS</strong> and deployed using <strong>Elastic Beanstalk</strong>. All incoming client API requests are load balanced between 2-8 EC2 service instances (instances are auto scaled based on current average latency and CPU utilisation).
-        API Requests, along with being SSL encrypted, require multiple types of custom authentication header token to ensure the security of each user's account and data.
+        API Requests, along with being SSL encrypted, require multiple types of custom authentication header tokens to ensure the security of each user's account and data.
     </p>
 
     <p>
