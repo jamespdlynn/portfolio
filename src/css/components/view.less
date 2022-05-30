@@ -2,7 +2,7 @@
 #view {
 
   position: absolute;
-  left: 20%;
+  left: 25%;
   bottom: 0px;
   top: 0px;
 
@@ -33,15 +33,20 @@
     .box-sizing(border-box);
 
     @media (max-width: @screen-lg) {
-      max-width: 920px;
+      width:74%;
     }
 
     @media (max-width: @screen-md) {
-      max-width: 660px;
+      //max-width: 620px;
     }
 
     @media (max-width: @screen-sm) {
-      max-width: 600px;
+      //max-width: 480px;
+    }
+
+     @media (max-width: @screen-phone) {
+       width:100%;
+      //max-width: 480px;
     }
 
     font-size: 24px;
