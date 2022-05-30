@@ -163,7 +163,7 @@ define(['angularAMD', 'config/preload', 'service/userAgent', 'directive/file'], 
 			 */
 			play: function (id, force) {
 				var audio = assets[id];
-				if (!audio || !audio instanceof Audio || audio.hasError) {
+				if (!audio || !(audio instanceof Audio) || audio.hasError) {
 					console.warn('cannot play audio: ' + id);
 					return;
 				}
@@ -175,7 +175,7 @@ define(['angularAMD', 'config/preload', 'service/userAgent', 'directive/file'], 
 
 		};
 
-		//IOS doesn't let us preload audio without a touch event (LAME) so we have use some custom logic
+		//IOS doesn't let us preload audio without a touch event so we have use some custom logic
 
 		var audioUnlocked = false;
 

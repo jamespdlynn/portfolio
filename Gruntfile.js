@@ -156,8 +156,6 @@ module.exports = function (grunt) {
 	//Deploy a production build to the 'dist' directory
 	grunt.registerTask('deploy', [
 
-		'test', //Run tests
-
 		'clean', //Delete both build and dist directories
 
 		'copy:build', //Copy source files to temporary build directory

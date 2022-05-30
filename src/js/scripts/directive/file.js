@@ -46,9 +46,9 @@ define(['angularAMD'], function (angularAMD) {
             object = angular.element(document.createElement('object'));
 
             //Embedding files is jacked on IOS so just use the download link instead
-           /* if (!$userAgent.isIOS()) {
-              object.attr('data', data);
-            }*/
+            if (!$userAgent.isIOS()) {
+              //object.attr('data', data);
+            }
 
             object.attr('data', data);
 
