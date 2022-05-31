@@ -23,7 +23,7 @@
 
     <p>
         The primary database is a MongoDB NoSQL cluster managed by <strong>MongoDB Atlas</strong> (though still hosted within the same AWS VPC as the rest of the stack).
-        Two <strong>Elastic Cache Redis</strong> replica instances help reduce primary database load, by functioning as a temporary shared in-memory cache.
+        Two <strong>Elasticache Redis</strong> replica instances help reduce primary database load, by functioning as a temporary shared in-memory cache.
     </p>
 
     <p>
@@ -31,7 +31,7 @@
     </p>
 
     <p>
-        Every client request, whether handled by Cloudfront or the EC2 instances, has its pertinent information logged to <strong>CloudWatch</strong> for analytics and debugging. Logs are retained for up to 14 days.
+        Every client request, whether handled by CloudFront or the EC2 instances, has its pertinent information logged to <strong>CloudWatch</strong> for analytics and debugging. Logs are retained for up to 14 days.
     </p>
 
     <p>
