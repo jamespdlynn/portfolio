@@ -47,10 +47,8 @@ define(['angularAMD'], function (angularAMD) {
 
             //Embedding files is jacked on IOS so just use the download link instead
             if (!$userAgent.isIOS()) {
-              //object.attr('data', data);
+              object.attr('data', data);
             }
-
-            object.attr('data', data);
 
             //Create a download link to append to the object element, which will only display if the user's browser doesn't have the associated object plugin
             link = angular.element(document.createElement('a'));
