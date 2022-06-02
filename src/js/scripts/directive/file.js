@@ -54,7 +54,7 @@ define(['angularAMD'], function (angularAMD) {
             link = angular.element(document.createElement('a'));
             link.attr('href', data);
             link.attr('class', 'btn btn-success btn-lg');
-            link.text('Download');
+            link.text('Open');
 
             object.append(link);
 

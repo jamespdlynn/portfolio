@@ -22,6 +22,22 @@ define(function (require, exports, module) {
   return [
 
     {
+      id: 'email',
+      type: 'image',
+      src: assetsPath + '/img/email.png',
+      group: 'main',
+      cache: true
+    },
+
+    {
+      id: 'linkedIn',
+      type: 'image',
+      src: assetsPath + '/img/ln.png',
+      group: 'main',
+      cache: true
+    },
+
+    {
       id: 'sprites',
       type: 'image',
       src: assetsPath + '/img/sprites.png',
