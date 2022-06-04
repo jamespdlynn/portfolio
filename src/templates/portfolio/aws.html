@@ -3,24 +3,22 @@
     <div file src="'aws'" class="img portfolio-img"></div>
 
     <p>
-        Atypical of the industry, I design my games to be relatively server authoritative, meaning the server does not simply act as a data relay,
+        Atypical of the industry, I design my games to be generally server authoritative. This means the server does not simply act as a data relay,
         but is also responsible for executing a large portion of each game's business logic.
         This has a number of advantages over a codebase that exists nearly entirely on the client:
         <ul>
-          <li>As all the server code runs on the same Linux operating systems, there's less likelihood of platform specific bugs.</li>
+          <li>Lower likelihood of platform specific bugs (as all server code runs on the same Amazon Linux operating systems).</li>
+          <li>More stable integration tests with wider coverage.</li>
           <li>Having validation reside on the server makes it much more difficult for players to cheat or fake purchases.</li>
-<!--
-          <li>Server code is (generally) easier to write integration tests for.</li>
--->
-          <li>Server code changes can be deployed to production almost instantaneously, while it can take over a week to roll out a new version of a client to all the app stores.</li>
+          <li>Server code changes can be deployed to production almost instantaneously, while it can take over a week to fully roll out a new version of a client to each app store.</li>
         </ul>
     </p>
 
-    <p> I in order to achieve this, I manage the entirety of own custom server stack within an <b>AWS Virtual Private Cloud</b>. I designed my stack with a focus on low-latency and high-throughput, while keeping overall costs to a minimum.</p>
+    <p>I desire my server-side infrastructure to have a focus on low-latency and high-throughput request handling, while keeping overall costs to a minimum. In order to achieve this, I manage the entirety of my own custom stack within an <b>AWS Virtual Private Cloud</b>. </p>
 
     <p>
-        The server code is written in <strong>NodeJS</strong> and deployed using <strong>Elastic Beanstalk</strong>. All incoming client API requests are load balanced between 2-6 EC2 service instances (number of instances are auto scaled based on current average latency and CPU utilisation).
-        API Requests, along with being SSL encrypted, require multiple types of custom authentication header tokens to ensure the security of each user's account and data.
+        All server code is written in <strong>NodeJS</strong> and deployed using <strong>Elastic Beanstalk</strong>. Client API requests are load balanced between 2-6 EC2 service instances (number of instances are auto scaled based on current average latency and CPU utilisation).
+        API Requests, along with being SSL encrypted, require expiratory custom authentication header tokens to ensure the security of each user's account and data.
     </p>
 
     <p>
